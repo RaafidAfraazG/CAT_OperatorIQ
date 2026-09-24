@@ -1,0 +1,561 @@
+operator_id,training_id,assigned_date,completion_date,status,score,reason_recommended
+OP0001,TRN002,2025-06-14,,ASSIGNED,,Periodic refresher recommended
+OP0002,TRN028,2025-08-11,,ASSIGNED,,Periodic refresher recommended
+OP0003,TRN013,2025-03-01,2025-03-06,COMPLETED,64.9,High idle ratio relative to peer baseline
+OP0003,TRN011,2025-09-09,2025-09-24,COMPLETED,69.9,Periodic refresher recommended
+OP0004,TRN023,2025-02-10,2025-02-25,COMPLETED,100.0,Periodic refresher recommended
+OP0004,TRN020,2025-02-08,2025-02-15,COMPLETED,97.5,Periodic refresher recommended
+OP0005,TRN012,2025-09-12,,IN_PROGRESS,,High idle ratio relative to peer baseline
+OP0005,TRN003,2025-08-31,2025-09-18,COMPLETED,65.0,Seatbelt violations detected in recent shifts
+OP0005,TRN018,2025-02-07,2025-02-26,COMPLETED,70.0,New operator onboarding
+OP0005,TRN009,2025-01-14,2025-01-19,COMPLETED,64.9,Periodic refresher recommended
+OP0006,TRN005,2025-05-14,2025-05-15,COMPLETED,80.8,Seatbelt violations detected in recent shifts
+OP0006,TRN009,2025-07-24,2025-08-07,COMPLETED,81.0,Engine RPM / fuel consumption above expected range
+OP0006,TRN025,2025-08-01,2025-08-08,COMPLETED,95.9,Periodic refresher recommended
+OP0006,TRN002,2025-05-02,,IN_PROGRESS,,Periodic refresher recommended
+OP0007,TRN014,2025-04-16,,ASSIGNED,,High idle ratio relative to peer baseline
+OP0007,TRN003,2025-01-29,,IN_PROGRESS,,Seatbelt violations detected in recent shifts
+OP0007,TRN017,2025-06-12,,OVERDUE,,Repeated proximity events flagged by system
+OP0007,TRN021,2025-01-24,2025-02-06,COMPLETED,50.3,New operator onboarding
+OP0007,TRN027,2025-09-05,2025-09-08,COMPLETED,53.6,Task efficiency below site baseline
+OP0007,TRN010,2025-02-16,,OVERDUE,,Periodic refresher recommended
+OP0007,TRN012,2025-09-02,,ASSIGNED,,Periodic refresher recommended
+OP0008,TRN012,2025-04-15,,OVERDUE,,High idle ratio relative to peer baseline
+OP0008,TRN008,2025-02-03,,OVERDUE,,Seatbelt violations detected in recent shifts
+OP0008,TRN015,2025-09-06,,IN_PROGRESS,,Repeated proximity events flagged by system
+OP0008,TRN010,2025-07-28,2025-08-07,COMPLETED,54.9,Engine RPM / fuel consumption above expected range
+OP0008,TRN021,2025-09-09,2025-09-15,COMPLETED,54.9,New operator onboarding
+OP0008,TRN027,2025-07-16,2025-07-23,COMPLETED,50.7,Task efficiency below site baseline
+OP0008,TRN028,2025-09-15,,OVERDUE,,Periodic refresher recommended
+OP0008,TRN009,2025-05-30,,IN_PROGRESS,,Periodic refresher recommended
+OP0009,TRN013,2025-04-29,,IN_PROGRESS,,High idle ratio relative to peer baseline
+OP0009,TRN003,2025-04-14,2025-04-20,COMPLETED,56.9,Seatbelt violations detected in recent shifts
+OP0009,TRN020,2025-08-10,2025-08-22,COMPLETED,47.2,New operator onboarding
+OP0010,TRN011,2025-04-23,,ASSIGNED,,Engine RPM / fuel consumption above expected range
+OP0010,TRN012,2025-03-20,,ASSIGNED,,Periodic refresher recommended
+OP0011,TRN012,2025-03-03,,IN_PROGRESS,,High idle ratio relative to peer baseline
+OP0011,TRN002,2025-03-28,,IN_PROGRESS,,Seatbelt violations detected in recent shifts
+OP0011,TRN017,2025-06-04,,OVERDUE,,Repeated proximity events flagged by system
+OP0011,TRN019,2025-02-17,2025-03-04,COMPLETED,88.4,New operator onboarding
+OP0011,TRN027,2025-01-26,,IN_PROGRESS,,Task efficiency below site baseline
+OP0012,TRN003,2025-03-03,,OVERDUE,,Seatbelt violations detected in recent shifts
+OP0012,TRN016,2025-02-01,2025-02-14,COMPLETED,56.2,Repeated proximity events flagged by system
+OP0013,TRN007,2025-06-28,2025-07-10,COMPLETED,80.6,Seatbelt violations detected in recent shifts
+OP0013,TRN016,2025-03-21,2025-04-03,COMPLETED,70.6,Repeated proximity events flagged by system
+OP0013,TRN017,2025-02-09,2025-03-01,COMPLETED,68.2,Periodic refresher recommended
+OP0014,TRN005,2025-03-27,2025-04-02,COMPLETED,74.4,Seatbelt violations detected in recent shifts
+OP0014,TRN010,2025-08-03,2025-08-04,COMPLETED,100.0,Periodic refresher recommended
+OP0014,TRN015,2025-03-17,2025-03-19,COMPLETED,88.4,Periodic refresher recommended
+OP0015,TRN014,2025-01-25,2025-02-06,COMPLETED,61.9,High idle ratio relative to peer baseline
+OP0015,TRN006,2025-02-15,,OVERDUE,,Seatbelt violations detected in recent shifts
+OP0015,TRN019,2025-09-04,2025-09-06,COMPLETED,64.2,New operator onboarding
+OP0015,TRN027,2025-05-02,2025-05-13,COMPLETED,61.4,Task efficiency below site baseline
+OP0015,TRN016,2025-02-24,2025-03-06,COMPLETED,63.0,Periodic refresher recommended
+OP0015,TRN028,2025-03-24,,IN_PROGRESS,,Periodic refresher recommended
+OP0016,TRN012,2025-08-17,2025-09-02,COMPLETED,30.0,High idle ratio relative to peer baseline
+OP0016,TRN001,2025-06-22,,ASSIGNED,,Seatbelt violations detected in recent shifts
+OP0016,TRN016,2025-04-23,2025-05-07,COMPLETED,30.0,Repeated proximity events flagged by system
+OP0016,TRN019,2025-04-30,2025-05-18,COMPLETED,30.0,New operator onboarding
+OP0017,TRN002,2025-01-05,,IN_PROGRESS,,Seatbelt violations detected in recent shifts
+OP0017,TRN017,2025-06-10,2025-06-24,COMPLETED,77.9,Repeated proximity events flagged by system
+OP0017,TRN009,2025-03-05,2025-03-11,COMPLETED,75.0,Engine RPM / fuel consumption above expected range
+OP0017,TRN015,2025-07-24,,OVERDUE,,Periodic refresher recommended
+OP0018,TRN003,2025-01-31,2025-02-14,COMPLETED,81.6,Seatbelt violations detected in recent shifts
+OP0018,TRN002,2025-05-06,2025-05-22,COMPLETED,78.5,Periodic refresher recommended
+OP0018,TRN026,2025-02-14,2025-02-27,COMPLETED,72.9,Periodic refresher recommended
+OP0019,TRN014,2025-05-27,2025-06-06,COMPLETED,63.1,High idle ratio relative to peer baseline
+OP0019,TRN002,2025-02-21,2025-03-06,COMPLETED,49.6,Seatbelt violations detected in recent shifts
+OP0019,TRN016,2025-07-17,,IN_PROGRESS,,Repeated proximity events flagged by system
+OP0019,TRN020,2025-07-14,,IN_PROGRESS,,New operator onboarding
+OP0019,TRN027,2025-05-23,2025-06-02,COMPLETED,64.6,Task efficiency below site baseline
+OP0019,TRN012,2025-01-20,,ASSIGNED,,Periodic refresher recommended
+OP0020,TRN014,2025-06-24,2025-07-13,COMPLETED,46.2,High idle ratio relative to peer baseline
+OP0020,TRN008,2025-01-29,2025-02-01,COMPLETED,66.4,Seatbelt violations detected in recent shifts
+OP0020,TRN017,2025-06-21,,IN_PROGRESS,,Repeated proximity events flagged by system
+OP0020,TRN020,2025-09-15,2025-09-26,COMPLETED,49.5,New operator onboarding
+OP0020,TRN028,2025-06-12,2025-06-28,COMPLETED,73.9,Task efficiency below site baseline
+OP0021,TRN013,2025-06-29,2025-07-05,COMPLETED,68.0,High idle ratio relative to peer baseline
+OP0021,TRN015,2025-02-25,2025-03-09,COMPLETED,72.3,Repeated proximity events flagged by system
+OP0021,TRN019,2025-05-08,2025-05-15,COMPLETED,76.2,Periodic refresher recommended
+OP0022,TRN008,2025-09-07,2025-09-16,COMPLETED,70.9,Seatbelt violations detected in recent shifts
+OP0022,TRN017,2025-04-29,2025-05-04,COMPLETED,71.0,Repeated proximity events flagged by system
+OP0022,TRN012,2025-02-02,2025-02-11,COMPLETED,60.4,Periodic refresher recommended
+OP0022,TRN008,2025-08-08,,ASSIGNED,,Periodic refresher recommended
+OP0023,TRN007,2025-07-22,,IN_PROGRESS,,Seatbelt violations detected in recent shifts
+OP0023,TRN016,2025-09-17,,OVERDUE,,Repeated proximity events flagged by system
+OP0023,TRN019,2025-09-02,,ASSIGNED,,New operator onboarding
+OP0023,TRN027,2025-08-11,,IN_PROGRESS,,Task efficiency below site baseline
+OP0024,TRN004,2025-03-22,2025-03-25,COMPLETED,86.8,Seatbelt violations detected in recent shifts
+OP0024,TRN015,2025-01-15,,ASSIGNED,,Periodic refresher recommended
+OP0024,TRN007,2025-04-22,,OVERDUE,,Periodic refresher recommended
+OP0025,TRN002,2025-03-17,2025-03-22,COMPLETED,62.3,Seatbelt violations detected in recent shifts
+OP0025,TRN016,2025-02-07,2025-02-16,COMPLETED,60.5,Repeated proximity events flagged by system
+OP0026,TRN007,2025-01-09,2025-01-10,COMPLETED,66.0,Seatbelt violations detected in recent shifts
+OP0026,TRN017,2025-08-04,,IN_PROGRESS,,Repeated proximity events flagged by system
+OP0026,TRN017,2025-07-21,2025-07-22,COMPLETED,73.6,Periodic refresher recommended
+OP0027,TRN013,2025-01-22,,IN_PROGRESS,,High idle ratio relative to peer baseline
+OP0027,TRN004,2025-02-10,2025-02-18,COMPLETED,56.0,Seatbelt violations detected in recent shifts
+OP0027,TRN016,2025-07-18,,OVERDUE,,Repeated proximity events flagged by system
+OP0027,TRN022,2025-08-17,,ASSIGNED,,New operator onboarding
+OP0027,TRN013,2025-08-02,2025-08-15,COMPLETED,61.7,Periodic refresher recommended
+OP0027,TRN009,2025-08-30,2025-09-19,COMPLETED,58.1,Periodic refresher recommended
+OP0028,TRN013,2025-09-03,,ASSIGNED,,High idle ratio relative to peer baseline
+OP0029,TRN013,2025-02-24,2025-03-09,COMPLETED,57.2,High idle ratio relative to peer baseline
+OP0029,TRN004,2025-05-13,,IN_PROGRESS,,Seatbelt violations detected in recent shifts
+OP0029,TRN017,2025-01-09,,IN_PROGRESS,,Repeated proximity events flagged by system
+OP0029,TRN019,2025-07-09,,ASSIGNED,,New operator onboarding
+OP0029,TRN027,2025-09-08,2025-09-17,COMPLETED,57.5,Task efficiency below site baseline
+OP0029,TRN018,2025-06-23,2025-06-24,COMPLETED,47.1,Periodic refresher recommended
+OP0029,TRN001,2025-01-17,,IN_PROGRESS,,Periodic refresher recommended
+OP0030,TRN007,2025-01-29,2025-02-05,COMPLETED,61.3,Seatbelt violations detected in recent shifts
+OP0030,TRN027,2025-01-22,2025-02-06,COMPLETED,66.5,Periodic refresher recommended
+OP0030,TRN013,2025-06-03,,ASSIGNED,,Periodic refresher recommended
+OP0031,TRN007,2025-07-09,,ASSIGNED,,Seatbelt violations detected in recent shifts
+OP0031,TRN015,2025-04-11,,IN_PROGRESS,,Repeated proximity events flagged by system
+OP0032,TRN019,2025-04-22,,ASSIGNED,,Periodic refresher recommended
+OP0032,TRN021,2025-01-27,,OVERDUE,,Periodic refresher recommended
+OP0033,TRN005,2025-08-25,2025-09-06,COMPLETED,74.2,Seatbelt violations detected in recent shifts
+OP0034,TRN014,2025-08-09,,IN_PROGRESS,,High idle ratio relative to peer baseline
+OP0034,TRN006,2025-05-12,2025-05-28,COMPLETED,61.7,Seatbelt violations detected in recent shifts
+OP0034,TRN016,2025-01-10,2025-01-11,COMPLETED,57.9,Periodic refresher recommended
+OP0034,TRN016,2025-08-27,2025-09-08,COMPLETED,70.2,Periodic refresher recommended
+OP0035,TRN010,2025-02-07,2025-02-08,COMPLETED,100.0,Periodic refresher recommended
+OP0035,TRN021,2025-08-23,,IN_PROGRESS,,Periodic refresher recommended
+OP0036,TRN001,2025-02-11,2025-02-12,COMPLETED,69.2,Seatbelt violations detected in recent shifts
+OP0036,TRN028,2025-04-08,2025-04-16,COMPLETED,67.1,Task efficiency below site baseline
+OP0036,TRN011,2025-01-07,,OVERDUE,,Periodic refresher recommended
+OP0036,TRN023,2025-07-12,2025-07-25,COMPLETED,83.2,Periodic refresher recommended
+OP0037,TRN006,2025-01-02,2025-01-10,COMPLETED,97.5,Seatbelt violations detected in recent shifts
+OP0037,TRN017,2025-03-31,,ASSIGNED,,Repeated proximity events flagged by system
+OP0037,TRN011,2025-08-13,2025-08-18,COMPLETED,90.9,Engine RPM / fuel consumption above expected range
+OP0037,TRN028,2025-02-14,,IN_PROGRESS,,Task efficiency below site baseline
+OP0037,TRN015,2025-07-05,,OVERDUE,,Periodic refresher recommended
+OP0038,TRN014,2025-04-28,,IN_PROGRESS,,High idle ratio relative to peer baseline
+OP0038,TRN008,2025-01-21,,OVERDUE,,Seatbelt violations detected in recent shifts
+OP0038,TRN028,2025-03-14,2025-03-30,COMPLETED,70.4,Task efficiency below site baseline
+OP0038,TRN010,2025-06-07,,IN_PROGRESS,,Periodic refresher recommended
+OP0039,TRN007,2025-07-20,2025-08-01,COMPLETED,62.2,Seatbelt violations detected in recent shifts
+OP0040,TRN010,2025-03-21,,ASSIGNED,,Periodic refresher recommended
+OP0041,TRN014,2025-02-14,,ASSIGNED,,High idle ratio relative to peer baseline
+OP0041,TRN007,2025-03-05,,ASSIGNED,,Seatbelt violations detected in recent shifts
+OP0041,TRN016,2025-08-03,,IN_PROGRESS,,Repeated proximity events flagged by system
+OP0041,TRN018,2025-04-29,2025-05-01,COMPLETED,40.1,New operator onboarding
+OP0041,TRN005,2025-04-11,,ASSIGNED,,Periodic refresher recommended
+OP0041,TRN025,2025-07-11,,ASSIGNED,,Periodic refresher recommended
+OP0042,TRN001,2025-09-23,,IN_PROGRESS,,Seatbelt violations detected in recent shifts
+OP0042,TRN015,2025-09-21,2025-09-23,COMPLETED,65.5,Repeated proximity events flagged by system
+OP0042,TRN027,2025-04-30,,ASSIGNED,,Periodic refresher recommended
+OP0042,TRN001,2025-08-27,,IN_PROGRESS,,Periodic refresher recommended
+OP0043,TRN002,2025-09-20,2025-10-03,COMPLETED,97.1,Seatbelt violations detected in recent shifts
+OP0044,TRN002,2025-06-07,2025-06-26,COMPLETED,73.5,Seatbelt violations detected in recent shifts
+OP0045,TRN013,2025-05-19,2025-06-02,COMPLETED,72.3,High idle ratio relative to peer baseline
+OP0045,TRN005,2025-07-03,,IN_PROGRESS,,Seatbelt violations detected in recent shifts
+OP0045,TRN017,2025-02-28,2025-03-14,COMPLETED,48.5,Repeated proximity events flagged by system
+OP0045,TRN020,2025-04-16,2025-05-06,COMPLETED,65.0,New operator onboarding
+OP0045,TRN027,2025-08-19,2025-09-07,COMPLETED,90.1,Task efficiency below site baseline
+OP0046,TRN014,2025-03-30,2025-04-18,COMPLETED,53.3,High idle ratio relative to peer baseline
+OP0046,TRN006,2025-09-13,,ASSIGNED,,Seatbelt violations detected in recent shifts
+OP0046,TRN017,2025-02-06,,IN_PROGRESS,,Repeated proximity events flagged by system
+OP0046,TRN020,2025-06-15,2025-07-01,COMPLETED,65.9,New operator onboarding
+OP0046,TRN027,2025-08-09,2025-08-10,COMPLETED,65.7,Task efficiency below site baseline
+OP0046,TRN004,2025-04-04,2025-04-06,COMPLETED,53.0,Periodic refresher recommended
+OP0047,TRN006,2025-08-19,2025-09-01,COMPLETED,82.9,Seatbelt violations detected in recent shifts
+OP0047,TRN016,2025-03-05,2025-03-20,COMPLETED,95.6,Repeated proximity events flagged by system
+OP0047,TRN011,2025-05-20,2025-05-28,COMPLETED,100.0,Engine RPM / fuel consumption above expected range
+OP0047,TRN004,2025-05-17,2025-06-05,COMPLETED,92.4,Periodic refresher recommended
+OP0048,TRN017,2025-07-20,2025-07-26,COMPLETED,73.5,Repeated proximity events flagged by system
+OP0048,TRN027,2025-01-03,,ASSIGNED,,Periodic refresher recommended
+OP0048,TRN019,2025-02-20,2025-03-01,COMPLETED,74.8,Periodic refresher recommended
+OP0049,TRN012,2025-03-25,,ASSIGNED,,High idle ratio relative to peer baseline
+OP0049,TRN006,2025-07-28,2025-08-15,COMPLETED,89.0,Seatbelt violations detected in recent shifts
+OP0049,TRN021,2025-08-18,,IN_PROGRESS,,Periodic refresher recommended
+OP0049,TRN022,2025-09-10,2025-09-19,COMPLETED,85.1,Periodic refresher recommended
+OP0050,TRN026,2025-07-30,,ASSIGNED,,Periodic refresher recommended
+OP0050,TRN010,2025-03-12,2025-03-30,COMPLETED,72.8,Periodic refresher recommended
+OP0050,TRN002,2025-08-07,,OVERDUE,,Periodic refresher recommended
+OP0051,TRN017,2025-03-11,2025-03-27,COMPLETED,80.4,Periodic refresher recommended
+OP0052,TRN013,2025-04-15,2025-04-21,COMPLETED,75.9,High idle ratio relative to peer baseline
+OP0052,TRN004,2025-09-11,2025-09-23,COMPLETED,90.3,Seatbelt violations detected in recent shifts
+OP0052,TRN016,2025-09-05,2025-09-15,COMPLETED,89.6,Repeated proximity events flagged by system
+OP0052,TRN019,2025-09-15,2025-09-28,COMPLETED,76.7,New operator onboarding
+OP0052,TRN028,2025-03-12,2025-03-14,COMPLETED,82.6,Task efficiency below site baseline
+OP0052,TRN011,2025-02-27,,IN_PROGRESS,,Periodic refresher recommended
+OP0053,TRN003,2025-03-02,,IN_PROGRESS,,Seatbelt violations detected in recent shifts
+OP0053,TRN016,2025-03-30,2025-04-03,COMPLETED,76.0,Repeated proximity events flagged by system
+OP0053,TRN011,2025-04-29,2025-05-18,COMPLETED,70.4,Engine RPM / fuel consumption above expected range
+OP0053,TRN004,2025-06-27,,ASSIGNED,,Periodic refresher recommended
+OP0054,TRN015,2025-01-12,2025-01-21,COMPLETED,36.4,Repeated proximity events flagged by system
+OP0054,TRN005,2025-05-02,2025-05-05,COMPLETED,66.8,Periodic refresher recommended
+OP0054,TRN019,2025-03-29,,ASSIGNED,,Periodic refresher recommended
+OP0055,TRN002,2025-09-11,,IN_PROGRESS,,Seatbelt violations detected in recent shifts
+OP0055,TRN016,2025-05-28,,ASSIGNED,,Repeated proximity events flagged by system
+OP0055,TRN010,2025-05-24,,ASSIGNED,,Periodic refresher recommended
+OP0055,TRN002,2025-08-17,2025-08-27,COMPLETED,82.5,Periodic refresher recommended
+OP0042,TRN025,2025-01-20,,ASSIGNED,,Periodic refresher recommended
+OP0024,TRN002,2025-05-29,,ASSIGNED,,Periodic refresher recommended
+OP0049,TRN018,2025-05-22,,ASSIGNED,,Periodic refresher recommended
+OP0020,TRN012,2025-05-27,,ASSIGNED,,Periodic refresher recommended
+OP0027,TRN014,2025-04-15,,IN_PROGRESS,,Periodic refresher recommended
+OP0054,TRN013,2025-08-20,,IN_PROGRESS,,Periodic refresher recommended
+OP0049,TRN024,2025-04-10,,IN_PROGRESS,,Periodic refresher recommended
+OP0003,TRN021,2025-08-17,,ASSIGNED,,Periodic refresher recommended
+OP0026,TRN026,2025-06-13,2025-07-02,COMPLETED,77.1,Periodic refresher recommended
+OP0018,TRN017,2025-09-13,2025-10-02,COMPLETED,74.3,Periodic refresher recommended
+OP0007,TRN026,2025-08-18,2025-09-03,COMPLETED,49.9,Periodic refresher recommended
+OP0008,TRN003,2025-06-18,2025-06-25,COMPLETED,59.3,Periodic refresher recommended
+OP0015,TRN028,2025-08-12,,OVERDUE,,Periodic refresher recommended
+OP0017,TRN013,2025-02-18,2025-03-03,COMPLETED,80.1,Periodic refresher recommended
+OP0050,TRN014,2025-07-12,,ASSIGNED,,Periodic refresher recommended
+OP0015,TRN024,2025-09-07,,IN_PROGRESS,,Periodic refresher recommended
+OP0012,TRN020,2025-07-03,2025-07-19,COMPLETED,75.2,Periodic refresher recommended
+OP0050,TRN024,2025-01-23,,IN_PROGRESS,,Periodic refresher recommended
+OP0047,TRN027,2025-04-02,2025-04-07,COMPLETED,100.0,Periodic refresher recommended
+OP0014,TRN005,2025-01-12,2025-01-25,COMPLETED,82.0,Periodic refresher recommended
+OP0054,TRN012,2025-08-20,,ASSIGNED,,Periodic refresher recommended
+OP0020,TRN018,2025-06-03,,IN_PROGRESS,,Periodic refresher recommended
+OP0053,TRN021,2025-06-25,,ASSIGNED,,Periodic refresher recommended
+OP0025,TRN014,2025-02-22,2025-02-25,COMPLETED,68.7,Periodic refresher recommended
+OP0049,TRN025,2025-05-07,,ASSIGNED,,Periodic refresher recommended
+OP0050,TRN027,2025-08-18,,IN_PROGRESS,,Periodic refresher recommended
+OP0046,TRN014,2025-09-19,2025-10-06,COMPLETED,61.3,Periodic refresher recommended
+OP0011,TRN016,2025-07-30,2025-08-06,COMPLETED,74.7,Periodic refresher recommended
+OP0004,TRN027,2025-08-18,2025-08-22,COMPLETED,86.6,Periodic refresher recommended
+OP0032,TRN019,2025-05-18,2025-05-27,COMPLETED,87.6,Periodic refresher recommended
+OP0049,TRN025,2025-07-01,2025-07-15,COMPLETED,72.4,Periodic refresher recommended
+OP0040,TRN014,2025-01-20,2025-02-06,COMPLETED,52.0,Periodic refresher recommended
+OP0031,TRN028,2025-05-03,,ASSIGNED,,Periodic refresher recommended
+OP0002,TRN024,2025-01-01,2025-01-06,COMPLETED,70.1,Periodic refresher recommended
+OP0024,TRN022,2025-03-25,,IN_PROGRESS,,Periodic refresher recommended
+OP0007,TRN028,2025-05-11,,IN_PROGRESS,,Periodic refresher recommended
+OP0049,TRN014,2025-03-18,2025-03-26,COMPLETED,71.5,Periodic refresher recommended
+OP0047,TRN013,2025-09-19,,IN_PROGRESS,,Periodic refresher recommended
+OP0043,TRN013,2025-03-27,2025-04-08,COMPLETED,86.9,Periodic refresher recommended
+OP0030,TRN018,2025-05-28,2025-06-16,COMPLETED,57.5,Periodic refresher recommended
+OP0045,TRN021,2025-06-15,2025-06-29,COMPLETED,55.2,Periodic refresher recommended
+OP0029,TRN023,2025-06-03,,ASSIGNED,,Periodic refresher recommended
+OP0041,TRN013,2025-02-24,,ASSIGNED,,Periodic refresher recommended
+OP0051,TRN022,2025-09-09,2025-09-18,COMPLETED,88.0,Periodic refresher recommended
+OP0045,TRN015,2025-09-09,,OVERDUE,,Periodic refresher recommended
+OP0034,TRN018,2025-07-08,2025-07-21,COMPLETED,74.5,Periodic refresher recommended
+OP0019,TRN015,2025-04-02,2025-04-04,COMPLETED,55.7,Periodic refresher recommended
+OP0030,TRN027,2025-04-13,2025-04-23,COMPLETED,63.9,Periodic refresher recommended
+OP0039,TRN010,2025-07-28,,OVERDUE,,Periodic refresher recommended
+OP0051,TRN011,2025-08-16,2025-08-20,COMPLETED,81.4,Periodic refresher recommended
+OP0050,TRN023,2025-02-23,,IN_PROGRESS,,Periodic refresher recommended
+OP0021,TRN003,2025-01-20,2025-02-04,COMPLETED,80.9,Periodic refresher recommended
+OP0031,TRN020,2025-02-12,,OVERDUE,,Periodic refresher recommended
+OP0002,TRN028,2025-08-28,2025-09-04,COMPLETED,90.4,Periodic refresher recommended
+OP0023,TRN009,2025-07-11,2025-07-14,COMPLETED,67.9,Periodic refresher recommended
+OP0042,TRN023,2025-02-14,,IN_PROGRESS,,Periodic refresher recommended
+OP0016,TRN026,2025-07-15,2025-07-27,COMPLETED,30.0,Periodic refresher recommended
+OP0036,TRN016,2025-09-10,2025-09-26,COMPLETED,70.6,Periodic refresher recommended
+OP0042,TRN011,2025-04-01,2025-04-04,COMPLETED,63.0,Periodic refresher recommended
+OP0036,TRN003,2025-08-12,,IN_PROGRESS,,Periodic refresher recommended
+OP0031,TRN003,2025-03-15,,IN_PROGRESS,,Periodic refresher recommended
+OP0033,TRN012,2025-04-29,2025-05-07,COMPLETED,78.2,Periodic refresher recommended
+OP0028,TRN015,2025-04-15,,IN_PROGRESS,,Periodic refresher recommended
+OP0038,TRN026,2025-05-09,,OVERDUE,,Periodic refresher recommended
+OP0054,TRN026,2025-09-07,2025-09-08,COMPLETED,61.0,Periodic refresher recommended
+OP0009,TRN009,2025-06-13,,OVERDUE,,Periodic refresher recommended
+OP0050,TRN023,2025-02-15,,OVERDUE,,Periodic refresher recommended
+OP0026,TRN011,2025-08-01,2025-08-17,COMPLETED,91.1,Periodic refresher recommended
+OP0048,TRN020,2025-04-08,2025-04-25,COMPLETED,63.2,Periodic refresher recommended
+OP0053,TRN027,2025-05-03,2025-05-22,COMPLETED,79.5,Periodic refresher recommended
+OP0051,TRN006,2025-02-14,2025-02-21,COMPLETED,86.7,Periodic refresher recommended
+OP0025,TRN003,2025-01-30,,OVERDUE,,Periodic refresher recommended
+OP0016,TRN012,2025-06-26,,ASSIGNED,,Periodic refresher recommended
+OP0031,TRN021,2025-09-07,2025-09-24,COMPLETED,92.5,Periodic refresher recommended
+OP0051,TRN009,2025-06-05,2025-06-22,COMPLETED,73.7,Periodic refresher recommended
+OP0037,TRN020,2025-02-27,2025-03-11,COMPLETED,77.2,Periodic refresher recommended
+OP0010,TRN027,2025-02-01,2025-02-02,COMPLETED,74.2,Periodic refresher recommended
+OP0047,TRN023,2025-01-30,,ASSIGNED,,Periodic refresher recommended
+OP0030,TRN011,2025-04-11,,IN_PROGRESS,,Periodic refresher recommended
+OP0009,TRN024,2025-03-13,2025-03-30,COMPLETED,41.1,Periodic refresher recommended
+OP0025,TRN019,2025-06-07,2025-06-16,COMPLETED,65.3,Periodic refresher recommended
+OP0003,TRN016,2025-06-20,,OVERDUE,,Periodic refresher recommended
+OP0055,TRN013,2025-04-02,2025-04-22,COMPLETED,75.0,Periodic refresher recommended
+OP0018,TRN003,2025-07-04,,OVERDUE,,Periodic refresher recommended
+OP0025,TRN026,2025-06-08,2025-06-11,COMPLETED,80.3,Periodic refresher recommended
+OP0006,TRN019,2025-06-11,,OVERDUE,,Periodic refresher recommended
+OP0016,TRN014,2025-08-16,2025-08-20,COMPLETED,30.0,Periodic refresher recommended
+OP0048,TRN027,2025-05-28,2025-06-08,COMPLETED,78.7,Periodic refresher recommended
+OP0016,TRN025,2025-02-18,,ASSIGNED,,Periodic refresher recommended
+OP0010,TRN003,2025-04-04,2025-04-18,COMPLETED,67.1,Periodic refresher recommended
+OP0017,TRN028,2025-09-16,2025-09-28,COMPLETED,86.7,Periodic refresher recommended
+OP0025,TRN014,2025-01-24,,IN_PROGRESS,,Periodic refresher recommended
+OP0021,TRN017,2025-08-16,2025-08-17,COMPLETED,78.7,Periodic refresher recommended
+OP0023,TRN025,2025-06-24,2025-06-26,COMPLETED,59.3,Periodic refresher recommended
+OP0008,TRN003,2025-08-06,2025-08-18,COMPLETED,49.5,Periodic refresher recommended
+OP0040,TRN019,2025-06-07,,IN_PROGRESS,,Periodic refresher recommended
+OP0047,TRN009,2025-09-06,2025-09-12,COMPLETED,96.3,Periodic refresher recommended
+OP0024,TRN013,2025-01-15,,IN_PROGRESS,,Periodic refresher recommended
+OP0004,TRN028,2025-07-12,,IN_PROGRESS,,Periodic refresher recommended
+OP0023,TRN001,2025-05-31,2025-06-16,COMPLETED,74.3,Periodic refresher recommended
+OP0021,TRN025,2025-02-01,2025-02-14,COMPLETED,64.3,Periodic refresher recommended
+OP0038,TRN027,2025-08-29,2025-09-13,COMPLETED,89.0,Periodic refresher recommended
+OP0002,TRN025,2025-07-18,2025-07-30,COMPLETED,71.4,Periodic refresher recommended
+OP0027,TRN016,2025-07-19,2025-07-29,COMPLETED,53.1,Periodic refresher recommended
+OP0040,TRN028,2025-01-26,2025-02-15,COMPLETED,65.2,Periodic refresher recommended
+OP0003,TRN018,2025-05-29,2025-06-02,COMPLETED,57.0,Periodic refresher recommended
+OP0030,TRN028,2025-04-27,2025-05-02,COMPLETED,57.8,Periodic refresher recommended
+OP0037,TRN011,2025-03-16,2025-03-22,COMPLETED,83.5,Periodic refresher recommended
+OP0025,TRN017,2025-05-29,,IN_PROGRESS,,Periodic refresher recommended
+OP0039,TRN013,2025-02-05,2025-02-21,COMPLETED,60.9,Periodic refresher recommended
+OP0036,TRN022,2025-04-28,,IN_PROGRESS,,Periodic refresher recommended
+OP0035,TRN013,2025-01-30,,ASSIGNED,,Periodic refresher recommended
+OP0016,TRN001,2025-03-05,,ASSIGNED,,Periodic refresher recommended
+OP0049,TRN019,2025-04-23,,OVERDUE,,Periodic refresher recommended
+OP0036,TRN015,2025-02-23,,IN_PROGRESS,,Periodic refresher recommended
+OP0038,TRN012,2025-08-10,,IN_PROGRESS,,Periodic refresher recommended
+OP0027,TRN024,2025-03-06,2025-03-10,COMPLETED,49.4,Periodic refresher recommended
+OP0026,TRN018,2025-02-02,2025-02-16,COMPLETED,68.6,Periodic refresher recommended
+OP0029,TRN027,2025-03-01,,IN_PROGRESS,,Periodic refresher recommended
+OP0047,TRN014,2025-08-03,,IN_PROGRESS,,Periodic refresher recommended
+OP0034,TRN027,2025-07-03,2025-07-08,COMPLETED,68.7,Periodic refresher recommended
+OP0041,TRN010,2025-03-16,2025-03-28,COMPLETED,30.0,Periodic refresher recommended
+OP0011,TRN027,2025-07-07,2025-07-11,COMPLETED,76.4,Periodic refresher recommended
+OP0042,TRN017,2025-01-25,,OVERDUE,,Periodic refresher recommended
+OP0034,TRN018,2025-04-30,2025-05-12,COMPLETED,67.7,Periodic refresher recommended
+OP0008,TRN027,2025-07-14,2025-07-26,COMPLETED,34.4,Periodic refresher recommended
+OP0039,TRN025,2025-06-24,2025-07-01,COMPLETED,55.2,Periodic refresher recommended
+OP0012,TRN010,2025-04-07,,ASSIGNED,,Periodic refresher recommended
+OP0036,TRN014,2025-02-16,,OVERDUE,,Periodic refresher recommended
+OP0019,TRN003,2025-01-30,2025-02-12,COMPLETED,59.9,Periodic refresher recommended
+OP0050,TRN022,2025-08-04,2025-08-09,COMPLETED,75.4,Periodic refresher recommended
+OP0041,TRN014,2025-04-11,,IN_PROGRESS,,Periodic refresher recommended
+OP0047,TRN009,2025-03-19,,IN_PROGRESS,,Periodic refresher recommended
+OP0047,TRN015,2025-07-08,2025-07-15,COMPLETED,88.2,Periodic refresher recommended
+OP0019,TRN021,2025-02-02,2025-02-22,COMPLETED,63.8,Periodic refresher recommended
+OP0015,TRN007,2025-09-05,,IN_PROGRESS,,Periodic refresher recommended
+OP0053,TRN021,2025-03-12,2025-03-22,COMPLETED,79.1,Periodic refresher recommended
+OP0030,TRN011,2025-06-15,2025-06-29,COMPLETED,50.1,Periodic refresher recommended
+OP0033,TRN017,2025-03-20,,IN_PROGRESS,,Periodic refresher recommended
+OP0006,TRN015,2025-09-12,2025-09-13,COMPLETED,86.0,Periodic refresher recommended
+OP0019,TRN028,2025-02-06,2025-02-07,COMPLETED,66.3,Periodic refresher recommended
+OP0035,TRN028,2025-02-07,2025-02-09,COMPLETED,95.4,Periodic refresher recommended
+OP0003,TRN010,2025-05-11,2025-05-12,COMPLETED,64.5,Periodic refresher recommended
+OP0032,TRN021,2025-02-04,2025-02-15,COMPLETED,100.0,Periodic refresher recommended
+OP0036,TRN026,2025-02-21,2025-03-05,COMPLETED,83.4,Periodic refresher recommended
+OP0048,TRN001,2025-05-04,,OVERDUE,,Periodic refresher recommended
+OP0055,TRN010,2025-03-01,2025-03-18,COMPLETED,77.2,Periodic refresher recommended
+OP0021,TRN020,2025-02-20,,ASSIGNED,,Periodic refresher recommended
+OP0053,TRN023,2025-04-25,,IN_PROGRESS,,Periodic refresher recommended
+OP0039,TRN028,2025-02-06,,OVERDUE,,Periodic refresher recommended
+OP0042,TRN023,2025-08-19,,ASSIGNED,,Periodic refresher recommended
+OP0015,TRN012,2025-01-01,,IN_PROGRESS,,Periodic refresher recommended
+OP0033,TRN011,2025-01-25,,IN_PROGRESS,,Periodic refresher recommended
+OP0025,TRN028,2025-08-02,2025-08-13,COMPLETED,69.3,Periodic refresher recommended
+OP0009,TRN017,2025-03-16,2025-03-30,COMPLETED,52.4,Periodic refresher recommended
+OP0051,TRN023,2025-09-16,,OVERDUE,,Periodic refresher recommended
+OP0033,TRN021,2025-03-24,,ASSIGNED,,Periodic refresher recommended
+OP0046,TRN004,2025-07-05,,ASSIGNED,,Periodic refresher recommended
+OP0008,TRN009,2025-06-23,,IN_PROGRESS,,Periodic refresher recommended
+OP0004,TRN013,2025-08-25,2025-09-13,COMPLETED,89.9,Periodic refresher recommended
+OP0017,TRN021,2025-03-14,2025-03-31,COMPLETED,73.3,Periodic refresher recommended
+OP0003,TRN028,2025-01-02,2025-01-20,COMPLETED,69.1,Periodic refresher recommended
+OP0024,TRN027,2025-01-31,2025-02-18,COMPLETED,86.4,Periodic refresher recommended
+OP0007,TRN014,2025-07-10,,OVERDUE,,Periodic refresher recommended
+OP0044,TRN014,2025-04-03,2025-04-15,COMPLETED,64.6,Periodic refresher recommended
+OP0049,TRN003,2025-04-10,,ASSIGNED,,Periodic refresher recommended
+OP0010,TRN020,2025-02-28,2025-03-15,COMPLETED,67.7,Periodic refresher recommended
+OP0040,TRN013,2025-09-17,2025-09-20,COMPLETED,82.7,Periodic refresher recommended
+OP0027,TRN024,2025-07-30,,OVERDUE,,Periodic refresher recommended
+OP0041,TRN017,2025-09-01,,OVERDUE,,Periodic refresher recommended
+OP0002,TRN023,2025-03-14,2025-04-01,COMPLETED,82.4,Periodic refresher recommended
+OP0052,TRN009,2025-06-17,,OVERDUE,,Periodic refresher recommended
+OP0033,TRN013,2025-03-31,2025-04-18,COMPLETED,81.2,Periodic refresher recommended
+OP0037,TRN016,2025-04-28,,ASSIGNED,,Periodic refresher recommended
+OP0028,TRN021,2025-06-30,2025-07-15,COMPLETED,58.7,Periodic refresher recommended
+OP0013,TRN012,2025-02-21,2025-02-23,COMPLETED,73.2,Periodic refresher recommended
+OP0016,TRN016,2025-05-10,,OVERDUE,,Periodic refresher recommended
+OP0003,TRN001,2025-09-18,,IN_PROGRESS,,Periodic refresher recommended
+OP0045,TRN027,2025-08-27,,ASSIGNED,,Periodic refresher recommended
+OP0054,TRN017,2025-09-13,2025-09-14,COMPLETED,73.0,Periodic refresher recommended
+OP0001,TRN028,2025-06-19,,ASSIGNED,,Periodic refresher recommended
+OP0047,TRN003,2025-05-07,2025-05-23,COMPLETED,100.0,Periodic refresher recommended
+OP0045,TRN013,2025-07-27,,IN_PROGRESS,,Periodic refresher recommended
+OP0014,TRN015,2025-06-09,2025-06-21,COMPLETED,80.4,Periodic refresher recommended
+OP0042,TRN016,2025-09-04,,ASSIGNED,,Periodic refresher recommended
+OP0054,TRN012,2025-06-30,,ASSIGNED,,Periodic refresher recommended
+OP0031,TRN009,2025-01-04,,OVERDUE,,Periodic refresher recommended
+OP0030,TRN016,2025-09-12,,OVERDUE,,Periodic refresher recommended
+OP0025,TRN017,2025-01-24,,ASSIGNED,,Periodic refresher recommended
+OP0048,TRN016,2025-04-21,,ASSIGNED,,Periodic refresher recommended
+OP0040,TRN012,2025-06-16,2025-07-06,COMPLETED,71.8,Periodic refresher recommended
+OP0002,TRN009,2025-08-28,,IN_PROGRESS,,Periodic refresher recommended
+OP0049,TRN016,2025-09-10,2025-09-19,COMPLETED,82.5,Periodic refresher recommended
+OP0030,TRN026,2025-03-28,,ASSIGNED,,Periodic refresher recommended
+OP0051,TRN018,2025-03-05,,OVERDUE,,Periodic refresher recommended
+OP0023,TRN027,2025-04-14,,OVERDUE,,Periodic refresher recommended
+OP0016,TRN010,2025-08-04,,IN_PROGRESS,,Periodic refresher recommended
+OP0022,TRN017,2025-05-12,2025-05-19,COMPLETED,69.1,Periodic refresher recommended
+OP0034,TRN028,2025-04-15,2025-04-21,COMPLETED,71.8,Periodic refresher recommended
+OP0042,TRN015,2025-09-07,,ASSIGNED,,Periodic refresher recommended
+OP0007,TRN028,2025-05-28,2025-06-08,COMPLETED,52.2,Periodic refresher recommended
+OP0027,TRN011,2025-03-02,2025-03-16,COMPLETED,43.4,Periodic refresher recommended
+OP0043,TRN017,2025-05-25,2025-06-05,COMPLETED,97.9,Periodic refresher recommended
+OP0054,TRN024,2025-09-08,,IN_PROGRESS,,Periodic refresher recommended
+OP0051,TRN020,2025-03-12,2025-03-15,COMPLETED,65.6,Periodic refresher recommended
+OP0007,TRN022,2025-05-28,,IN_PROGRESS,,Periodic refresher recommended
+OP0035,TRN028,2025-08-31,,IN_PROGRESS,,Periodic refresher recommended
+OP0001,TRN022,2025-01-03,2025-01-12,COMPLETED,77.2,Periodic refresher recommended
+OP0020,TRN024,2025-06-26,2025-07-02,COMPLETED,66.0,Periodic refresher recommended
+OP0001,TRN021,2025-01-17,2025-02-04,COMPLETED,82.6,Periodic refresher recommended
+OP0004,TRN011,2025-03-14,2025-03-17,COMPLETED,85.7,Periodic refresher recommended
+OP0012,TRN011,2025-07-01,2025-07-12,COMPLETED,71.5,Periodic refresher recommended
+OP0026,TRN008,2025-04-22,,OVERDUE,,Periodic refresher recommended
+OP0036,TRN011,2025-05-19,2025-05-24,COMPLETED,60.2,Periodic refresher recommended
+OP0039,TRN012,2025-04-18,2025-05-06,COMPLETED,55.0,Periodic refresher recommended
+OP0032,TRN019,2025-03-13,2025-03-15,COMPLETED,100.0,Periodic refresher recommended
+OP0055,TRN028,2025-03-17,,OVERDUE,,Periodic refresher recommended
+OP0045,TRN013,2025-04-12,,IN_PROGRESS,,Periodic refresher recommended
+OP0005,TRN027,2025-09-13,,OVERDUE,,Periodic refresher recommended
+OP0019,TRN025,2025-08-04,,OVERDUE,,Periodic refresher recommended
+OP0014,TRN016,2025-06-29,2025-07-11,COMPLETED,79.6,Periodic refresher recommended
+OP0040,TRN027,2025-06-23,2025-06-24,COMPLETED,65.4,Periodic refresher recommended
+OP0041,TRN015,2025-07-14,2025-07-29,COMPLETED,30.0,Periodic refresher recommended
+OP0034,TRN013,2025-04-27,,IN_PROGRESS,,Periodic refresher recommended
+OP0006,TRN025,2025-09-24,,IN_PROGRESS,,Periodic refresher recommended
+OP0006,TRN014,2025-01-28,2025-02-04,COMPLETED,83.0,Periodic refresher recommended
+OP0026,TRN023,2025-03-08,,IN_PROGRESS,,Periodic refresher recommended
+OP0002,TRN015,2025-02-11,2025-02-12,COMPLETED,72.3,Periodic refresher recommended
+OP0012,TRN011,2025-08-14,,ASSIGNED,,Periodic refresher recommended
+OP0049,TRN020,2025-01-15,2025-01-25,COMPLETED,81.6,Periodic refresher recommended
+OP0003,TRN027,2025-07-27,2025-08-12,COMPLETED,69.2,Periodic refresher recommended
+OP0030,TRN016,2025-04-21,2025-05-08,COMPLETED,57.4,Periodic refresher recommended
+OP0006,TRN024,2025-07-10,,OVERDUE,,Periodic refresher recommended
+OP0035,TRN023,2025-05-23,2025-05-30,COMPLETED,80.1,Periodic refresher recommended
+OP0055,TRN023,2025-06-02,,OVERDUE,,Periodic refresher recommended
+OP0049,TRN027,2025-04-17,,OVERDUE,,Periodic refresher recommended
+OP0032,TRN004,2025-05-13,2025-05-15,COMPLETED,87.1,Periodic refresher recommended
+OP0018,TRN027,2025-08-20,,OVERDUE,,Periodic refresher recommended
+OP0028,TRN012,2025-01-04,,OVERDUE,,Periodic refresher recommended
+OP0020,TRN012,2025-04-09,2025-04-14,COMPLETED,60.3,Periodic refresher recommended
+OP0021,TRN020,2025-04-08,2025-04-26,COMPLETED,60.5,Periodic refresher recommended
+OP0005,TRN014,2025-03-31,,ASSIGNED,,Periodic refresher recommended
+OP0040,TRN004,2025-03-14,2025-04-01,COMPLETED,69.2,Periodic refresher recommended
+OP0053,TRN013,2025-05-17,2025-05-22,COMPLETED,60.5,Periodic refresher recommended
+OP0004,TRN012,2025-03-02,2025-03-21,COMPLETED,95.8,Periodic refresher recommended
+OP0017,TRN024,2025-04-10,2025-04-25,COMPLETED,85.5,Periodic refresher recommended
+OP0014,TRN011,2025-06-26,2025-06-28,COMPLETED,100.0,Periodic refresher recommended
+OP0020,TRN014,2025-09-02,,ASSIGNED,,Periodic refresher recommended
+OP0013,TRN023,2025-07-13,,OVERDUE,,Periodic refresher recommended
+OP0002,TRN007,2025-06-22,,OVERDUE,,Periodic refresher recommended
+OP0040,TRN028,2025-03-29,2025-04-06,COMPLETED,83.9,Periodic refresher recommended
+OP0047,TRN009,2025-08-26,2025-09-11,COMPLETED,85.1,Periodic refresher recommended
+OP0045,TRN008,2025-08-28,2025-09-07,COMPLETED,67.4,Periodic refresher recommended
+OP0051,TRN028,2025-02-18,2025-02-27,COMPLETED,75.3,Periodic refresher recommended
+OP0020,TRN024,2025-08-06,,OVERDUE,,Periodic refresher recommended
+OP0029,TRN014,2025-07-08,2025-07-18,COMPLETED,49.6,Periodic refresher recommended
+OP0021,TRN012,2025-07-10,,ASSIGNED,,Periodic refresher recommended
+OP0030,TRN008,2025-03-22,2025-04-05,COMPLETED,46.2,Periodic refresher recommended
+OP0036,TRN011,2025-01-27,,IN_PROGRESS,,Periodic refresher recommended
+OP0027,TRN015,2025-01-16,2025-01-24,COMPLETED,75.2,Periodic refresher recommended
+OP0030,TRN015,2025-05-14,,ASSIGNED,,Periodic refresher recommended
+OP0023,TRN016,2025-03-31,2025-04-19,COMPLETED,59.1,Periodic refresher recommended
+OP0041,TRN009,2025-01-24,,IN_PROGRESS,,Periodic refresher recommended
+OP0034,TRN012,2025-02-25,,ASSIGNED,,Periodic refresher recommended
+OP0046,TRN007,2025-07-20,2025-08-06,COMPLETED,67.7,Periodic refresher recommended
+OP0055,TRN014,2025-02-04,2025-02-24,COMPLETED,65.5,Periodic refresher recommended
+OP0037,TRN003,2025-07-19,,OVERDUE,,Periodic refresher recommended
+OP0010,TRN012,2025-03-30,2025-04-09,COMPLETED,75.8,Periodic refresher recommended
+OP0004,TRN027,2025-08-02,,ASSIGNED,,Periodic refresher recommended
+OP0024,TRN020,2025-07-11,,OVERDUE,,Periodic refresher recommended
+OP0041,TRN016,2025-07-10,2025-07-18,COMPLETED,30.0,Periodic refresher recommended
+OP0051,TRN008,2025-02-10,,OVERDUE,,Periodic refresher recommended
+OP0036,TRN020,2025-06-20,,ASSIGNED,,Periodic refresher recommended
+OP0035,TRN016,2025-06-17,2025-07-02,COMPLETED,88.7,Periodic refresher recommended
+OP0033,TRN017,2025-07-19,2025-07-24,COMPLETED,95.5,Periodic refresher recommended
+OP0054,TRN009,2025-08-03,2025-08-06,COMPLETED,56.3,Periodic refresher recommended
+OP0024,TRN026,2025-03-17,2025-04-06,COMPLETED,96.0,Periodic refresher recommended
+OP0018,TRN006,2025-07-01,,OVERDUE,,Periodic refresher recommended
+OP0030,TRN014,2025-07-17,,OVERDUE,,Periodic refresher recommended
+OP0017,TRN008,2025-06-24,2025-06-28,COMPLETED,65.9,Periodic refresher recommended
+OP0038,TRN026,2025-03-22,,IN_PROGRESS,,Periodic refresher recommended
+OP0018,TRN010,2025-03-25,,IN_PROGRESS,,Periodic refresher recommended
+OP0026,TRN009,2025-06-25,,OVERDUE,,Periodic refresher recommended
+OP0032,TRN007,2025-02-02,,ASSIGNED,,Periodic refresher recommended
+OP0044,TRN002,2025-05-04,,ASSIGNED,,Periodic refresher recommended
+OP0007,TRN009,2025-04-02,2025-04-03,COMPLETED,58.3,Periodic refresher recommended
+OP0008,TRN019,2025-05-29,2025-06-01,COMPLETED,56.5,Periodic refresher recommended
+OP0002,TRN002,2025-01-26,2025-02-04,COMPLETED,83.9,Periodic refresher recommended
+OP0009,TRN019,2025-03-07,,ASSIGNED,,Periodic refresher recommended
+OP0007,TRN010,2025-03-11,,ASSIGNED,,Periodic refresher recommended
+OP0042,TRN024,2025-05-30,2025-06-09,COMPLETED,68.5,Periodic refresher recommended
+OP0036,TRN011,2025-08-26,,ASSIGNED,,Periodic refresher recommended
+OP0045,TRN009,2025-04-17,2025-04-29,COMPLETED,57.1,Periodic refresher recommended
+OP0022,TRN009,2025-05-29,2025-06-04,COMPLETED,58.3,Periodic refresher recommended
+OP0043,TRN013,2025-04-27,,IN_PROGRESS,,Periodic refresher recommended
+OP0048,TRN019,2025-01-29,,IN_PROGRESS,,Periodic refresher recommended
+OP0055,TRN025,2025-04-02,,ASSIGNED,,Periodic refresher recommended
+OP0018,TRN020,2025-02-21,2025-02-25,COMPLETED,79.0,Periodic refresher recommended
+OP0030,TRN010,2025-09-06,2025-09-16,COMPLETED,58.7,Periodic refresher recommended
+OP0033,TRN018,2025-09-18,2025-10-03,COMPLETED,86.7,Periodic refresher recommended
+OP0024,TRN012,2025-07-07,,OVERDUE,,Periodic refresher recommended
+OP0016,TRN018,2025-06-14,,IN_PROGRESS,,Periodic refresher recommended
+OP0041,TRN014,2025-08-06,2025-08-17,COMPLETED,48.5,Periodic refresher recommended
+OP0005,TRN012,2025-05-12,2025-05-14,COMPLETED,81.2,Periodic refresher recommended
+OP0036,TRN022,2025-09-11,,OVERDUE,,Periodic refresher recommended
+OP0039,TRN003,2025-04-29,,IN_PROGRESS,,Periodic refresher recommended
+OP0052,TRN015,2025-01-12,2025-01-28,COMPLETED,63.0,Periodic refresher recommended
+OP0045,TRN010,2025-02-24,2025-03-16,COMPLETED,68.3,Periodic refresher recommended
+OP0031,TRN028,2025-04-14,2025-05-01,COMPLETED,82.3,Periodic refresher recommended
+OP0010,TRN025,2025-07-13,,ASSIGNED,,Periodic refresher recommended
+OP0043,TRN012,2025-07-20,,OVERDUE,,Periodic refresher recommended
+OP0005,TRN004,2025-06-28,2025-07-13,COMPLETED,82.9,Periodic refresher recommended
+OP0044,TRN027,2025-01-10,,ASSIGNED,,Periodic refresher recommended
+OP0032,TRN027,2025-03-02,2025-03-07,COMPLETED,100.0,Periodic refresher recommended
+OP0036,TRN028,2025-06-12,2025-06-17,COMPLETED,82.0,Periodic refresher recommended
+OP0054,TRN017,2025-06-15,2025-06-16,COMPLETED,59.6,Periodic refresher recommended
+OP0009,TRN012,2025-07-01,2025-07-06,COMPLETED,48.2,Periodic refresher recommended
+OP0001,TRN026,2025-04-11,2025-04-12,COMPLETED,76.0,Periodic refresher recommended
+OP0038,TRN022,2025-02-13,2025-02-18,COMPLETED,73.4,Periodic refresher recommended
+OP0041,TRN010,2025-08-21,,IN_PROGRESS,,Periodic refresher recommended
+OP0013,TRN005,2025-08-13,2025-08-21,COMPLETED,73.8,Periodic refresher recommended
+OP0035,TRN017,2025-03-03,,OVERDUE,,Periodic refresher recommended
+OP0014,TRN016,2025-07-01,,OVERDUE,,Periodic refresher recommended
+OP0020,TRN018,2025-06-21,,OVERDUE,,Periodic refresher recommended
+OP0048,TRN017,2025-09-24,2025-10-03,COMPLETED,63.6,Periodic refresher recommended
+OP0047,TRN010,2025-08-22,2025-09-09,COMPLETED,85.5,Periodic refresher recommended
+OP0051,TRN027,2025-09-11,2025-09-30,COMPLETED,78.5,Periodic refresher recommended
+OP0028,TRN015,2025-07-08,2025-07-13,COMPLETED,60.8,Periodic refresher recommended
+OP0024,TRN012,2025-04-12,,OVERDUE,,Periodic refresher recommended
+OP0050,TRN014,2025-04-25,,ASSIGNED,,Periodic refresher recommended
+OP0040,TRN016,2025-07-13,,ASSIGNED,,Periodic refresher recommended
+OP0030,TRN010,2025-09-17,2025-09-20,COMPLETED,58.2,Periodic refresher recommended
+OP0052,TRN006,2025-02-01,2025-02-06,COMPLETED,86.0,Periodic refresher recommended
+OP0036,TRN017,2025-03-27,,IN_PROGRESS,,Periodic refresher recommended
+OP0007,TRN019,2025-02-26,2025-03-11,COMPLETED,69.5,Periodic refresher recommended
+OP0055,TRN018,2025-04-26,,OVERDUE,,Periodic refresher recommended
+OP0031,TRN016,2025-01-15,2025-01-24,COMPLETED,83.6,Periodic refresher recommended
+OP0004,TRN012,2025-04-30,,OVERDUE,,Periodic refresher recommended
+OP0016,TRN028,2025-03-14,,IN_PROGRESS,,Periodic refresher recommended
+OP0035,TRN013,2025-03-14,,ASSIGNED,,Periodic refresher recommended
+OP0054,TRN023,2025-04-11,,OVERDUE,,Periodic refresher recommended
+OP0001,TRN005,2025-03-08,,IN_PROGRESS,,Periodic refresher recommended
+OP0007,TRN025,2025-06-21,,OVERDUE,,Periodic refresher recommended
+OP0036,TRN024,2025-05-12,,ASSIGNED,,Periodic refresher recommended
+OP0029,TRN018,2025-07-26,,IN_PROGRESS,,Periodic refresher recommended
+OP0026,TRN016,2025-06-05,,ASSIGNED,,Periodic refresher recommended
+OP0011,TRN012,2025-06-18,2025-06-21,COMPLETED,65.1,Periodic refresher recommended
+OP0054,TRN014,2025-02-18,2025-02-27,COMPLETED,57.5,Periodic refresher recommended
+OP0055,TRN013,2025-05-25,,IN_PROGRESS,,Periodic refresher recommended
+OP0024,TRN003,2025-09-19,2025-10-07,COMPLETED,77.0,Periodic refresher recommended
+OP0028,TRN024,2025-09-03,2025-09-04,COMPLETED,73.8,Periodic refresher recommended
+OP0037,TRN024,2025-08-14,,IN_PROGRESS,,Periodic refresher recommended
+OP0044,TRN013,2025-05-28,,ASSIGNED,,Periodic refresher recommended
+OP0044,TRN023,2025-06-30,,ASSIGNED,,Periodic refresher recommended
+OP0016,TRN013,2025-07-25,,IN_PROGRESS,,Periodic refresher recommended
+OP0049,TRN012,2025-01-20,2025-01-28,COMPLETED,76.3,Periodic refresher recommended
+OP0032,TRN013,2025-03-12,2025-03-22,COMPLETED,91.4,Periodic refresher recommended
+OP0035,TRN015,2025-03-31,2025-04-19,COMPLETED,83.1,Periodic refresher recommended
+OP0026,TRN023,2025-07-22,,IN_PROGRESS,,Periodic refresher recommended
+OP0004,TRN016,2025-05-21,2025-06-10,COMPLETED,88.9,Periodic refresher recommended
+OP0047,TRN021,2025-01-04,,ASSIGNED,,Periodic refresher recommended
+OP0002,TRN021,2025-02-16,,ASSIGNED,,Periodic refresher recommended
+OP0046,TRN010,2025-08-18,,ASSIGNED,,Periodic refresher recommended
+OP0025,TRN020,2025-04-09,,IN_PROGRESS,,Periodic refresher recommended
+OP0013,TRN003,2025-07-11,2025-07-20,COMPLETED,61.9,Periodic refresher recommended
+OP0015,TRN016,2025-08-25,,ASSIGNED,,Periodic refresher recommended
+OP0010,TRN010,2025-04-23,,ASSIGNED,,Periodic refresher recommended
+OP0043,TRN020,2025-04-06,,IN_PROGRESS,,Periodic refresher recommended

@@ -1,0 +1,29 @@
+training_id,title,category,difficulty,duration_min,description,trigger_condition
+TRN001,Operating Near Ground Personnel,SAFETY,INTERMEDIATE,30,Recognizing and maintaining safe clearance from ground crew.,Repeated PERSON_PROXIMITY events
+TRN002,Seatbelt Compliance Essentials,SAFETY,BEGINNER,15,Why and when seatbelt use is mandatory during operation.,SEATBELT_VIOLATION events
+TRN003,Safe Reversing Practices,SAFETY,INTERMEDIATE,25,Blind-spot awareness and spotter protocols while reversing.,UNSAFE_REVERSING events / high reverse_count
+TRN004,Vehicle Proximity Awareness,SAFETY,INTERMEDIATE,20,Maintaining safe distance from other site vehicles.,Repeated VEHICLE_PROXIMITY events
+TRN005,Obstacle Awareness on Active Sites,SAFETY,BEGINNER,20,Identifying and avoiding fixed/temporary site obstacles.,OBSTACLE_PROXIMITY events
+TRN006,Incident Reporting Procedures,SAFETY,BEGINNER,15,How and when to log near-misses and incidents.,Low operator_reported rate on incidents
+TRN007,Harsh Braking & Overspeed Prevention,SAFETY,INTERMEDIATE,20,Techniques to reduce harsh braking and overspeed events.,HARSH_BRAKING / OVERSPEED events
+TRN008,Critical Severity Response Protocol,SAFETY,ADVANCED,30,Immediate actions following a CRITICAL safety event.,Any CRITICAL severity event
+TRN009,Fuel-Efficient Machine Operation,FUEL_EFFICIENCY,INTERMEDIATE,25,Throttle and load management to reduce fuel burn.,fuel_deviation_percent consistently above baseline
+TRN010,Understanding Fuel Deviation Alerts,FUEL_EFFICIENCY,BEGINNER,15,Interpreting HIGH_FUEL_CONSUMPTION alerts.,HIGH_FUEL_CONSUMPTION alerts
+TRN011,Load Matching for Fuel Savings,FUEL_EFFICIENCY,ADVANCED,30,Matching engine load to task demand.,High average_engine_load with low task_efficiency
+TRN012,Reducing Excessive Idle Time,IDLE_MANAGEMENT,BEGINNER,20,Practical habits to cut unnecessary idling.,High idle_ratio
+TRN013,Auto Idle-Shutdown Features,IDLE_MANAGEMENT,BEGINNER,10,Using built-in idle-shutdown to save fuel.,High idle_duration_min trend
+TRN014,Idle Time & Engine Wear,IDLE_MANAGEMENT,INTERMEDIATE,20,How prolonged idling affects component life.,High idle_ratio with rising coolant_temperature_c
+TRN015,Proximity Detection System Overview,PROXIMITY_AWARENESS,BEGINNER,15,How the onboard proximity system works.,New operator onboarding
+TRN016,Working in Congested Site Zones,PROXIMITY_AWARENESS,INTERMEDIATE,25,Operating safely in high-traffic work zones.,Repeated proximity events in ZONE with high traffic
+TRN017,Spotter Communication Protocol,PROXIMITY_AWARENESS,INTERMEDIATE,20,Coordinating with ground spotters effectively.,Proximity events during REVERSING
+TRN018,Excavator Digging Cycle Optimization,MACHINE_OPERATION,INTERMEDIATE,30,Optimizing bucket fill and cycle time.,Low task_efficiency on Earth Excavation / Trenching
+TRN019,Wheel Loader Load & Carry Technique,MACHINE_OPERATION,INTERMEDIATE,25,Efficient loading and carrying technique.,Low task_efficiency on Material Loading
+TRN020,Grader Blade Control Fundamentals,MACHINE_OPERATION,ADVANCED,30,Precision blade control for grading tasks.,Low task_efficiency on Grading
+TRN021,Hauler Payload & Cycle Management,MACHINE_OPERATION,INTERMEDIATE,25,Managing payload and cycle time for hauling.,Low task_efficiency on Hauling
+TRN022,New Operator Machine Familiarization,MACHINE_OPERATION,BEGINNER,40,General controls and instrumentation walkthrough.,New operator onboarding / BEGINNER skill_level
+TRN023,Working in Wet Ground Conditions,ENVIRONMENTAL_AWARENESS,INTERMEDIATE,20,Adjusting technique for muddy/wet ground.,Tasks with high soil_moisture / WET ground_condition
+TRN024,Low Visibility Operating Procedures,ENVIRONMENTAL_AWARENESS,ADVANCED,25,Operating safely in fog/heavy rain.,Tasks completed under low visibility_m
+TRN025,Dust Control Best Practices,ENVIRONMENTAL_AWARENESS,BEGINNER,15,Reducing dust exposure and visibility impact.,High dust_level readings at site
+TRN026,Cold & Heat Weather Operation,ENVIRONMENTAL_AWARENESS,INTERMEDIATE,20,Machine and operator considerations in extreme temperature.,Extreme temperature_c readings
+TRN027,Task Planning & Time Estimation,TASK_EFFICIENCY,INTERMEDIATE,25,Improving estimate-to-actual duration accuracy.,task_efficiency consistently below baseline
+TRN028,Reading AI Task Delay Alerts,TASK_EFFICIENCY,BEGINNER,15,Responding to TASK_DELAY alerts effectively.,TASK_DELAY alerts
