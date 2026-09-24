@@ -89,18 +89,6 @@ export default function TrainingScreen() {
     setSelectedModule(null);
   };
 
-  if (loading) {
-    return (
-      <div className="flex-1 min-h-0 flex flex-col items-center justify-center bg-[#080A0B] text-[#929A9E] font-mono select-none overflow-hidden">
-        <div className="w-12 h-12 rounded-full border-2 border-[#141819] border-t-[#FFCC00] animate-spin mb-6" />
-        <p className="text-sm font-bold uppercase tracking-widest text-[#F1F3F4]">LOADING TRAINING RECORDS</p>
-      </div>
-    );
-  }
-
-  const skillProgress = trainingData?.current_skill_progress || 0;
-  const recentCompletion = trainingData?.completed_modules?.[0];
-  
   const rawRecModules = trainingData?.recommended_modules || [];
   const isSteepSlopeCompleted = trainingData?.completed_modules?.some(
     (m: any) => m.module_name?.toLowerCase().includes('steep slope') || m.module_name?.toLowerCase().includes('rock')
@@ -141,6 +129,18 @@ export default function TrainingScreen() {
       return [steepSlopeModule, ...filtered];
     }
   }, [rawRecModules, isSteepSlopeCompleted]);
+
+  if (loading) {
+    return (
+      <div className="flex-1 min-h-0 flex flex-col items-center justify-center bg-[#080A0B] text-[#929A9E] font-mono select-none overflow-hidden">
+        <div className="w-12 h-12 rounded-full border-2 border-[#141819] border-t-[#FFCC00] animate-spin mb-6" />
+        <p className="text-sm font-bold uppercase tracking-widest text-[#F1F3F4]">LOADING TRAINING RECORDS</p>
+      </div>
+    );
+  }
+
+  const skillProgress = trainingData?.current_skill_progress || 0;
+  const recentCompletion = trainingData?.completed_modules?.[0];
 
   return (
     <div className="flex-1 min-h-0 flex flex-col bg-[#080A0B] select-none relative">
