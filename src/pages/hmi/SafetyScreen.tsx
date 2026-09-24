@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, User, Truck, Box, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { Shield, User, Truck, Box, AlertTriangle, CheckCircle2, ChevronUp, ChevronDown } from 'lucide-react';
 import { api } from '../../api/client';
 import Modal from '../../components/common/Modal';
-
-// Simulated Proximity Sensor Output for Demo purposes
-const simulatedProximity = [
-  { label: 'WORKER', type: 'worker', distanceM: 4.2, status: 'warning', angle: 220 },
-  { label: 'HAUL TRUCK', type: 'vehicle', distanceM: 8.7, status: 'safe', angle: 45 },
-  { label: 'EDGE', type: 'obstacle', distanceM: 12.4, status: 'safe', angle: 135 }
-];
 
 const ExcavatorSVG = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 100 160" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -187,6 +180,18 @@ function IncidentModal({ isOpen, onClose }: IncidentModalProps) {
   );
 }
 
+// ─── Demo State Constants ──────────────────────────────
+const DEMO_PX_PER_M = 10;
+const PROXIMITY_DANGER_M = 8.0; // The single configurable safety boundary parameter
+const PROXIMITY_WARN_M = 12.0;
+
+const DEMO_OBJECTS = [
+  { id: 'worker-1', label: 'WORKER', type: 'worker', initX: -80, initY: 140, angleOffset: 220 },
+  { id: 'truck-1', label: 'HAUL TRUCK', type: 'vehicle', initX: 110, initY: -110, angleOffset: 45 },
+  { id: 'edge-1', label: 'EDGE', type: 'obstacle', initX: 130, initY: 120, angleOffset: 135 },
+  { id: 'worker-2', label: 'WORKER', type: 'worker', initX: -70, initY: -90, angleOffset: 300 },
+];
+
 export default function SafetyScreen() {
   const navigate = useNavigate();
 
@@ -197,6 +202,18 @@ export default function SafetyScreen() {
   const [telemetry, setTelemetry] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+
+  // ─── Interactive Demo State ───
+  const [machineY, setMachineY] = useState(0); // Y offset in pixels
+  const [blink, setBlink] = useState(false);
+  
+  useEffect(() => {
+    const id = setInterval(() => setBlink(b => !b), 600);
+    return () => clearInterval(id);
+  }, []);
+
+  const moveUp = useCallback(() => setMachineY(y => y - 15), []);
+  const moveDown = useCallback(() => setMachineY(y => y + 15), []);
 
   useEffect(() => {
     async function loadData() {
@@ -233,6 +250,146 @@ export default function SafetyScreen() {
     loadData();
   }, []);
 
+  // Calculate dynamic proximity for demo objects based on machineY
+  const dynamicDemoProximity = DEMO_OBJECTS.map(obj => {
+    const dx = obj.initX;
+    const dy = obj.initY - machineY; // Machine moving up (negative Y) brings objects lower relative to it
+    const distPx = Math.sqrt(dx * dx + dy * dy);
+    const distM = +(distPx / DEMO_PX_PER_M).toFixed(1);
+    
+    // Calculate angle relative to machine (center)
+    let angle = (Math.atan2(dy, dx) * 180 / Math.PI) + 90;
+    if (angle < 0) angle += 360;
+
+    let status = 'safe';
+    // Visual collision: the object has a visual radius of ~3% (6 units in dx space = 0.6m)
+    // So if the distance to its center is <= Boundary (8.0) + Object Radius (0.6), they are touching!
+    const OBJECT_RADIUS_M = 0.6;
+    if (distM <= PROXIMITY_DANGER_M + OBJECT_RADIUS_M) status = 'critical';
+
+    return { ...obj, distanceM: distM, status, angle, _dx: dx, _dy: dy };
+  });
+
+  // Extract min distance from demo for global state override
+  // Compare using the edge-adjusted threshold so the ring triggers exactly when touched
+  const demoMinDistance = Math.min(...dynamicDemoProximity.map(o => o.distanceM));
+  const hasDemoCritical = demoMinDistance <= PROXIMITY_DANGER_M + 0.6;
+  const hasDemoWarning = demoMinDistance <= PROXIMITY_WARN_M;
+
+  // Derive global state from real data OR demo data
+  const hasCriticalAlert = alerts.some(a => a.severity.toLowerCase() === 'critical');
+  const hasWarningAlert = alerts.some(a => a.severity.toLowerCase() === 'warning' || a.severity.toLowerCase() === 'high');
+
+  const nearestPersonM = telemetry?.nearest_person_distance_m ?? null;
+  const nearestVehicleM = telemetry?.nearest_vehicle_distance_m ?? null;
+  const nearestObstacleM = telemetry?.nearest_obstacle_distance_m ?? null;
+  const seatbeltStatus = telemetry?.seatbelt_status ?? 'FASTENED';
+  
+  const telDistances = [nearestPersonM, nearestVehicleM, nearestObstacleM].filter((d): d is number => d !== null);
+  // Ensure the interactive demo can ALWAYS trigger the overlay by taking the absolute minimum of real and demo distances
+  const minDistance = telDistances.length > 0 ? Math.min(Math.min(...telDistances), demoMinDistance) : demoMinDistance;
+
+  // Baseline backend score and level
+  let displayRiskScore: number | string = risk?.risk_score !== undefined && risk?.risk_score !== null ? Number(risk.risk_score) : '--';
+  let backendRiskLevel = risk?.risk_level?.toLowerCase() || 'low';
+
+  // Apply real active alerts to baseline level
+  if (hasCriticalAlert || risk?.risk_level === 'critical' || risk?.risk_level === 'High') {
+      backendRiskLevel = 'critical';
+  } else if (hasWarningAlert || risk?.risk_level === 'moderate' || risk?.risk_level === 'high' || risk?.risk_level === 'Medium') {
+      backendRiskLevel = 'moderate';
+  }
+  
+  // Apply live proximity overlay if an object enters the boundary
+  if (typeof displayRiskScore === 'number' && !isNaN(displayRiskScore) && minDistance !== null) {
+    if (minDistance <= PROXIMITY_DANGER_M + 0.6) {
+      // Scale score from 80 to 99 based on distance inside critical boundary (8.6m to 0m)
+      const overlay = Math.round(80 + ((8.6 - Math.max(0, minDistance)) / 8.6) * 19);
+      displayRiskScore = Math.max(displayRiskScore, overlay);
+      backendRiskLevel = 'critical';
+    } else if (minDistance <= PROXIMITY_WARN_M) {
+      // Scale score from 50 to 79 based on distance inside caution boundary (12.0m to 8.6m)
+      const overlay = Math.round(50 + ((12.0 - minDistance) / (12.0 - 8.6)) * 29);
+      displayRiskScore = Math.max(displayRiskScore, overlay);
+      backendRiskLevel = displayRiskScore >= 85 ? 'critical' : displayRiskScore >= 75 ? 'high' : displayRiskScore >= 45 ? 'moderate' : backendRiskLevel;
+    }
+  }
+
+  // Unified derived state
+  const isCritical = backendRiskLevel === 'critical';
+  const isCaution = !isCritical && (backendRiskLevel === 'high' || backendRiskLevel === 'moderate' || backendRiskLevel === 'medium');
+  
+  const globalStateText = isCritical ? 'CRITICAL HAZARD' : isCaution ? 'CAUTION' : 'SAFE TO OPERATE';
+  const globalStateColor = isCritical ? 'text-[#E5484D]' : isCaution ? 'text-[#F2B84B]' : 'text-[#42C76A]';
+
+  const scoreColor = backendRiskLevel === 'critical' || backendRiskLevel === 'high' 
+                     ? 'text-[#E5484D]' 
+                     : backendRiskLevel === 'medium' || backendRiskLevel === 'moderate'
+                     ? 'text-[#F2B84B]' 
+                     : 'text-[#F1F3F4]';
+
+  // Use dynamic demo objects for the radar display
+  const proximityData = dynamicDemoProximity;
+
+  // Find nearest hazard
+  const sortedProximity = [...proximityData].sort((a, b) => a.distanceM - b.distanceM);
+  const nearest = sortedProximity[0];
+
+  const getZoneColor = (hazard: any) => hazard ? (hazard.status === 'critical' ? (blink ? 'border-[#E5484D] bg-[#E5484D]/30' : 'border-[#E5484D] bg-[#E5484D]/10') : 'border-[#F2B84B] bg-[#F2B84B]/10') : 'border-transparent bg-transparent';
+  const frontHazard = proximityData.find((p: any) => (p.angle >= 315 || p.angle <= 45) && p.status !== 'safe');
+  const rightHazard = proximityData.find((p: any) => (p.angle > 45 && p.angle < 135) && p.status !== 'safe');
+  const rearHazard = proximityData.find((p: any) => (p.angle >= 135 && p.angle <= 225) && p.status !== 'safe');
+  const leftHazard = proximityData.find((p: any) => (p.angle > 225 && p.angle < 315) && p.status !== 'safe');
+
+  // Audio Alarm Effect
+  useEffect(() => {
+    if (!isCritical) return;
+    
+    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContextClass) return;
+    
+    const audioCtx = new AudioContextClass();
+    
+    let isPlaying = true;
+    let oscillator: OscillatorNode | null = null;
+    let gainNode: GainNode | null = null;
+    
+    const playBeep = () => {
+      if (!isPlaying || audioCtx.state === 'closed') return;
+      
+      oscillator = audioCtx.createOscillator();
+      gainNode = audioCtx.createGain();
+      
+      // High-pitched square wave for industrial alarm sound
+      oscillator.type = 'square';
+      oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); 
+      
+      // Volume envelope to avoid popping clicks
+      gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.05);
+      gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime + 0.2);
+      gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.25);
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      
+      oscillator.start(audioCtx.currentTime);
+      oscillator.stop(audioCtx.currentTime + 0.25);
+    };
+
+    // Play a beep every 600ms (matching the visual blink rate)
+    const intervalId = setInterval(playBeep, 600);
+    playBeep(); // Play first beep immediately
+
+    return () => {
+      isPlaying = false;
+      clearInterval(intervalId);
+      if (audioCtx.state !== 'closed') {
+        audioCtx.close().catch(console.error);
+      }
+    };
+  }, [isCritical]);
+
   if (loading) {
     return (
       <div className="h-full min-h-0 flex flex-col items-center justify-center bg-[#080A0B] text-[#929A9E] font-mono select-none overflow-hidden">
@@ -240,50 +397,6 @@ export default function SafetyScreen() {
       </div>
     );
   }
-
-  // Derive global state from real data
-  // Hierarchy: CRITICAL > WARNING/CAUTION > SAFE
-  const hasCriticalAlert = alerts.some(a => a.severity.toLowerCase() === 'critical');
-  const hasWarningAlert = alerts.some(a => a.severity.toLowerCase() === 'warning' || a.severity.toLowerCase() === 'high');
-
-  // Real proximity from telemetry (ML risk_level uses lowercase: low/moderate/high/critical)
-  const nearestPersonM = telemetry?.nearest_person_distance_m ?? null;
-  const nearestVehicleM = telemetry?.nearest_vehicle_distance_m ?? null;
-  const nearestObstacleM = telemetry?.nearest_obstacle_distance_m ?? null;
-  const seatbeltStatus = telemetry?.seatbelt_status ?? 'FASTENED';
-  const PROXIMITY_DANGER_M = 3.0;
-  const PROXIMITY_WARN_M = 8.0;
-  const telDistances = [nearestPersonM, nearestVehicleM, nearestObstacleM].filter((d): d is number => d !== null);
-  const minDistance = telDistances.length > 0 ? Math.min(...telDistances) : null;
-  const hasCriticalProximity = minDistance !== null && minDistance < PROXIMITY_DANGER_M;
-  const hasWarningProximity = minDistance !== null && minDistance < PROXIMITY_WARN_M;
-
-  // ML risk_level is lowercase: 'low', 'moderate', 'high', 'critical'
-  const isCritical = hasCriticalAlert || hasCriticalProximity || risk?.risk_level === 'critical' || risk?.risk_level === 'High';
-  const isCaution = !isCritical && (hasWarningAlert || hasWarningProximity || risk?.risk_level === 'moderate' || risk?.risk_level === 'high' || risk?.risk_level === 'Medium');
-  
-  const globalStateText = isCritical ? 'CRITICAL HAZARD' : isCaution ? 'CAUTION' : 'SAFE TO OPERATE';
-  const globalStateColor = isCritical ? 'text-[#E5484D]' : isCaution ? 'text-[#F2B84B]' : 'text-[#42C76A]';
-  const riskScore = risk?.risk_score ?? 15;
-
-  // Build real proximity objects from telemetry for radar display
-  const realProximity = [
-    ...(nearestPersonM !== null ? [{ label: 'WORKER', type: 'worker', distanceM: nearestPersonM, status: nearestPersonM < PROXIMITY_DANGER_M ? 'critical' : nearestPersonM < PROXIMITY_WARN_M ? 'warning' : 'safe', angle: 220 }] : []),
-    ...(nearestVehicleM !== null ? [{ label: 'VEHICLE', type: 'vehicle', distanceM: nearestVehicleM, status: nearestVehicleM < PROXIMITY_DANGER_M ? 'critical' : nearestVehicleM < PROXIMITY_WARN_M ? 'warning' : 'safe', angle: 45 }] : []),
-    ...(nearestObstacleM !== null ? [{ label: 'OBSTACLE', type: 'obstacle', distanceM: nearestObstacleM, status: nearestObstacleM < PROXIMITY_DANGER_M ? 'critical' : nearestObstacleM < PROXIMITY_WARN_M ? 'warning' : 'safe', angle: 135 }] : []),
-  ];
-  // Fallback to simulated if no telemetry loaded yet
-  const proximityData = realProximity.length > 0 ? realProximity : simulatedProximity;
-
-  // Find nearest hazard
-  const sortedProximity = [...proximityData].sort((a, b) => a.distanceM - b.distanceM);
-  const nearest = sortedProximity[0];
-
-  const getZoneColor = (hazard: any) => hazard ? (hazard.status === 'critical' ? 'border-[#E5484D] bg-[#E5484D]/10' : 'border-[#F2B84B] bg-[#F2B84B]/10') : 'border-transparent bg-transparent';
-  const frontHazard = proximityData.find((p: any) => (p.angle >= 315 || p.angle <= 45) && p.status !== 'safe');
-  const rightHazard = proximityData.find((p: any) => (p.angle > 45 && p.angle < 135) && p.status !== 'safe');
-  const rearHazard = proximityData.find((p: any) => (p.angle >= 135 && p.angle <= 225) && p.status !== 'safe');
-  const leftHazard = proximityData.find((p: any) => (p.angle > 225 && p.angle < 315) && p.status !== 'safe');
 
   return (
     <div className="flex-1 min-h-0 flex flex-col bg-[#080A0B] select-none px-4 py-2 lg:py-4 lg:px-12 overflow-hidden">
@@ -301,7 +414,7 @@ export default function SafetyScreen() {
               </span>
               <div className="flex items-center gap-4 mt-2">
                 <div className={`w-4 h-4 rounded-full ${isCritical ? 'bg-[#E5484D] animate-pulse' : isCaution ? 'bg-[#F2B84B]' : 'bg-[#42C76A]'}`} />
-                <span className={`font-mono text-3xl lg:text-4xl font-extrabold tracking-tight uppercase ${globalStateColor}`}>
+                <span className={`font-mono text-3xl lg:text-4xl font-extrabold tracking-tight uppercase ${globalStateColor} transition-colors duration-300`}>
                   {globalStateText}
                 </span>
               </div>
@@ -309,11 +422,14 @@ export default function SafetyScreen() {
 
             <div className="flex flex-col gap-1 mt-4">
               <span className="font-mono text-xs tracking-widest text-[#5E676C] uppercase font-bold">
-                SAFETY RISK
+                OVERALL SAFETY RISK
               </span>
-              <div className="flex items-baseline gap-2 mt-1">
-                <span className={`font-mono text-5xl font-extrabold tracking-tighter ${isCritical ? 'text-[#E5484D]' : isCaution ? 'text-[#F2B84B]' : 'text-[#F1F3F4]'}`}>
-                  {riskScore}
+              <span className="font-mono text-[9px] tracking-widest text-[#42C76A] uppercase font-bold leading-tight">
+                behavior + safety history + current conditions
+              </span>
+              <div className="flex items-baseline gap-2 mt-2">
+                <span className={`font-mono text-5xl font-extrabold tracking-tighter transition-colors duration-300 ${scoreColor}`}>
+                  {displayRiskScore}
                 </span>
                 <span className="font-mono text-xl text-[#5E676C]">/ 100</span>
               </div>
@@ -332,15 +448,15 @@ export default function SafetyScreen() {
               <div className="flex justify-between items-center">
                 <span className="text-[#5E676C]">NEAREST OBJECT</span>
                 <div className="flex items-center gap-2">
-                  <span className={minDistance !== null && minDistance < PROXIMITY_WARN_M ? 'text-[#F2B84B]' : 'text-[#42C76A]'}>●</span>
-                  <span className="text-[#F1F3F4]">{minDistance !== null ? `${minDistance.toFixed(1)}m` : 'CLEAR'}</span>
+                  <span className={minDistance !== null && minDistance < PROXIMITY_WARN_M ? (minDistance < PROXIMITY_DANGER_M ? 'text-[#E5484D] animate-pulse' : 'text-[#F2B84B]') : 'text-[#42C76A]'}>●</span>
+                  <span className={`transition-colors duration-300 ${minDistance !== null && minDistance < PROXIMITY_DANGER_M ? 'text-[#E5484D]' : 'text-[#F1F3F4]'}`}>{minDistance !== null ? `${minDistance.toFixed(1)}m` : 'CLEAR'}</span>
                 </div>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-[#5E676C]">RADAR</span>
                 <div className="flex items-center gap-2">
                   <span className="text-[#42C76A]">●</span>
-                  <span className="text-[#F1F3F4]">{telemetry ? 'ONLINE' : 'STANDBY'}</span>
+                  <span className="text-[#F1F3F4]">{telemetry ? 'ONLINE' : 'ONLINE (DEMO)'}</span>
                 </div>
               </div>
             </div>
@@ -357,43 +473,75 @@ export default function SafetyScreen() {
 
         {/* CENTER COLUMN: MACHINE PROXIMITY */}
         <div className="flex-1 flex flex-col items-center justify-between relative py-2 lg:py-6 px-4 min-w-0">
-          <div className="text-center font-mono text-xs text-[#5E676C] font-bold tracking-widest mb-4">FRONT<br/>↑</div>
+          <div className="w-full flex justify-between items-start mb-4">
+            <div className="flex flex-col items-center gap-2">
+              {/* UP/DOWN Demo Controls */}
+              <button
+                onClick={moveUp}
+                className="w-12 h-12 bg-[#141819] border border-[#5E676C] rounded flex items-center justify-center text-[#FFCC00] hover:bg-[#1D2225] hover:border-[#F1F3F4] active:scale-95 transition-all"
+                title="Move Machine Forward"
+              >
+                <ChevronUp size={24} />
+              </button>
+              <button
+                onClick={moveDown}
+                className="w-12 h-12 bg-[#141819] border border-[#5E676C] rounded flex items-center justify-center text-[#FFCC00] hover:bg-[#1D2225] hover:border-[#F1F3F4] active:scale-95 transition-all"
+                title="Move Machine Backward"
+              >
+                <ChevronDown size={24} />
+              </button>
+            </div>
+            
+            <div className="text-center font-mono text-xs text-[#5E676C] font-bold tracking-widest flex-1 mr-12">FRONT<br/>↑</div>
+          </div>
           
           <div className="w-full max-w-[400px] aspect-[4/5] relative flex items-center justify-center">
             
-            {/* Machine Silhouette */}
+            {/* Machine Silhouette (Fixed in center) */}
             <div className="absolute w-[80px] h-[120px] flex items-center justify-center z-10 pointer-events-none">
               <ExcavatorSVG className="w-full h-full" />
+              {/* Machine direction arrow */}
+              <div className="absolute -top-6 text-[#FFCC00] opacity-50 text-xl font-bold">↑</div>
             </div>
 
-            {/* Subtle Sensor Zones */}
-            <div className="absolute inset-x-8 inset-y-16 border border-[#141819] rounded-[40px] opacity-40 pointer-events-none" />
-            <div className="absolute inset-x-0 inset-y-8 border border-[#141819] rounded-[60px] opacity-20 pointer-events-none" />
-            
-            {/* Directional Hazard Highlight Zones */}
-            <div className={`absolute top-4 left-1/4 right-1/4 h-1/4 border-t border-l border-r rounded-t-[50px] transition-all duration-500 pointer-events-none ${getZoneColor(frontHazard)}`} />
-            <div className={`absolute bottom-4 left-1/4 right-1/4 h-1/4 border-b border-l border-r rounded-b-[50px] transition-all duration-500 pointer-events-none ${getZoneColor(rearHazard)}`} />
-            <div className={`absolute left-4 top-1/4 bottom-1/4 w-1/4 border-l border-t border-b rounded-l-[50px] transition-all duration-500 pointer-events-none ${getZoneColor(leftHazard)}`} />
-            <div className={`absolute right-4 top-1/4 bottom-1/4 w-1/4 border-r border-t border-b rounded-r-[50px] transition-all duration-500 pointer-events-none ${getZoneColor(rightHazard)}`} />
+            {/* Configurable Proximity/Safety Boundary (Fixed in center) */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+               {/* 80% width circle represents the PROXIMITY_DANGER_M boundary precisely */}
+               <div 
+                 className={`w-[80%] aspect-square rounded-full border-[3px] transition-all duration-300 flex items-center justify-center ${
+                   hasDemoCritical 
+                     ? (blink ? 'border-[#E5484D] bg-[#E5484D]/20 scale-105' : 'border-[#E5484D]/70 bg-[#E5484D]/10 scale-100')
+                     : 'border-[#42C76A] bg-[#42C76A]/5 scale-100'
+                 }`}
+               >
+                  {/* Inner reference ring */}
+                  <div className="w-[70%] h-[70%] rounded-full border border-[#141819] opacity-30 pointer-events-none" />
+               </div>
+            </div>
 
             {/* Radar Objects */}
             {proximityData.map((obj: any, i: number) => {
-              const angleRad = (obj.angle - 90) * (Math.PI / 180);
-              const r = Math.min((obj.distanceM / 20) * 50, 50); // Map up to 20m out to 50% radius
-              const top = 50 + r * Math.sin(angleRad);
-              const left = 50 + r * Math.cos(angleRad);
+              // Convert object position to percentage of container
+              const centerX = 50;
+              const centerY = 50;
+              // 1 unit of _dx is 0.5% of the container width
+              const left = centerX + (obj._dx / 2);
+              const top = centerY + (obj._dy / 2);
               
               const isObjCritical = obj.status === 'critical';
               const isObjWarning = obj.status === 'warning';
-              const objColor = isObjCritical ? '#E5484D' : isObjWarning ? '#F2B84B' : '#42C76A';
-
+              
+              // If object entered boundary, turn it red
+              const objColor = isObjCritical ? '#E5484D' : '#42C76A';
+              const showBlink = isObjCritical && blink;
+              
               // Quadrant based label offset engine
               const isLeft = obj.angle > 180 && obj.angle < 360;
               
               return (
                 <div 
-                  key={i} 
-                  className="absolute flex items-center gap-2 transition-all duration-300 ease-in-out"
+                  key={obj.id || i} 
+                  className="absolute flex items-center gap-2 transition-all duration-300 ease-linear"
                   style={{ 
                     top: `${top}%`, 
                     left: `${left}%`,
@@ -401,15 +549,15 @@ export default function SafetyScreen() {
                     transform: `translate(${isLeft ? '50%' : '-50%'}, -50%)`
                   }}
                 >
-                  <div className={`flex items-center justify-center w-5 h-5 rounded-full border z-20 shrink-0 bg-[#080A0B] ${isObjCritical ? 'animate-pulse' : ''}`} style={{ borderColor: objColor }}>
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: objColor }} />
+                  <div className={`flex items-center justify-center w-6 h-6 rounded-full border-2 z-20 shrink-0 bg-[#080A0B] transition-colors duration-200 ${showBlink ? 'scale-125' : ''}`} style={{ borderColor: showBlink ? '#E5484D' : objColor }}>
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: showBlink ? '#E5484D' : objColor }} />
                   </div>
                   
-                  <div className={`flex flex-col ${isLeft ? 'items-end text-right' : 'items-start text-left'} z-30 bg-[#080A0B]/90 px-2 py-1 rounded border border-[#141819]`}>
-                    <span className="font-mono text-[10px] text-[#929A9E] uppercase leading-none mb-1">
+                  <div className={`flex flex-col ${isLeft ? 'items-end text-right' : 'items-start text-left'} z-30 bg-[#080A0B]/90 px-2 py-1 rounded border border-[#141819] transition-colors duration-200 ${showBlink ? 'border-[#E5484D]' : ''}`}>
+                    <span className={`font-mono text-[10px] uppercase leading-none mb-1 transition-colors duration-200 ${showBlink ? 'text-[#E5484D] font-bold' : 'text-[#929A9E]'}`}>
                       {obj.label}
                     </span>
-                    <span className="font-mono text-xs font-bold" style={{ color: objColor }}>
+                    <span className="font-mono text-xs font-bold transition-colors duration-200" style={{ color: showBlink ? '#E5484D' : objColor }}>
                       {obj.distanceM}m
                     </span>
                   </div>
@@ -433,7 +581,7 @@ export default function SafetyScreen() {
               <div className="flex flex-col items-end gap-1 text-right">
                 <span className="text-[#5E676C] text-[10px] font-bold">NEAREST HAZARD</span>
                 <div className="flex items-baseline gap-2">
-                  <span className={`text-xl font-extrabold ${nearest.status === 'critical' ? 'text-[#E5484D]' : nearest.status === 'warning' ? 'text-[#F2B84B]' : 'text-[#F1F3F4]'}`}>
+                  <span className={`text-xl font-extrabold transition-colors duration-300 ${nearest.status === 'critical' ? 'text-[#E5484D]' : nearest.status === 'warning' ? 'text-[#F2B84B]' : 'text-[#F1F3F4]'}`}>
                     {nearest.distanceM}m
                   </span>
                   <span className="text-[#929A9E] text-xs shrink-0">• {nearest.label}</span>
