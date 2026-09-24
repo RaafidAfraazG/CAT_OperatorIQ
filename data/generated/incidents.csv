@@ -1,0 +1,221 @@
+incident_id,timestamp,machine_id,operator_id,task_id,site_id,incident_type,severity,description,location_zone,injury_occurred,machine_damage,resolved,operator_reported
+INC00219,2025-01-01 15:32:00,M0014,OP0023,T00518,ST013,NEAR_MISS_PROXIMITY,LOW,Incident reported: road preparation.,ZONE-C,False,False,False,False
+INC00145,2025-01-01 17:14:00,M0014,OP0023,T00518,ST013,MECHANICAL_OBSERVATION,HIGH,hydraulic hose showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,True,False
+INC00069,2025-01-02 12:24:00,M0008,OP0030,T00522,ST008,ENVIRONMENTAL_HAZARD,MEDIUM,Hazardous ground/weather condition (cloudy) reported at site during earth excavation.,ZONE-A,False,False,True,False
+INC00039,2025-01-02 14:18:00,M0023,OP0010,T00017,ST009,MECHANICAL_OBSERVATION,MEDIUM,bucket linkage showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,True
+INC00177,2025-01-02 15:15:00,M0001,OP0003,T00422,ST007,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: earth excavation.,ZONE-C,False,False,False,False
+INC00003,2025-01-02 16:30:00,M0014,OP0040,T00710,ST013,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (sunny) reported at site during hauling.,ZONE-B,False,False,True,True
+INC00094,2025-01-02 19:51:00,M0037,OP0015,T00635,ST005,MECHANICAL_OBSERVATION,HIGH,tire showing early wear signs; flagged for maintenance review.,ZONE-D,False,False,True,True
+INC00126,2025-01-04 11:30:00,M0036,OP0044,T00708,ST006,ENVIRONMENTAL_HAZARD,MEDIUM,Hazardous ground/weather condition (cloudy) reported at site during road preparation.,ZONE-A,False,False,True,False
+INC00209,2025-01-04 13:09:00,M0036,OP0044,T00708,ST006,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (cloudy) reported at site during road preparation.,ZONE-B,False,False,True,False
+INC00022,2025-01-07 12:51:00,M0030,OP0032,T00589,ST009,COLLISION_MINOR,MEDIUM,Minor contact between Excavator and site obstacle while earth excavation.,ZONE-B,False,False,False,True
+INC00199,2025-01-07 14:14:00,M0030,OP0032,T00589,ST009,ENVIRONMENTAL_HAZARD,MEDIUM,Hazardous ground/weather condition (fog) reported at site during earth excavation.,ZONE-D,False,False,True,True
+INC00050,2025-01-09 10:57:00,M0002,OP0050,T00170,ST007,NEAR_MISS_PROXIMITY,HIGH,Incident reported: material stockpiling.,ZONE-A,False,False,False,True
+INC00166,2025-01-12 12:12:00,M0028,OP0049,T00693,ST012,EQUIPMENT_DAMAGE,LOW,Minor tire damage reported during trenching operation.,ZONE-D,False,False,True,False
+INC00189,2025-01-13 14:37:00,M0031,OP0039,T00781,ST002,NEAR_MISS_PROXIMITY,LOW,Incident reported: material stockpiling.,ZONE-A,False,False,True,True
+INC00011,2025-01-13 15:09:00,M0021,OP0035,T00224,ST014,EQUIPMENT_DAMAGE,CRITICAL,Minor hydraulic hose damage reported during road preparation operation.,ZONE-A,False,False,True,True
+INC00047,2025-01-13 16:14:00,M0031,OP0039,T00781,ST002,ENVIRONMENTAL_HAZARD,HIGH,Hazardous ground/weather condition (cloudy) reported at site during material stockpiling.,ZONE-C,False,False,True,True
+INC00139,2025-01-14 13:50:00,M0009,OP0012,T00204,ST004,UNSAFE_OPERATION,HIGH,Operator observed operating Excavator outside standard procedure during material loading.,ZONE-B,False,False,True,True
+INC00176,2025-01-15 10:51:00,M0042,OP0024,T00749,ST011,MECHANICAL_OBSERVATION,LOW,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,False,True
+INC00081,2025-01-17 14:31:00,M0003,OP0046,T00683,ST013,EQUIPMENT_DAMAGE,LOW,Minor blade edge damage reported during soil compaction operation.,ZONE-C,False,False,False,False
+INC00128,2025-01-18 11:44:00,M0026,OP0043,T00826,ST015,MECHANICAL_OBSERVATION,LOW,track showing early wear signs; flagged for maintenance review.,ZONE-B,False,False,True,False
+INC00060,2025-01-19 07:46:00,M0035,OP0021,T00181,ST013,UNSAFE_OPERATION,LOW,Operator observed operating Motor Grader outside standard procedure during grading.,ZONE-D,False,True,True,True
+INC00172,2025-01-19 08:57:00,M0035,OP0021,T00181,ST013,MECHANICAL_OBSERVATION,LOW,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-B,False,False,True,False
+INC00014,2025-01-19 09:15:00,M0018,OP0051,T00798,ST014,UNSAFE_OPERATION,LOW,Operator observed operating Excavator outside standard procedure during earth excavation.,ZONE-C,False,False,True,True
+INC00125,2025-01-20 18:11:00,M0030,OP0007,T00390,ST009,EQUIPMENT_DAMAGE,LOW,Minor hydraulic hose damage reported during trenching operation.,ZONE-A,False,True,False,False
+INC00164,2025-01-21 13:57:00,M0022,OP0004,T00836,ST002,NEAR_MISS_PROXIMITY,LOW,Incident reported: grading.,ZONE-C,False,False,True,False
+INC00124,2025-01-22 13:11:00,M0013,OP0048,T00232,ST007,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: material stockpiling.,ZONE-A,False,True,True,True
+INC00175,2025-01-23 14:18:00,M0021,OP0025,T00292,ST014,NEAR_MISS_PROXIMITY,HIGH,Incident reported: road preparation.,ZONE-A,False,False,True,True
+INC00079,2025-01-25 12:18:00,M0003,OP0034,T00682,ST013,EQUIPMENT_DAMAGE,MEDIUM,Minor blade edge damage reported during trenching operation.,ZONE-B,False,True,True,True
+INC00182,2025-01-25 13:29:00,M0029,OP0039,T00704,ST010,COLLISION_MINOR,MEDIUM,Minor contact between Dozer and site obstacle while material stockpiling.,ZONE-C,False,False,True,False
+INC00200,2025-01-28 23:52:00,M0014,OP0013,T00085,ST013,MECHANICAL_OBSERVATION,LOW,hydraulic hose showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,True,False
+INC00206,2025-01-30 15:42:00,M0008,OP0016,T00014,ST008,EQUIPMENT_DAMAGE,HIGH,Minor bucket linkage damage reported during trenching operation.,ZONE-D,False,False,True,False
+INC00093,2025-01-31 21:20:00,M0022,OP0052,T00384,ST002,UNSAFE_OPERATION,MEDIUM,Operator observed operating Articulated Hauler outside standard procedure during hauling.,ZONE-A,False,False,True,True
+INC00045,2025-02-01 13:47:00,M0038,OP0050,T00470,ST004,MECHANICAL_OBSERVATION,HIGH,hydraulic hose showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,True
+INC00080,2025-02-03 15:29:00,M0022,OP0005,T00564,ST002,NEAR_MISS_PROXIMITY,LOW,Incident reported: hauling.,ZONE-D,False,False,False,False
+INC00143,2025-02-03 16:10:00,M0030,OP0020,T00236,ST009,MECHANICAL_OBSERVATION,CRITICAL,bucket linkage showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,False,False
+INC00038,2025-02-04 14:39:00,M0019,OP0005,T00423,ST002,MECHANICAL_OBSERVATION,HIGH,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-D,False,True,True,True
+INC00212,2025-02-12 12:24:00,M0020,OP0021,T00443,ST015,MECHANICAL_OBSERVATION,LOW,tire showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,True
+INC00075,2025-02-12 14:25:00,M0020,OP0021,T00443,ST015,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: road preparation.,ZONE-B,False,False,True,False
+INC00032,2025-02-13 06:31:00,M0040,OP0038,T00588,ST002,COLLISION_MINOR,LOW,Minor contact between Wheel Loader and site obstacle while soil compaction.,ZONE-C,False,True,False,False
+INC00040,2025-02-14 11:13:00,M0039,OP0031,T00310,ST003,UNSAFE_OPERATION,LOW,Operator observed operating Excavator outside standard procedure during material loading.,ZONE-D,False,False,True,True
+INC00020,2025-02-18 08:37:00,M0017,OP0039,T00459,ST015,MECHANICAL_OBSERVATION,LOW,blade edge showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,False
+INC00089,2025-02-18 13:04:00,M0012,OP0054,T00286,ST002,UNSAFE_OPERATION,HIGH,Operator observed operating Articulated Hauler outside standard procedure during hauling.,ZONE-D,True,False,True,True
+INC00043,2025-02-18 13:16:00,M0012,OP0054,T00286,ST002,NEAR_MISS_PROXIMITY,HIGH,Incident reported: hauling.,ZONE-D,False,False,True,True
+INC00136,2025-02-20 15:54:00,M0001,OP0026,T00003,ST007,UNSAFE_OPERATION,LOW,Operator observed operating Excavator outside standard procedure during material loading.,ZONE-B,False,False,False,True
+INC00057,2025-02-24 09:09:00,M0033,OP0004,T00274,ST001,COLLISION_MINOR,LOW,Minor contact between Motor Grader and site obstacle while road preparation.,ZONE-A,False,True,False,True
+INC00147,2025-02-27 09:45:00,M0027,OP0044,T00479,ST015,EQUIPMENT_DAMAGE,CRITICAL,Minor blade edge damage reported during trenching operation.,ZONE-D,False,True,True,True
+INC00007,2025-02-27 14:33:00,M0025,OP0026,T00317,ST011,NEAR_MISS_PROXIMITY,LOW,Incident reported: material stockpiling.,ZONE-D,False,False,True,False
+INC00070,2025-02-28 16:03:00,M0038,OP0007,T00112,ST004,ENVIRONMENTAL_HAZARD,MEDIUM,Hazardous ground/weather condition (sunny) reported at site during soil compaction.,ZONE-D,False,False,True,True
+INC00090,2025-03-01 12:09:00,M0012,OP0036,T00260,ST002,NEAR_MISS_PROXIMITY,HIGH,Incident reported: hauling.,ZONE-C,False,False,True,False
+INC00035,2025-03-01 18:39:00,M0013,OP0047,T00820,ST007,UNSAFE_OPERATION,HIGH,Operator observed operating Backhoe Loader outside standard procedure during trenching.,ZONE-C,False,False,True,True
+INC00106,2025-03-02 19:11:00,M0026,OP0015,T00380,ST015,EQUIPMENT_DAMAGE,LOW,Minor track damage reported during grading operation.,ZONE-B,False,True,True,True
+INC00092,2025-03-03 06:56:00,M0005,OP0029,T00540,ST003,ENVIRONMENTAL_HAZARD,MEDIUM,Hazardous ground/weather condition (storm) reported at site during material loading.,ZONE-C,False,False,True,True
+INC00091,2025-03-04 15:42:00,M0008,OP0046,T00831,ST008,MECHANICAL_OBSERVATION,MEDIUM,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-D,False,False,True,False
+INC00138,2025-03-08 07:00:00,M0022,OP0036,T00707,ST002,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (sunny) reported at site during hauling.,ZONE-C,False,False,False,False
+INC00034,2025-03-08 07:42:00,M0022,OP0036,T00707,ST002,UNSAFE_OPERATION,LOW,Operator observed operating Articulated Hauler outside standard procedure during hauling.,ZONE-C,False,False,True,True
+INC00156,2025-03-09 11:01:00,M0027,OP0042,T00570,ST015,ENVIRONMENTAL_HAZARD,CRITICAL,Hazardous ground/weather condition (cloudy) reported at site during earth excavation.,ZONE-D,False,True,False,True
+INC00111,2025-03-11 11:12:00,M0018,OP0026,T00742,ST014,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (rainy) reported at site during earth excavation.,ZONE-A,False,False,True,True
+INC00190,2025-03-11 16:46:00,M0027,OP0013,T00372,ST015,UNSAFE_OPERATION,LOW,Operator observed operating Excavator outside standard procedure during earth excavation.,ZONE-D,False,False,True,True
+INC00097,2025-03-11 19:51:00,M0027,OP0013,T00372,ST015,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: earth excavation.,ZONE-C,False,False,True,False
+INC00179,2025-03-14 09:02:00,M0030,OP0042,T00405,ST009,MECHANICAL_OBSERVATION,MEDIUM,blade edge showing early wear signs; flagged for maintenance review.,ZONE-B,False,False,True,True
+INC00061,2025-03-14 10:03:00,M0030,OP0042,T00405,ST009,UNSAFE_OPERATION,LOW,Operator observed operating Excavator outside standard procedure during material loading.,ZONE-B,False,False,True,False
+INC00027,2025-03-17 14:33:00,M0004,OP0035,T00253,ST007,UNSAFE_OPERATION,MEDIUM,Operator observed operating Motor Grader outside standard procedure during demolition.,ZONE-B,False,False,True,True
+INC00150,2025-03-17 14:36:00,M0004,OP0035,T00253,ST007,UNSAFE_OPERATION,LOW,Operator observed operating Motor Grader outside standard procedure during demolition.,ZONE-D,False,False,True,True
+INC00129,2025-03-17 20:11:00,M0023,OP0045,T00800,ST009,UNSAFE_OPERATION,HIGH,Operator observed operating Wheel Loader outside standard procedure during material loading.,ZONE-B,False,False,True,True
+INC00009,2025-03-18 09:03:00,M0025,OP0004,T00647,ST011,EQUIPMENT_DAMAGE,LOW,Minor hydraulic hose damage reported during material stockpiling operation.,ZONE-B,False,True,False,False
+INC00187,2025-03-18 14:30:00,M0029,OP0014,T00193,ST010,NEAR_MISS_PROXIMITY,HIGH,Incident reported: grading.,ZONE-D,False,False,True,True
+INC00151,2025-03-19 10:39:00,M0006,OP0046,T00751,ST010,NEAR_MISS_PROXIMITY,LOW,Incident reported: trenching.,ZONE-D,False,False,True,False
+INC00001,2025-03-19 15:50:00,M0025,OP0019,T00665,ST011,NEAR_MISS_PROXIMITY,HIGH,Near-miss: Vehicle Proximity at 1.1m while reversing.,ZONE-D,False,False,False,True
+INC00149,2025-03-20 11:25:00,M0014,OP0032,T00135,ST013,ENVIRONMENTAL_HAZARD,MEDIUM,Hazardous ground/weather condition (sunny) reported at site during hauling.,ZONE-B,False,False,True,True
+INC00142,2025-03-22 12:40:00,M0027,OP0037,T00679,ST015,MECHANICAL_OBSERVATION,HIGH,track showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,False
+INC00086,2025-03-25 18:01:00,M0020,OP0019,T00362,ST015,COLLISION_MINOR,LOW,Minor contact between Backhoe Loader and site obstacle while trenching.,ZONE-A,False,True,True,True
+INC00036,2025-03-27 15:13:00,M0005,OP0007,T00244,ST003,COLLISION_MINOR,LOW,Minor contact between Articulated Hauler and site obstacle while hauling.,ZONE-B,False,True,False,True
+INC00016,2025-03-28 17:26:00,M0026,OP0026,T00166,ST015,UNSAFE_OPERATION,LOW,Operator observed operating Motor Grader outside standard procedure during grading.,ZONE-A,False,False,True,False
+INC00063,2025-03-29 15:05:00,M0025,OP0014,T00700,ST011,MECHANICAL_OBSERVATION,MEDIUM,hydraulic hose showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,True,True
+INC00088,2025-03-30 15:49:00,M0025,OP0011,T00387,ST011,COLLISION_MINOR,MEDIUM,Minor contact between Wheel Loader and site obstacle while material loading.,ZONE-D,False,False,True,True
+INC00165,2025-03-30 17:31:00,M0025,OP0011,T00387,ST011,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (sunny) reported at site during material loading.,ZONE-B,False,False,True,False
+INC00110,2025-04-02 04:18:00,M0033,OP0025,T00081,ST001,MECHANICAL_OBSERVATION,HIGH,bucket linkage showing early wear signs; flagged for maintenance review.,ZONE-D,False,False,False,False
+INC00214,2025-04-02 09:53:00,M0006,OP0027,T00037,ST010,NEAR_MISS_PROXIMITY,LOW,Incident reported: demolition.,ZONE-D,False,False,True,True
+INC00216,2025-04-03 12:08:00,M0032,OP0054,T00083,ST008,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (sunny) reported at site during soil compaction.,ZONE-D,False,False,True,True
+INC00024,2025-04-11 15:17:00,M0038,OP0049,T00520,ST004,EQUIPMENT_DAMAGE,LOW,Minor track damage reported during material stockpiling operation.,ZONE-A,False,True,True,True
+INC00207,2025-04-12 14:33:00,M0016,OP0019,T00668,ST006,EQUIPMENT_DAMAGE,CRITICAL,Minor boom cylinder damage reported during soil compaction operation.,ZONE-D,False,True,True,False
+INC00096,2025-04-13 03:54:00,M0022,OP0049,T00332,ST002,COLLISION_MINOR,LOW,Minor contact between Articulated Hauler and site obstacle while hauling.,ZONE-C,False,True,False,True
+INC00123,2025-04-13 15:22:00,M0036,OP0055,T00455,ST006,NEAR_MISS_PROXIMITY,HIGH,Incident reported: road preparation.,ZONE-A,False,False,True,False
+INC00116,2025-04-15 12:32:00,M0039,OP0040,T00336,ST003,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (rainy) reported at site during earth excavation.,ZONE-B,False,False,False,False
+INC00201,2025-04-15 21:00:00,M0005,OP0031,T00632,ST003,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: demolition.,ZONE-A,False,False,False,True
+INC00180,2025-04-16 15:02:00,M0016,OP0004,T00403,ST006,UNSAFE_OPERATION,MEDIUM,Operator observed operating Compactor outside standard procedure during road preparation.,ZONE-D,False,False,True,True
+INC00178,2025-04-18 06:51:00,M0041,OP0043,T00711,ST008,EQUIPMENT_DAMAGE,LOW,Minor tire damage reported during trenching operation.,ZONE-C,False,False,True,True
+INC00065,2025-04-20 12:53:00,M0025,OP0010,T00828,ST011,UNSAFE_OPERATION,MEDIUM,Operator observed operating Wheel Loader outside standard procedure during grading.,ZONE-D,False,False,False,True
+INC00127,2025-04-21 15:43:00,M0039,OP0028,T00272,ST003,UNSAFE_OPERATION,LOW,Operator observed operating Excavator outside standard procedure during earth excavation.,ZONE-A,False,False,False,False
+INC00031,2025-04-26 10:47:00,M0006,OP0029,T00396,ST010,EQUIPMENT_DAMAGE,LOW,Minor bucket linkage damage reported during trenching operation.,ZONE-D,False,True,False,True
+INC00173,2025-04-27 12:04:00,M0021,OP0041,T00358,ST014,NEAR_MISS_PROXIMITY,LOW,Incident reported: grading.,ZONE-B,False,False,True,False
+INC00058,2025-04-27 12:19:00,M0033,OP0046,T00644,ST001,NEAR_MISS_PROXIMITY,LOW,Incident reported: earth excavation.,ZONE-B,False,True,True,False
+INC00105,2025-04-27 13:58:00,M0008,OP0011,T00044,ST008,NEAR_MISS_PROXIMITY,CRITICAL,Incident reported: grading.,ZONE-B,False,False,True,False
+INC00052,2025-04-27 14:06:00,M0036,OP0048,T00141,ST006,NEAR_MISS_PROXIMITY,LOW,Incident reported: earth excavation.,ZONE-B,False,False,True,True
+INC00132,2025-04-27 16:27:00,M0011,OP0046,T00297,ST003,MECHANICAL_OBSERVATION,CRITICAL,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-C,False,True,True,True
+INC00215,2025-04-28 03:15:00,M0011,OP0046,T00297,ST003,MECHANICAL_OBSERVATION,LOW,blade edge showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,True,True
+INC00118,2025-05-01 13:32:00,M0004,OP0031,T00227,ST007,NEAR_MISS_PROXIMITY,LOW,Incident reported: grading.,ZONE-B,False,True,False,True
+INC00005,2025-05-01 14:28:00,M0015,OP0051,T00180,ST001,EQUIPMENT_DAMAGE,LOW,Minor bucket linkage damage reported during trenching operation.,ZONE-A,False,False,False,False
+INC00197,2025-05-01 15:14:00,M0015,OP0051,T00180,ST001,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (cloudy) reported at site during trenching.,ZONE-B,False,False,True,False
+INC00171,2025-05-03 12:52:00,M0034,OP0013,T00830,ST014,NEAR_MISS_PROXIMITY,LOW,Incident reported: material loading.,ZONE-A,False,False,False,False
+INC00049,2025-05-04 10:52:00,M0031,OP0024,T00685,ST002,ENVIRONMENTAL_HAZARD,HIGH,Hazardous ground/weather condition (fog) reported at site during material loading.,ZONE-B,False,False,False,False
+INC00025,2025-05-06 08:05:00,M0009,OP0026,T00439,ST004,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: trenching.,ZONE-B,False,False,True,False
+INC00188,2025-05-06 17:15:00,M0008,OP0020,T00760,ST008,MECHANICAL_OBSERVATION,LOW,blade edge showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,False
+INC00019,2025-05-06 19:07:00,M0025,OP0046,T00343,ST011,NEAR_MISS_PROXIMITY,HIGH,Incident reported: demolition.,ZONE-D,False,False,False,True
+INC00028,2025-05-08 14:14:00,M0026,OP0001,T00529,ST015,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: grading.,ZONE-B,False,False,True,True
+INC00041,2025-05-09 06:09:00,M0035,OP0008,T00765,ST013,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (rainy) reported at site during hauling.,ZONE-A,False,False,False,False
+INC00119,2025-05-10 13:48:00,M0023,OP0043,T00341,ST009,EQUIPMENT_DAMAGE,LOW,Minor tire damage reported during road preparation operation.,ZONE-A,False,False,True,False
+INC00196,2025-05-10 14:56:00,M0023,OP0039,T00033,ST009,EQUIPMENT_DAMAGE,LOW,Minor hydraulic hose damage reported during material loading operation.,ZONE-B,False,True,False,False
+INC00168,2025-05-10 16:47:00,M0023,OP0043,T00341,ST009,MECHANICAL_OBSERVATION,MEDIUM,track showing early wear signs; flagged for maintenance review.,ZONE-D,False,False,True,True
+INC00026,2025-05-11 15:45:00,M0010,OP0015,T00103,ST012,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: material loading.,ZONE-C,False,False,True,True
+INC00087,2025-05-12 12:44:00,M0009,OP0047,T00625,ST004,NEAR_MISS_PROXIMITY,HIGH,Incident reported: material loading.,ZONE-C,False,False,False,True
+INC00112,2025-05-12 17:02:00,M0025,OP0031,T00241,ST011,UNSAFE_OPERATION,LOW,Operator observed operating Wheel Loader outside standard procedure during material stockpiling.,ZONE-D,False,False,True,False
+INC00084,2025-05-12 20:52:00,M0025,OP0031,T00241,ST011,COLLISION_MINOR,HIGH,Minor contact between Wheel Loader and site obstacle while material stockpiling.,ZONE-A,False,True,True,False
+INC00029,2025-05-13 08:28:00,M0027,OP0006,T00519,ST015,UNSAFE_OPERATION,MEDIUM,Operator observed operating Excavator outside standard procedure during trenching.,ZONE-D,False,False,True,False
+INC00083,2025-05-13 11:53:00,M0013,OP0021,T00587,ST007,EQUIPMENT_DAMAGE,LOW,Minor track damage reported during trenching operation.,ZONE-D,False,False,True,True
+INC00159,2025-05-16 02:17:00,M0019,OP0004,T00119,ST002,MECHANICAL_OBSERVATION,LOW,bucket linkage showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,True,False
+INC00117,2025-05-16 13:09:00,M0003,OP0007,T00426,ST013,NEAR_MISS_PROXIMITY,LOW,Incident reported: demolition.,ZONE-D,False,False,True,True
+INC00104,2025-05-16 14:38:00,M0030,OP0043,T00190,ST009,MECHANICAL_OBSERVATION,LOW,blade edge showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,False
+INC00181,2025-05-20 17:11:00,M0017,OP0023,T00810,ST015,COLLISION_MINOR,MEDIUM,Minor contact between Motor Grader and site obstacle while road preparation.,ZONE-C,False,True,True,True
+INC00037,2025-05-20 18:30:00,M0017,OP0023,T00810,ST015,EQUIPMENT_DAMAGE,MEDIUM,Minor tire damage reported during road preparation operation.,ZONE-A,False,False,True,False
+INC00013,2025-05-24 17:06:00,M0006,OP0004,T00783,ST010,NEAR_MISS_PROXIMITY,HIGH,Incident reported: trenching.,ZONE-D,False,False,True,True
+INC00186,2025-05-24 20:03:00,M0039,OP0015,T00835,ST003,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: material loading.,ZONE-A,False,False,False,False
+INC00077,2025-05-25 12:08:00,M0023,OP0009,T00414,ST009,ENVIRONMENTAL_HAZARD,HIGH,Hazardous ground/weather condition (rainy) reported at site during material stockpiling.,ZONE-C,False,False,True,False
+INC00008,2025-05-25 18:08:00,M0027,OP0003,T00521,ST015,MECHANICAL_OBSERVATION,MEDIUM,tire showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,False
+INC00169,2025-05-26 13:17:00,M0018,OP0055,T00261,ST014,ENVIRONMENTAL_HAZARD,HIGH,Hazardous ground/weather condition (windy) reported at site during earth excavation.,ZONE-D,False,False,True,False
+INC00161,2025-05-26 17:28:00,M0029,OP0014,T00808,ST010,NEAR_MISS_PROXIMITY,HIGH,Incident reported: road preparation.,ZONE-B,False,False,False,False
+INC00056,2025-05-27 08:16:00,M0039,OP0016,T00806,ST003,UNSAFE_OPERATION,MEDIUM,Operator observed operating Excavator outside standard procedure during material loading.,ZONE-A,False,False,True,False
+INC00217,2025-05-30 19:41:00,M0038,OP0027,T00513,ST004,UNSAFE_OPERATION,HIGH,Operator observed operating Dozer outside standard procedure during demolition.,ZONE-D,False,False,False,False
+INC00068,2025-06-01 08:43:00,M0002,OP0029,T00300,ST007,COLLISION_MINOR,LOW,Minor contact between Wheel Loader and site obstacle while material loading.,ZONE-B,False,True,False,False
+INC00195,2025-06-01 11:17:00,M0002,OP0029,T00300,ST007,EQUIPMENT_DAMAGE,CRITICAL,Minor hydraulic hose damage reported during material loading operation.,ZONE-C,False,True,False,True
+INC00131,2025-06-03 15:51:00,M0002,OP0008,T00706,ST007,MECHANICAL_OBSERVATION,LOW,bucket linkage showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,True,False
+INC00220,2025-06-07 12:36:00,M0006,OP0054,T00176,ST010,MECHANICAL_OBSERVATION,LOW,bucket linkage showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,True
+INC00167,2025-06-07 16:00:00,M0016,OP0036,T00357,ST006,NEAR_MISS_PROXIMITY,HIGH,Incident reported: road preparation.,ZONE-A,False,False,True,False
+INC00098,2025-06-08 12:59:00,M0013,OP0004,T00151,ST007,NEAR_MISS_PROXIMITY,LOW,Incident reported: trenching.,ZONE-C,False,False,False,False
+INC00074,2025-06-09 07:16:00,M0028,OP0046,T00247,ST012,MECHANICAL_OBSERVATION,LOW,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,False,False
+INC00004,2025-06-11 08:29:00,M0034,OP0046,T00339,ST014,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: grading.,ZONE-C,False,True,False,False
+INC00162,2025-06-11 09:06:00,M0034,OP0046,T00339,ST014,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (cloudy) reported at site during grading.,ZONE-C,False,False,False,True
+INC00030,2025-06-11 13:11:00,M0028,OP0018,T00034,ST012,MECHANICAL_OBSERVATION,HIGH,hydraulic hose showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,True,True
+INC00073,2025-06-11 13:41:00,M0028,OP0018,T00034,ST012,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: trenching.,ZONE-D,False,False,True,True
+INC00072,2025-06-11 16:32:00,M0016,OP0052,T00059,ST006,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: road preparation.,ZONE-C,False,False,True,True
+INC00148,2025-06-11 17:29:00,M0016,OP0052,T00059,ST006,NEAR_MISS_PROXIMITY,LOW,Incident reported: road preparation.,ZONE-D,False,False,False,False
+INC00170,2025-06-15 16:22:00,M0030,OP0035,T00397,ST009,ENVIRONMENTAL_HAZARD,MEDIUM,Hazardous ground/weather condition (cloudy) reported at site during trenching.,ZONE-A,False,False,False,True
+INC00174,2025-06-16 07:27:00,M0028,OP0006,T00205,ST012,COLLISION_MINOR,MEDIUM,Minor contact between Excavator and site obstacle while hauling.,ZONE-A,False,True,True,True
+INC00042,2025-06-16 07:50:00,M0028,OP0006,T00205,ST012,UNSAFE_OPERATION,LOW,Operator observed operating Excavator outside standard procedure during hauling.,ZONE-B,False,False,True,False
+INC00108,2025-06-16 08:16:00,M0028,OP0006,T00205,ST012,MECHANICAL_OBSERVATION,MEDIUM,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-B,False,True,False,False
+INC00194,2025-06-18 08:32:00,M0029,OP0055,T00230,ST010,NEAR_MISS_PROXIMITY,HIGH,Incident reported: road preparation.,ZONE-C,False,False,True,True
+INC00015,2025-06-18 08:53:00,M0029,OP0055,T00230,ST010,MECHANICAL_OBSERVATION,MEDIUM,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,False,True
+INC00211,2025-06-20 09:04:00,M0027,OP0023,T00730,ST015,EQUIPMENT_DAMAGE,LOW,Minor boom cylinder damage reported during demolition operation.,ZONE-A,False,True,True,True
+INC00055,2025-06-21 11:37:00,M0021,OP0030,T00356,ST014,ENVIRONMENTAL_HAZARD,CRITICAL,Hazardous ground/weather condition (fog) reported at site during soil compaction.,ZONE-C,False,False,True,True
+INC00059,2025-06-22 15:02:00,M0013,OP0028,T00664,ST007,EQUIPMENT_DAMAGE,MEDIUM,Minor track damage reported during trenching operation.,ZONE-A,False,False,True,True
+INC00109,2025-06-23 14:38:00,M0003,OP0021,T00240,ST013,UNSAFE_OPERATION,MEDIUM,Operator observed operating Dozer outside standard procedure during material stockpiling.,ZONE-A,False,False,True,True
+INC00115,2025-06-24 17:47:00,M0030,OP0049,T00703,ST009,EQUIPMENT_DAMAGE,LOW,Minor hydraulic hose damage reported during demolition operation.,ZONE-D,False,False,False,True
+INC00076,2025-06-25 21:20:00,M0021,OP0048,T00024,ST014,COLLISION_MINOR,HIGH,Minor contact between Motor Grader and site obstacle while soil compaction.,ZONE-C,True,False,True,False
+INC00157,2025-06-26 19:13:00,M0001,OP0038,T00342,ST007,COLLISION_MINOR,HIGH,Minor contact between Excavator and site obstacle while trenching.,ZONE-A,False,False,True,False
+INC00048,2025-06-26 19:21:00,M0001,OP0038,T00342,ST007,MECHANICAL_OBSERVATION,LOW,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,False,True
+INC00017,2025-06-29 20:24:00,M0022,OP0050,T00511,ST002,ENVIRONMENTAL_HAZARD,LOW,Hazardous ground/weather condition (cloudy) reported at site during material stockpiling.,ZONE-B,False,False,False,True
+INC00018,2025-07-01 13:31:00,M0037,OP0013,T00146,ST005,UNSAFE_OPERATION,LOW,Operator observed operating Compactor outside standard procedure during road preparation.,ZONE-D,False,False,True,False
+INC00133,2025-07-01 15:37:00,M0037,OP0013,T00146,ST005,COLLISION_MINOR,LOW,Minor contact between Compactor and site obstacle while road preparation.,ZONE-A,False,False,False,True
+INC00155,2025-07-03 12:58:00,M0014,OP0034,T00733,ST013,EQUIPMENT_DAMAGE,CRITICAL,Minor tire damage reported during hauling operation.,ZONE-D,False,True,True,True
+INC00203,2025-07-04 14:37:00,M0014,OP0053,T00688,ST013,COLLISION_MINOR,MEDIUM,Minor contact between Articulated Hauler and site obstacle while hauling.,ZONE-A,False,True,True,False
+INC00144,2025-07-08 08:27:00,M0040,OP0028,T00558,ST002,NEAR_MISS_PROXIMITY,HIGH,Incident reported: material stockpiling.,ZONE-C,False,False,True,True
+INC00208,2025-07-08 09:46:00,M0040,OP0028,T00558,ST002,ENVIRONMENTAL_HAZARD,MEDIUM,Hazardous ground/weather condition (sunny) reported at site during material stockpiling.,ZONE-B,False,False,True,True
+INC00114,2025-07-08 10:57:00,M0037,OP0016,T00777,ST005,NEAR_MISS_PROXIMITY,LOW,Incident reported: road preparation.,ZONE-C,False,False,True,True
+INC00078,2025-07-08 18:22:00,M0026,OP0049,T00431,ST015,MECHANICAL_OBSERVATION,MEDIUM,bucket linkage showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,True,True
+INC00160,2025-07-09 10:31:00,M0040,OP0036,T00377,ST002,MECHANICAL_OBSERVATION,CRITICAL,bucket linkage showing early wear signs; flagged for maintenance review.,ZONE-B,False,False,True,False
+INC00154,2025-07-10 09:06:00,M0033,OP0023,T00614,ST001,NEAR_MISS_PROXIMITY,HIGH,Incident reported: road preparation.,ZONE-D,False,False,True,True
+INC00205,2025-07-10 12:35:00,M0011,OP0010,T00117,ST003,UNSAFE_OPERATION,MEDIUM,Operator observed operating Backhoe Loader outside standard procedure during material loading.,ZONE-B,False,False,True,True
+INC00053,2025-07-11 16:58:00,M0029,OP0012,T00562,ST010,COLLISION_MINOR,MEDIUM,Minor contact between Dozer and site obstacle while road preparation.,ZONE-D,False,False,True,False
+INC00121,2025-07-14 14:16:00,M0003,OP0053,T00080,ST013,UNSAFE_OPERATION,LOW,Operator observed operating Dozer outside standard procedure during material stockpiling.,ZONE-C,False,False,True,True
+INC00101,2025-07-16 15:16:00,M0020,OP0049,T00213,ST015,MECHANICAL_OBSERVATION,HIGH,track showing early wear signs; flagged for maintenance review.,ZONE-D,False,False,True,False
+INC00218,2025-07-21 14:18:00,M0001,OP0045,T00179,ST007,EQUIPMENT_DAMAGE,LOW,Minor blade edge damage reported during earth excavation operation.,ZONE-C,False,True,True,False
+INC00135,2025-07-21 21:42:00,M0037,OP0051,T00758,ST005,NEAR_MISS_PROXIMITY,LOW,Incident reported: material loading.,ZONE-A,False,False,True,True
+INC00044,2025-07-26 12:15:00,M0012,OP0016,T00660,ST002,EQUIPMENT_DAMAGE,LOW,Minor hydraulic hose damage reported during hauling operation.,ZONE-A,False,True,True,True
+INC00134,2025-07-26 13:37:00,M0012,OP0016,T00660,ST002,EQUIPMENT_DAMAGE,LOW,Minor track damage reported during hauling operation.,ZONE-B,False,False,True,True
+INC00102,2025-07-27 07:35:00,M0019,OP0024,T00246,ST002,MECHANICAL_OBSERVATION,MEDIUM,blade edge showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,False
+INC00204,2025-07-30 16:51:00,M0035,OP0042,T00234,ST013,EQUIPMENT_DAMAGE,LOW,Minor tire damage reported during road preparation operation.,ZONE-D,False,True,False,False
+INC00010,2025-08-01 10:27:00,M0004,OP0011,T00563,ST007,EQUIPMENT_DAMAGE,MEDIUM,Minor bucket linkage damage reported during road preparation operation.,ZONE-C,False,False,True,False
+INC00130,2025-08-01 11:22:00,M0004,OP0011,T00563,ST007,NEAR_MISS_PROXIMITY,LOW,Incident reported: road preparation.,ZONE-D,False,False,True,False
+INC00012,2025-08-02 12:43:00,M0020,OP0024,T00662,ST015,UNSAFE_OPERATION,MEDIUM,Operator observed operating Backhoe Loader outside standard procedure during trenching.,ZONE-D,False,False,False,False
+INC00193,2025-08-03 17:40:00,M0029,OP0051,T00535,ST010,MECHANICAL_OBSERVATION,CRITICAL,bucket linkage showing early wear signs; flagged for maintenance review.,ZONE-B,False,False,True,False
+INC00071,2025-08-04 08:39:00,M0031,OP0037,T00755,ST002,EQUIPMENT_DAMAGE,CRITICAL,Minor track damage reported during material stockpiling operation.,ZONE-A,False,True,True,True
+INC00202,2025-08-09 09:48:00,M0042,OP0002,T00480,ST011,NEAR_MISS_PROXIMITY,HIGH,Incident reported: material stockpiling.,ZONE-C,False,False,True,True
+INC00033,2025-08-20 18:52:00,M0001,OP0028,T00676,ST007,EQUIPMENT_DAMAGE,LOW,Minor boom cylinder damage reported during earth excavation operation.,ZONE-A,False,False,True,True
+INC00146,2025-08-21 12:20:00,M0036,OP0045,T00533,ST006,COLLISION_MINOR,MEDIUM,Minor contact between Dozer and site obstacle while trenching.,ZONE-D,False,True,True,True
+INC00137,2025-08-22 09:18:00,M0030,OP0007,T00066,ST009,UNSAFE_OPERATION,LOW,Operator observed operating Excavator outside standard procedure during material loading.,ZONE-D,False,False,False,False
+INC00153,2025-08-22 12:06:00,M0032,OP0037,T00050,ST008,UNSAFE_OPERATION,LOW,Operator observed operating Dozer outside standard procedure during demolition.,ZONE-C,False,False,True,False
+INC00163,2025-08-22 15:28:00,M0032,OP0037,T00050,ST008,EQUIPMENT_DAMAGE,LOW,Minor hydraulic hose damage reported during demolition operation.,ZONE-C,False,False,True,False
+INC00051,2025-08-22 15:50:00,M0032,OP0037,T00050,ST008,MECHANICAL_OBSERVATION,LOW,track showing early wear signs; flagged for maintenance review.,ZONE-B,False,False,True,True
+INC00100,2025-08-23 12:02:00,M0025,OP0028,T00238,ST011,MECHANICAL_OBSERVATION,HIGH,track showing early wear signs; flagged for maintenance review.,ZONE-D,False,False,True,True
+INC00191,2025-08-23 13:08:00,M0025,OP0028,T00238,ST011,EQUIPMENT_DAMAGE,LOW,Minor hydraulic hose damage reported during material loading operation.,ZONE-A,False,False,True,True
+INC00023,2025-08-24 08:52:00,M0013,OP0033,T00219,ST007,MECHANICAL_OBSERVATION,LOW,blade edge showing early wear signs; flagged for maintenance review.,ZONE-B,False,False,False,False
+INC00122,2025-08-26 13:57:00,M0014,OP0051,T00186,ST013,EQUIPMENT_DAMAGE,LOW,Minor track damage reported during hauling operation.,ZONE-A,False,False,False,True
+INC00184,2025-08-27 12:44:00,M0025,OP0019,T00844,ST011,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: soil compaction.,ZONE-D,False,False,False,False
+INC00006,2025-08-27 15:15:00,M0037,OP0019,T00468,ST005,MECHANICAL_OBSERVATION,LOW,blade edge showing early wear signs; flagged for maintenance review.,ZONE-A,False,False,True,True
+INC00120,2025-08-29 14:23:00,M0019,OP0029,T00123,ST002,EQUIPMENT_DAMAGE,LOW,Minor boom cylinder damage reported during trenching operation.,ZONE-B,False,True,False,True
+INC00152,2025-09-02 16:04:00,M0011,OP0050,T00398,ST003,UNSAFE_OPERATION,HIGH,Operator observed operating Backhoe Loader outside standard procedure during road preparation.,ZONE-A,False,False,True,True
+INC00082,2025-09-02 16:54:00,M0011,OP0050,T00398,ST003,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: road preparation.,ZONE-A,False,False,True,False
+INC00064,2025-09-02 18:21:00,M0011,OP0050,T00398,ST003,MECHANICAL_OBSERVATION,CRITICAL,tire showing early wear signs; flagged for maintenance review.,ZONE-B,False,False,False,True
+INC00046,2025-09-03 15:47:00,M0017,OP0006,T00214,ST015,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: road preparation.,ZONE-C,False,False,True,False
+INC00113,2025-09-05 11:02:00,M0006,OP0010,T00293,ST010,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: trenching.,ZONE-A,False,False,True,False
+INC00140,2025-09-05 14:36:00,M0006,OP0010,T00293,ST010,EQUIPMENT_DAMAGE,LOW,Minor blade edge damage reported during trenching operation.,ZONE-C,False,False,True,False
+INC00210,2025-09-10 01:30:00,M0041,OP0055,T00028,ST008,UNSAFE_OPERATION,LOW,Operator observed operating Backhoe Loader outside standard procedure during trenching.,ZONE-D,False,False,True,False
+INC00062,2025-09-10 13:18:00,M0021,OP0003,T00309,ST014,NEAR_MISS_PROXIMITY,CRITICAL,Incident reported: road preparation.,ZONE-A,False,False,True,True
+INC00141,2025-09-12 21:22:00,M0009,OP0027,T00569,ST004,EQUIPMENT_DAMAGE,LOW,Minor bucket linkage damage reported during demolition operation.,ZONE-C,False,True,True,False
+INC00085,2025-09-13 06:36:00,M0009,OP0046,T00330,ST004,COLLISION_MINOR,LOW,Minor contact between Excavator and site obstacle while earth excavation.,ZONE-A,False,True,True,True
+INC00158,2025-09-13 06:54:00,M0009,OP0046,T00330,ST004,UNSAFE_OPERATION,LOW,Operator observed operating Excavator outside standard procedure during earth excavation.,ZONE-A,False,False,True,False
+INC00192,2025-09-13 20:04:00,M0038,OP0022,T00553,ST004,NEAR_MISS_PROXIMITY,LOW,Incident reported: demolition.,ZONE-A,False,False,True,False
+INC00183,2025-09-13 20:55:00,M0012,OP0043,T00694,ST002,UNSAFE_OPERATION,MEDIUM,Operator observed operating Articulated Hauler outside standard procedure during earth excavation.,ZONE-B,False,False,True,False
+INC00054,2025-09-14 14:29:00,M0034,OP0024,T00565,ST014,EQUIPMENT_DAMAGE,MEDIUM,Minor track damage reported during trenching operation.,ZONE-D,False,False,True,False
+INC00213,2025-09-14 19:38:00,M0029,OP0052,T00042,ST010,EQUIPMENT_DAMAGE,MEDIUM,Minor track damage reported during road preparation operation.,ZONE-C,False,False,True,False
+INC00185,2025-09-14 19:53:00,M0029,OP0052,T00042,ST010,UNSAFE_OPERATION,LOW,Operator observed operating Dozer outside standard procedure during road preparation.,ZONE-D,False,True,False,True
+INC00067,2025-09-16 13:22:00,M0013,OP0003,T00228,ST007,COLLISION_MINOR,HIGH,Minor contact between Backhoe Loader and site obstacle while trenching.,ZONE-D,False,False,False,False
+INC00198,2025-09-16 15:15:00,M0017,OP0055,T00556,ST015,MECHANICAL_OBSERVATION,MEDIUM,hydraulic hose showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,True
+INC00066,2025-09-18 17:26:00,M0028,OP0014,T00796,ST012,NEAR_MISS_PROXIMITY,MEDIUM,Incident reported: soil compaction.,ZONE-B,False,False,True,False
+INC00095,2025-09-18 17:32:00,M0038,OP0039,T00466,ST004,MECHANICAL_OBSERVATION,HIGH,blade edge showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,True
+INC00107,2025-09-22 17:30:00,M0041,OP0044,T00719,ST008,UNSAFE_OPERATION,MEDIUM,Operator observed operating Backhoe Loader outside standard procedure during trenching.,ZONE-D,False,False,True,False
+INC00021,2025-09-25 22:44:00,M0035,OP0045,T00182,ST013,NEAR_MISS_PROXIMITY,LOW,Incident reported: material loading.,ZONE-D,False,False,False,False
+INC00002,2025-09-27 11:38:00,M0023,OP0034,T00498,ST009,MECHANICAL_OBSERVATION,LOW,track showing early wear signs; flagged for maintenance review.,ZONE-C,False,False,True,True
+INC00103,2025-09-29 13:34:00,M0011,OP0020,T00507,ST003,MECHANICAL_OBSERVATION,MEDIUM,boom cylinder showing early wear signs; flagged for maintenance review.,ZONE-D,False,False,False,False
+INC00099,2025-09-29 13:39:00,M0011,OP0020,T00507,ST003,NEAR_MISS_PROXIMITY,HIGH,Incident reported: grading.,ZONE-A,False,False,False,True

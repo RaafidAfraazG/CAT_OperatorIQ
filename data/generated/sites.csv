@@ -1,0 +1,16 @@
+site_id,site_name,site_type,location_region,terrain_type,elevation_m,average_slope_percent,ground_type
+ST001,West Plains Road Site 1,Road Construction,Coastal Flats,HILLY,797.0,12.2,MIXED
+ST002,Coastal Flats Mining Site 2,Mining,Central Highlands,ROLLING,496.0,8.1,ROCKY
+ST003,Central Highlands Urban Site 3,Urban Construction,North Valley,UNEVEN,13.0,2.8,MIXED
+ST004,South Basin Quarry Site 4,Quarry,West Plains,MOUNTAINOUS,868.0,18.7,SANDY
+ST005,East Ridge Infrastructure Site 5,Infrastructure,West Plains,MOUNTAINOUS,1410.0,26.2,GRAVEL
+ST006,West Plains Earthmoving Site 6,Earthmoving,Central Highlands,ROLLING,320.0,6.7,LOAMY
+ST007,North Valley Infrastructure Site 7,Infrastructure,Central Highlands,UNEVEN,68.0,0.0,MIXED
+ST008,North Valley Infrastructure Site 8,Infrastructure,West Plains,MOUNTAINOUS,2002.0,11.8,GRAVEL
+ST009,Highland Pass Urban Site 9,Urban Construction,West Plains,UNEVEN,68.0,0.2,LOAMY
+ST010,Highland Pass Urban Site 10,Urban Construction,North Valley,FLAT,68.0,2.7,ROCKY
+ST011,West Plains Mining Site 11,Mining,Coastal Flats,FLAT,45.0,0.7,MIXED
+ST012,Central Highlands Mining Site 12,Mining,South Basin,ROLLING,139.0,5.5,ROCKY
+ST013,Central Highlands Mining Site 13,Mining,North Valley,UNEVEN,267.0,0.8,MIXED
+ST014,West Plains Infrastructure Site 14,Infrastructure,Central Highlands,FLAT,39.0,0.4,ROCKY
+ST015,River Delta Road Site 15,Road Construction,Coastal Flats,FLAT,247.0,3.0,LOAMY
