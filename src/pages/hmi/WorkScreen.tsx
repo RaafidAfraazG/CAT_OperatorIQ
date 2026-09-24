@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../api/client';
 import type { Task } from '../../types';
+import { useDemoMode } from '../../context/DemoModeContext';
 
 export default function WorkScreen() {
   const navigate = useNavigate();
+  const { isDemoMode, demoState } = useDemoMode();
   
   const [loading, setLoading] = useState(true);
   const [tasks, setTasks] = useState<any[]>([]);
   const [currentTask, setCurrentTask] = useState<any>(null);
   const [eta, setEta] = useState<any>(null);
   
-  // Real-time tick for "NOW" in timeline (optional, we can just use static time for now)
+  // Real-time tick for "NOW" in timeline
   const [nowTimeStr, setNowTimeStr] = useState('');
 
   useEffect(() => {
@@ -59,7 +61,18 @@ export default function WorkScreen() {
     loadWorkData();
   }, []);
 
-  if (loading) {
+  const activeTask = isDemoMode
+    ? (currentTask || {
+        task_id: demoState.task.taskId,
+        task_type: demoState.task.taskTitle,
+        site_id: 'NORTH BENCH',
+        scheduled_start: new Date(Date.now() - 75 * 60000).toISOString(),
+        estimated_duration_min: demoState.task.scheduledMin,
+        task_status: demoState.task.taskStatus,
+      })
+    : currentTask;
+
+  if (loading && !isDemoMode) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center bg-[#080A0B] text-[#929A9E] font-mono select-none">
         <p className="text-sm font-bold uppercase tracking-widest text-[#F1F3F4] animate-pulse">SYNCING DISPATCH DATA</p>
@@ -68,7 +81,7 @@ export default function WorkScreen() {
   }
 
   // Fallback states if no tasks exist
-  if (!currentTask) {
+  if (!activeTask) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center bg-[#080A0B] text-[#929A9E] font-mono select-none">
         <p className="text-sm font-bold uppercase tracking-widest text-[#5E676C]">NO ACTIVE ASSIGNMENT</p>
@@ -77,32 +90,33 @@ export default function WorkScreen() {
   }
 
   // --- Calculations for Current Task ---
-  const taskTitle = currentTask.task_type.replace(/_/g, ' ');
-  const taskZone = currentTask.site_id ? `ZONE A • ${currentTask.site_id}` : 'ZONE A • NORTH BENCH';
+  const taskTitle = isDemoMode ? demoState.task.taskTitle : activeTask.task_type.replace(/_/g, ' ');
+  const taskZone = isDemoMode ? demoState.task.taskZone : (activeTask.site_id ? `ZONE A • ${activeTask.site_id}` : 'ZONE A • NORTH BENCH');
   // Timeline / Schedule calculations
-  const scheduledStart = new Date(currentTask.scheduled_start);
+  const scheduledStart = new Date(activeTask.scheduled_start || Date.now() - 75 * 60000);
   const startStr = scheduledStart.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  const scheduledMin = currentTask.estimated_duration_min ?? 120;
+  const scheduledMin = isDemoMode ? demoState.task.scheduledMin : (activeTask.estimated_duration_min ?? 120);
   
-  const elapsedMin = currentTask.actual_duration_min ?? Math.max(0, Math.floor((new Date().getTime() - scheduledStart.getTime()) / 60000));
+  const elapsedMin = activeTask.actual_duration_min ?? Math.max(0, Math.floor((new Date().getTime() - scheduledStart.getTime()) / 60000));
   const rawPct = scheduledMin > 0 ? Math.round((elapsedMin / scheduledMin) * 100) : 0;
-  const progressPct = Math.min(100, Math.max(0, rawPct));
+  const progressPct = isDemoMode ? Math.round(demoState.task.progressPct) : Math.min(100, Math.max(0, rawPct));
 
-
-  const predictedMin = eta?.predicted_duration_min ?? 135;
-  const varianceMin = eta?.delay_minutes ?? (predictedMin - scheduledMin);
-  const isDelayed = eta ? eta.status === 'likely_delayed' : varianceMin > 0;
+  const predictedMin = isDemoMode ? demoState.task.predictedMin : (eta?.predicted_duration_min ?? 135);
+  const varianceMin = isDemoMode ? demoState.task.varianceMin : (eta?.delay_minutes ?? (predictedMin - scheduledMin));
+  const isDelayed = isDemoMode ? demoState.task.isDelayed : (eta ? eta.status === 'likely_delayed' : varianceMin > 0);
 
   // Calculate Expected End time based on prediction
   const expectedEnd = new Date(scheduledStart.getTime() + predictedMin * 60000);
   const expectedStr = expectedEnd.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
   // --- Queue logic ---
-  // Tasks before current task in the sorted list are theoretically 'COMPLETED'
-  // Task after current task is 'NEXT', remaining are 'LATER'
-  const currentIndex = tasks.findIndex(t => t.task_id === currentTask.task_id);
-  const nextTask = currentIndex >= 0 && currentIndex + 1 < tasks.length ? tasks[currentIndex + 1] : null;
-  const laterTasks = currentIndex >= 0 && currentIndex + 2 < tasks.length ? tasks.slice(currentIndex + 2) : [];
+  const currentIndex = tasks.findIndex(t => t.task_id === activeTask.task_id);
+  const nextTask = isDemoMode 
+    ? (currentIndex >= 0 && currentIndex + 1 < tasks.length ? tasks[currentIndex + 1] : { task_id: 't-next', task_type: 'OVERBURDEN STRIPPING' })
+    : (currentIndex >= 0 && currentIndex + 1 < tasks.length ? tasks[currentIndex + 1] : null);
+  const laterTasks = isDemoMode
+    ? (currentIndex >= 0 && currentIndex + 2 < tasks.length ? tasks.slice(currentIndex + 2) : [{ task_id: 't-lat-1', task_type: 'TRENCHING SECTOR 4' }, { task_id: 't-lat-2', task_type: 'MATERIAL HAUL' }])
+    : (currentIndex >= 0 && currentIndex + 2 < tasks.length ? tasks.slice(currentIndex + 2) : []);
 
   return (
     <div className="flex-1 min-h-0 flex flex-col bg-[#080A0B] select-none px-8 py-4 lg:py-6 lg:px-12">
@@ -184,7 +198,7 @@ export default function WorkScreen() {
                 <div className="flex flex-col flex-1 pb-2">
                   <span className="text-xs text-[#FFCC00] mb-1">NOW</span>
                   <span className="text-base text-[#F1F3F4] font-bold">{taskTitle}</span>
-                  <span className="text-[#929A9E] mt-1 text-xs">{currentTask.task_status?.replace(/_/g, ' ') || 'IN PROGRESS'}</span>
+                  <span className="text-[#929A9E] mt-1 text-xs">{activeTask?.task_status?.replace(/_/g, ' ') || 'IN PROGRESS'}</span>
                 </div>
               </div>
 

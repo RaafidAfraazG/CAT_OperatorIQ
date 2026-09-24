@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Shield, User, Truck, Box, AlertTriangle, CheckCircle2, ChevronUp, ChevronDown } from 'lucide-react';
 import { api } from '../../api/client';
 import Modal from '../../components/common/Modal';
+import { useDemoMode } from '../../context/DemoModeContext';
 
 const ExcavatorSVG = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 100 160" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -194,6 +195,7 @@ const DEMO_OBJECTS = [
 
 export default function SafetyScreen() {
   const navigate = useNavigate();
+  const { isDemoMode, demoState, moveMachineUp, moveMachineDown } = useDemoMode();
 
   const [operator, setOperator] = useState<any>(null);
   const [risk, setRisk] = useState<any>(null);
@@ -204,7 +206,7 @@ export default function SafetyScreen() {
   const [modalOpen, setModalOpen] = useState(false);
 
   // ─── Interactive Demo State ───
-  const [machineY, setMachineY] = useState(0); // Y offset in pixels
+  const [localMachineY, setLocalMachineY] = useState(0); // Y offset in pixels
   const [blink, setBlink] = useState(false);
   
   useEffect(() => {
@@ -212,8 +214,8 @@ export default function SafetyScreen() {
     return () => clearInterval(id);
   }, []);
 
-  const moveUp = useCallback(() => setMachineY(y => y - 15), []);
-  const moveDown = useCallback(() => setMachineY(y => y + 15), []);
+  const moveUp = isDemoMode ? moveMachineUp : useCallback(() => setLocalMachineY(y => y - 15), []);
+  const moveDown = isDemoMode ? moveMachineDown : useCallback(() => setLocalMachineY(y => y + 15), []);
 
   useEffect(() => {
     async function loadData() {
@@ -250,20 +252,17 @@ export default function SafetyScreen() {
     loadData();
   }, []);
 
-  // Calculate dynamic proximity for demo objects based on machineY
+  // Calculate dynamic proximity for demo objects based on localMachineY (used when isDemoMode is OFF)
   const dynamicDemoProximity = DEMO_OBJECTS.map(obj => {
     const dx = obj.initX;
-    const dy = obj.initY - machineY; // Machine moving up (negative Y) brings objects lower relative to it
+    const dy = obj.initY - localMachineY;
     const distPx = Math.sqrt(dx * dx + dy * dy);
     const distM = +(distPx / DEMO_PX_PER_M).toFixed(1);
     
-    // Calculate angle relative to machine (center)
     let angle = (Math.atan2(dy, dx) * 180 / Math.PI) + 90;
     if (angle < 0) angle += 360;
 
     let status = 'safe';
-    // Visual collision: the object has a visual radius of ~3% (6 units in dx space = 0.6m)
-    // So if the distance to its center is <= Boundary (8.0) + Object Radius (0.6), they are touching!
     const OBJECT_RADIUS_M = 0.6;
     if (distM <= PROXIMITY_DANGER_M + OBJECT_RADIUS_M) status = 'critical';
 
@@ -271,10 +270,9 @@ export default function SafetyScreen() {
   });
 
   // Extract min distance from demo for global state override
-  // Compare using the edge-adjusted threshold so the ring triggers exactly when touched
   const demoMinDistance = Math.min(...dynamicDemoProximity.map(o => o.distanceM));
-  const hasDemoCritical = demoMinDistance <= PROXIMITY_DANGER_M + 0.6;
-  const hasDemoWarning = demoMinDistance <= PROXIMITY_WARN_M;
+  const localHasDemoCritical = demoMinDistance <= PROXIMITY_DANGER_M + 0.6;
+  const localHasDemoWarning = demoMinDistance <= PROXIMITY_WARN_M;
 
   // Derive global state from real data OR demo data
   const hasCriticalAlert = alerts.some(a => a.severity.toLowerCase() === 'critical');
@@ -283,57 +281,68 @@ export default function SafetyScreen() {
   const nearestPersonM = telemetry?.nearest_person_distance_m ?? null;
   const nearestVehicleM = telemetry?.nearest_vehicle_distance_m ?? null;
   const nearestObstacleM = telemetry?.nearest_obstacle_distance_m ?? null;
-  const seatbeltStatus = telemetry?.seatbelt_status ?? 'FASTENED';
+  const seatbeltStatus = isDemoMode ? demoState.safety.seatbeltStatus : (telemetry?.seatbelt_status ?? 'FASTENED');
   
   const telDistances = [nearestPersonM, nearestVehicleM, nearestObstacleM].filter((d): d is number => d !== null);
-  // Ensure the interactive demo can ALWAYS trigger the overlay by taking the absolute minimum of real and demo distances
-  const minDistance = telDistances.length > 0 ? Math.min(Math.min(...telDistances), demoMinDistance) : demoMinDistance;
+  const minDistance = isDemoMode 
+    ? demoState.safety.nearestDistance 
+    : (telDistances.length > 0 ? Math.min(Math.min(...telDistances), demoMinDistance) : demoMinDistance);
 
   // Baseline backend score and level
-  let displayRiskScore: number | string = risk?.risk_score !== undefined && risk?.risk_score !== null ? Number(risk.risk_score) : '--';
-  let backendRiskLevel = risk?.risk_level?.toLowerCase() || 'low';
+  let displayRiskScore: number | string = isDemoMode
+    ? demoState.safety.riskScore
+    : (risk?.risk_score !== undefined && risk?.risk_score !== null ? Number(risk.risk_score) : '--');
+  let backendRiskLevel = isDemoMode
+    ? demoState.safety.riskLevel
+    : (risk?.risk_level?.toLowerCase() || 'low');
 
-  // Apply real active alerts to baseline level
-  if (hasCriticalAlert || risk?.risk_level === 'critical' || risk?.risk_level === 'High') {
-      backendRiskLevel = 'critical';
-  } else if (hasWarningAlert || risk?.risk_level === 'moderate' || risk?.risk_level === 'high' || risk?.risk_level === 'Medium') {
-      backendRiskLevel = 'moderate';
-  }
-  
-  // Apply live proximity overlay if an object enters the boundary
-  if (typeof displayRiskScore === 'number' && !isNaN(displayRiskScore) && minDistance !== null) {
-    if (minDistance <= PROXIMITY_DANGER_M + 0.6) {
-      // Scale score from 80 to 99 based on distance inside critical boundary (8.6m to 0m)
-      const overlay = Math.round(80 + ((8.6 - Math.max(0, minDistance)) / 8.6) * 19);
-      displayRiskScore = Math.max(displayRiskScore, overlay);
-      backendRiskLevel = 'critical';
-    } else if (minDistance <= PROXIMITY_WARN_M) {
-      // Scale score from 50 to 79 based on distance inside caution boundary (12.0m to 8.6m)
-      const overlay = Math.round(50 + ((12.0 - minDistance) / (12.0 - 8.6)) * 29);
-      displayRiskScore = Math.max(displayRiskScore, overlay);
-      backendRiskLevel = displayRiskScore >= 85 ? 'critical' : displayRiskScore >= 75 ? 'high' : displayRiskScore >= 45 ? 'moderate' : backendRiskLevel;
+  if (!isDemoMode) {
+    // Apply real active alerts to baseline level
+    if (hasCriticalAlert || risk?.risk_level === 'critical' || risk?.risk_level === 'High') {
+        backendRiskLevel = 'critical';
+    } else if (hasWarningAlert || risk?.risk_level === 'moderate' || risk?.risk_level === 'high' || risk?.risk_level === 'Medium') {
+        backendRiskLevel = 'moderate';
+    }
+    
+    // Apply live proximity overlay if an object enters the boundary
+    if (typeof displayRiskScore === 'number' && !isNaN(displayRiskScore) && minDistance !== null) {
+      if (minDistance <= PROXIMITY_DANGER_M + 0.6) {
+        const overlay = Math.round(80 + ((8.6 - Math.max(0, minDistance)) / 8.6) * 19);
+        displayRiskScore = Math.max(displayRiskScore, overlay);
+        backendRiskLevel = 'critical';
+      } else if (minDistance <= PROXIMITY_WARN_M) {
+        const overlay = Math.round(50 + ((12.0 - minDistance) / (12.0 - 8.6)) * 29);
+        displayRiskScore = Math.max(displayRiskScore, overlay);
+        backendRiskLevel = displayRiskScore >= 85 ? 'critical' : displayRiskScore >= 75 ? 'high' : displayRiskScore >= 45 ? 'moderate' : backendRiskLevel;
+      }
     }
   }
 
   // Unified derived state
-  const isCritical = backendRiskLevel === 'critical';
-  const isCaution = !isCritical && (backendRiskLevel === 'high' || backendRiskLevel === 'moderate' || backendRiskLevel === 'medium');
+  const isCritical = isDemoMode ? demoState.safety.isCritical : (backendRiskLevel === 'critical');
+  const isCaution = isDemoMode ? demoState.safety.isCaution : (!isCritical && (backendRiskLevel === 'high' || backendRiskLevel === 'moderate' || backendRiskLevel === 'medium'));
   
-  const globalStateText = isCritical ? 'CRITICAL HAZARD' : isCaution ? 'CAUTION' : 'SAFE TO OPERATE';
-  const globalStateColor = isCritical ? 'text-[#E5484D]' : isCaution ? 'text-[#F2B84B]' : 'text-[#42C76A]';
+  const hasDemoCritical = isDemoMode ? demoState.safety.isCritical : localHasDemoCritical;
 
-  const scoreColor = backendRiskLevel === 'critical' || backendRiskLevel === 'high' 
+  const globalStateText = isDemoMode ? demoState.safety.globalStateText : (isCritical ? 'CRITICAL HAZARD' : isCaution ? 'CAUTION' : 'SAFE TO OPERATE');
+  const globalStateColor = isDemoMode ? demoState.safety.globalStateColor : (isCritical ? 'text-[#E5484D]' : isCaution ? 'text-[#F2B84B]' : 'text-[#42C76A]');
+
+  const scoreColor = isCritical || backendRiskLevel === 'high' 
                      ? 'text-[#E5484D]' 
-                     : backendRiskLevel === 'medium' || backendRiskLevel === 'moderate'
+                     : isCaution || backendRiskLevel === 'medium' || backendRiskLevel === 'moderate'
                      ? 'text-[#F2B84B]' 
                      : 'text-[#F1F3F4]';
 
   // Use dynamic demo objects for the radar display
-  const proximityData = dynamicDemoProximity;
+  const proximityData = isDemoMode ? demoState.safety.objects : dynamicDemoProximity;
 
   // Find nearest hazard
   const sortedProximity = [...proximityData].sort((a, b) => a.distanceM - b.distanceM);
-  const nearest = sortedProximity[0];
+  const nearest = isDemoMode ? demoState.safety.nearestObject : sortedProximity[0];
+
+  // Active alerts and events to display
+  const alertsToDisplay = isDemoMode ? [...demoState.safety.activeAlerts, ...alerts] : alerts;
+  const eventsToDisplay = isDemoMode ? demoState.safety.recentEvents : events;
 
   const getZoneColor = (hazard: any) => hazard ? (hazard.status === 'critical' ? (blink ? 'border-[#E5484D] bg-[#E5484D]/30' : 'border-[#E5484D] bg-[#E5484D]/10') : 'border-[#F2B84B] bg-[#F2B84B]/10') : 'border-transparent bg-transparent';
   const frontHazard = proximityData.find((p: any) => (p.angle >= 315 || p.angle <= 45) && p.status !== 'safe');
@@ -606,8 +615,8 @@ export default function SafetyScreen() {
             </span>
             
             <div className="flex flex-col gap-4 overflow-y-auto scrollbar-thin pr-2">
-              {alerts.length > 0 ? (
-                alerts.map((alert: any) => {
+              {alertsToDisplay.length > 0 ? (
+                alertsToDisplay.map((alert: any) => {
                   const isCrit = alert.severity.toLowerCase() === 'critical';
                   const color = isCrit ? 'text-[#E5484D]' : 'text-[#F2B84B]';
                   return (
@@ -640,7 +649,7 @@ export default function SafetyScreen() {
             </span>
             
             <div className="flex flex-col gap-6 overflow-hidden">
-              {events.slice(0, 2).map((ev: any) => (
+              {eventsToDisplay.slice(0, 2).map((ev: any) => (
                 <div key={ev.event_id} className="flex flex-col gap-1">
                   <div className="flex items-baseline justify-between font-mono tracking-widest uppercase">
                     <span className="text-xs text-[#929A9E] font-bold">{ev.event_type.replace(/_/g, ' ')}</span>
@@ -651,7 +660,7 @@ export default function SafetyScreen() {
                   <span className="font-mono text-xs text-[#5E676C] uppercase truncate">{ev.description}</span>
                 </div>
               ))}
-              {events.length === 0 && (
+              {eventsToDisplay.length === 0 && (
                 <span className="font-mono text-sm text-[#5E676C] tracking-widest uppercase font-bold">
                   NO RECENT EVENTS
                 </span>

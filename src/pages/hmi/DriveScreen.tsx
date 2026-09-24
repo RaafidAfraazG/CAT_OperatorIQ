@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AlertTriangle, Clock, TrendingUp } from 'lucide-react';
+import { AlertTriangle, Clock, TrendingUp, ClipboardList } from 'lucide-react';
 import { api } from '../../api/client';
+import { useDemoMode } from '../../context/DemoModeContext';
 
 export default function DriveScreen() {
   const navigate = useNavigate();
+  const { isDemoMode, demoState } = useDemoMode();
 
   const [operator, setOperator] = useState<any>(null);
   const [machine, setMachine] = useState<any>(null);
@@ -83,41 +85,49 @@ export default function DriveScreen() {
     loadDriveData();
   }, []);
 
-  // Telemetry fallback defaults
-  const speed = telemetry?.machine_speed_kmh ?? 4.8;
-  const rpm = telemetry?.engine_rpm ?? 1820;
-  const loadPct = telemetry?.engine_load_percent ?? 74;
-  const fuelRate = telemetry?.fuel_rate_lph ?? 22.4;
-  const fuelLvl = telemetry?.fuel_level_percent ?? 68;
-  const hydPress = telemetry?.hydraulic_pressure_bar ?? 245;
+  // Telemetry: use demo values if demo mode is on, else fallback to backend
+  const speed = isDemoMode ? demoState.telemetry.speed : (telemetry?.machine_speed_kmh ?? 4.8);
+  const rpm = isDemoMode ? demoState.telemetry.rpm : (telemetry?.engine_rpm ?? 1820);
+  const loadPct = isDemoMode ? demoState.telemetry.loadPct : (telemetry?.engine_load_percent ?? 74);
+  const fuelRate = isDemoMode ? demoState.telemetry.fuelRate : (telemetry?.fuel_rate_lph ?? 22.4);
+  const fuelLvl = isDemoMode ? demoState.telemetry.fuelLvl : (telemetry?.fuel_level_percent ?? 68);
+  const hydPress = isDemoMode ? demoState.telemetry.hydPress : (telemetry?.hydraulic_pressure_bar ?? 245);
 
   // Task & ETA calculations
-  const taskTitle = task ? task.task_type.replace(/_/g, ' ') : 'EARTH EXCAVATION';
-  const taskZone = task?.site_id ? `ZONE A • ${task.site_id}` : 'ZONE A • NORTH BENCH';
-  const scheduledMin = task?.estimated_duration_min ?? 120;
-  const predictedMin = eta?.predicted_duration_min ?? 135;
-  const varianceMin = eta?.delay_minutes ?? (predictedMin - scheduledMin);
-  const isDelayed = eta ? eta.status === 'likely_delayed' : varianceMin > 0;
-  const progressPct = task?.task_efficiency ? Math.round(task.task_efficiency * 100) : 72;
+  const taskTitle = isDemoMode ? demoState.task.taskTitle : (task ? task.task_type.replace(/_/g, ' ') : 'EARTH EXCAVATION');
+  const taskZone = isDemoMode ? demoState.task.taskZone : (task?.site_id ? `ZONE A • ${task.site_id}` : 'ZONE A • NORTH BENCH');
+  const scheduledMin = isDemoMode ? demoState.task.scheduledMin : (task?.estimated_duration_min ?? 120);
+  const predictedMin = isDemoMode ? demoState.task.predictedMin : (eta?.predicted_duration_min ?? 135);
+  const varianceMin = isDemoMode ? demoState.task.varianceMin : (eta?.delay_minutes ?? (predictedMin - scheduledMin));
+  const isDelayed = isDemoMode ? demoState.task.isDelayed : (eta ? eta.status === 'likely_delayed' : varianceMin > 0);
+  const progressPct = isDemoMode ? Math.round(demoState.task.progressPct) : (task?.task_efficiency ? Math.round(task.task_efficiency * 100) : 72);
+  const rawStatus = isDemoMode 
+    ? (demoState.task.taskStatus || (isDelayed ? 'DELAYED' : 'IN PROGRESS'))
+    : (task?.task_status ? task.task_status.replace(/_/g, ' ') : (isDelayed ? 'DELAYED' : 'IN PROGRESS'));
+  const taskStatusText = rawStatus.toUpperCase();
 
-  const seatbeltStatus = telemetry?.seatbelt_status ?? null;
+  const seatbeltStatus = isDemoMode ? demoState.telemetry.seatbeltStatus : (telemetry?.seatbelt_status ?? 'FASTENED');
   const nearestPersonM = telemetry?.nearest_person_distance_m ?? null;
   const nearestVehicleM = telemetry?.nearest_vehicle_distance_m ?? null;
   const nearestObstacleM = telemetry?.nearest_obstacle_distance_m ?? null;
 
-  // Determine proximity state from telemetry
+  // Determine proximity state
   const PROXIMITY_WARN_M = 5.0;
   const allDistances = [nearestPersonM, nearestVehicleM, nearestObstacleM].filter((d): d is number => d !== null);
-  const nearestDistance = allDistances.length > 0 ? Math.min(...allDistances) : null;
-  const proximityState = nearestDistance !== null
-    ? (nearestDistance < PROXIMITY_WARN_M ? 'WARNING' : 'CLEAR')
-    : 'CLEAR';
-  const proximityColor = proximityState === 'WARNING' ? 'text-[#F2B84B]' : 'text-[#42C76A]';
+  const backendNearestDistance = allDistances.length > 0 ? Math.min(...allDistances) : null;
+  
+  const nearestDistance = isDemoMode ? demoState.safety.nearestDistance : backendNearestDistance;
+  const proximityState = isDemoMode 
+    ? (demoState.safety.proximityState === 'CRITICAL' ? 'WARNING' : demoState.safety.proximityState)
+    : (nearestDistance !== null ? (nearestDistance < PROXIMITY_WARN_M ? 'WARNING' : 'CLEAR') : 'CLEAR');
+  const proximityColor = isDemoMode
+    ? (demoState.safety.isCritical ? 'text-[#E5484D]' : demoState.safety.isCaution ? 'text-[#F2B84B]' : 'text-[#42C76A]')
+    : (proximityState === 'WARNING' ? 'text-[#F2B84B]' : 'text-[#42C76A]');
 
   // Safety risk evaluation
-  const riskLevel = safetyRisk?.risk_level || 'low';
-  const riskScore = safetyRisk?.risk_score ?? 15;
-  const isCriticalSafety = riskLevel === 'critical' || riskScore >= 80;
+  const riskLevel = isDemoMode ? demoState.safety.riskLevel : (safetyRisk?.risk_level || 'low');
+  const riskScore = isDemoMode ? demoState.safety.riskScore : (safetyRisk?.risk_score ?? 15);
+  const isCriticalSafety = isDemoMode ? demoState.safety.isCritical : (riskLevel === 'critical' || riskScore >= 80);
 
   if (loading) {
     return (
@@ -137,12 +147,14 @@ export default function DriveScreen() {
             <AlertTriangle size={24} />
             <div>
               <p className="text-lg uppercase">CRITICAL SAFETY ALERT</p>
-              <p className="text-sm text-[#080A0B]/80 mt-1">PROXIMITY HAZARD: GROUND WORKER WITHIN 4.2M</p>
+              <p className="text-sm text-[#080A0B]/80 mt-1">
+                PROXIMITY HAZARD: GROUND WORKER WITHIN {nearestDistance !== null ? `${nearestDistance.toFixed(1)}M` : '4.2M'}
+              </p>
             </div>
           </div>
           <button
             type="button"
-            onClick={() => navigate('/legacy/safety')}
+            onClick={() => navigate('/safety')}
             className="px-6 py-2 bg-[#080A0B] text-[#F1F3F4] text-sm uppercase font-extrabold cursor-pointer hover:bg-[#141819]"
           >
             VIEW RADAR
@@ -153,38 +165,25 @@ export default function DriveScreen() {
       {/* SINGLE SURFACE INSTRUMENT PANEL */}
       <div className="flex-1 min-h-0 flex flex-col justify-between px-8 py-4 lg:py-6 lg:px-12 max-w-[1600px] mx-auto w-full gap-4 lg:gap-6">
         
-        {/* UPPER: TASK & CONTEXT */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-8">
-          <div>
+        {/* 1. UPPER: CURRENT OPERATION & TELEMETRY */}
+        <div className="flex items-center justify-between pb-1">
+          <div className="flex items-center gap-3">
             <span className="font-mono text-xs font-bold tracking-widest text-[#929A9E] uppercase">
               CURRENT OPERATION
             </span>
-            <h1 className="text-4xl lg:text-5xl font-extrabold text-[#F1F3F4] tracking-tight mt-2 uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#42C76A]" />
+            <span className="font-mono text-xs font-bold tracking-widest text-[#FFCC00] uppercase">
               {taskTitle}
-            </h1>
-            <p className="font-mono text-sm tracking-widest text-[#FFCC00] mt-3 uppercase">
-              {taskZone}
-            </p>
+            </span>
           </div>
-
-          <div className="flex items-center gap-6">
-            <div className="text-right">
-              <div className="flex items-baseline justify-end gap-1">
-                <span className="text-6xl lg:text-7xl font-extrabold text-[#F1F3F4] tracking-tighter">
-                  {progressPct}
-                </span>
-                <span className="text-3xl text-[#929A9E] font-medium">%</span>
-              </div>
-              <span className="font-mono text-sm tracking-widest text-[#929A9E] uppercase">
-                COMPLETED
-              </span>
-            </div>
+          <div className="font-mono text-xs tracking-widest text-[#5E676C] uppercase hidden sm:block">
+            {machine?.machine_model || 'EX-140GC'} // CAB TELEMETRY
           </div>
         </div>
 
         <div className="w-full h-px bg-[#141819]" />
 
-        {/* MIDDLE: MACHINE INSTRUMENTATION ROW */}
+        {/* MIDDLE: MACHINE INSTRUMENTATION ROW (TELEMETRY) */}
         <div className="flex flex-wrap items-center justify-between gap-8 py-2">
           {/* SPEED */}
           <div className="flex flex-col">
@@ -236,6 +235,102 @@ export default function DriveScreen() {
             <div className="flex items-baseline gap-2">
               <span className="font-mono text-4xl font-extrabold text-[#F1F3F4]">{fuelRate.toFixed(1)}</span>
               <span className="font-mono text-sm text-[#929A9E]">L/h</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full h-px bg-[#141819]" />
+
+        {/* 2. MIDDLE: COMPACT CURRENT TASK PANEL */}
+        <div className="w-full bg-[#0D1012] border border-[#22282C] border-l-4 border-l-[#FFCC00] rounded px-6 py-4 lg:py-5 shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          {/* Left Column: CURRENT TASK, Title, Zone */}
+          <div className="flex flex-col">
+            <div className="flex items-center gap-2 mb-1.5">
+              <ClipboardList className="w-3.5 h-3.5 text-[#FFCC00]" />
+              <span className="font-mono text-xs font-bold tracking-widest text-[#929A9E] uppercase">
+                CURRENT TASK
+              </span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-extrabold text-[#F1F3F4] tracking-tight uppercase">
+              {taskTitle}
+            </h2>
+            <p className="font-mono text-xs lg:text-sm tracking-widest text-[#FFCC00] font-semibold mt-1 uppercase">
+              {taskZone}
+            </p>
+          </div>
+
+          {/* Right Column: Progress %, ETA, Status */}
+          <div className="flex flex-wrap items-center gap-6 sm:gap-10 lg:gap-12">
+            {/* Task Progress % */}
+            <div className="flex flex-col">
+              <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-0.5">
+                PROGRESS
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-mono text-2xl lg:text-3xl font-black text-[#F1F3F4] tracking-tight">
+                  {progressPct}%
+                </span>
+                <span className="font-mono text-xs font-bold text-[#929A9E] uppercase tracking-wider">
+                  COMPLETE
+                </span>
+              </div>
+              {/* Mini progress bar */}
+              <div className="w-28 sm:w-36 h-1.5 bg-[#171B1D] rounded-full overflow-hidden mt-1.5 border border-[#2A3033]">
+                <div 
+                  className="h-full bg-[#FFCC00] transition-all duration-300"
+                  style={{ width: `${Math.min(100, Math.max(0, progressPct))}%` }}
+                />
+              </div>
+            </div>
+
+            <div className="w-px h-10 bg-[#1A1F22] hidden sm:block" />
+
+            {/* Predicted ETA */}
+            <div className="flex flex-col">
+              <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-0.5">
+                PREDICTED ETA
+              </span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-mono text-xs font-bold text-[#929A9E] uppercase tracking-wider">
+                  ETA
+                </span>
+                <span className="font-mono text-2xl lg:text-3xl font-black text-[#F1F3F4] tracking-tight">
+                  {predictedMin}
+                </span>
+                <span className="font-mono text-xs font-bold text-[#929A9E] uppercase tracking-wider">
+                  MIN
+                </span>
+              </div>
+              <span className="font-mono text-[10px] tracking-wider uppercase mt-1 text-[#5E676C]">
+                {isDelayed ? `+${varianceMin} MIN OVER` : 'ON SCHEDULE'}
+              </span>
+            </div>
+
+            <div className="w-px h-10 bg-[#1A1F22] hidden sm:block" />
+
+            {/* Task Status */}
+            <div className="flex flex-col">
+              <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-1">
+                STATUS
+              </span>
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-[#13171A] border border-[#262D32]">
+                <span className={`w-2 h-2 rounded-full ${
+                  taskStatusText.includes('COMPLETED')
+                    ? 'bg-[#42C76A]'
+                    : isDelayed || taskStatusText.includes('DELAYED')
+                    ? 'bg-[#F2B84B] animate-pulse'
+                    : 'bg-[#FFCC00] animate-pulse'
+                }`} />
+                <span className={`font-mono text-xs font-extrabold tracking-wider uppercase ${
+                  taskStatusText.includes('COMPLETED')
+                    ? 'text-[#42C76A]'
+                    : isDelayed || taskStatusText.includes('DELAYED')
+                    ? 'text-[#F2B84B]'
+                    : 'text-[#FFCC00]'
+                }`}>
+                  {taskStatusText}
+                </span>
+              </div>
             </div>
           </div>
         </div>

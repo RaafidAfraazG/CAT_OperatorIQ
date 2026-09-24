@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { Bell, Menu } from 'lucide-react';
+import { useDemoMode } from '../../context/DemoModeContext';
 
 interface TopbarProps {
   onMenuToggle: () => void;
@@ -18,6 +19,7 @@ const routeTitles: Record<string, string> = {
 export default function Topbar({ onMenuToggle }: TopbarProps) {
   const { pathname } = useLocation();
   const title = routeTitles[pathname] ?? 'OperatorIQ';
+  const { isDemoMode, toggleDemoMode } = useDemoMode();
 
   const now = new Date();
   const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
@@ -43,8 +45,21 @@ export default function Topbar({ onMenuToggle }: TopbarProps) {
         </div>
       </div>
 
-      {/* Right: time + notification */}
-      <div className="flex items-center gap-3">
+      {/* Right: demo toggle + time + notification */}
+      <div className="flex items-center gap-4">
+        <button
+          type="button"
+          onClick={toggleDemoMode}
+          className={`flex items-center gap-2 px-3 py-1.5 rounded text-xs font-mono font-bold uppercase transition-all ${
+            isDemoMode
+              ? 'bg-[#FFCC00] text-[#080A0B] shadow-[0_0_12px_rgba(255,204,0,0.35)]'
+              : 'bg-surface-800 text-surface-300 border border-surface-700 hover:text-white'
+          }`}
+        >
+          <span className={`w-2 h-2 rounded-full ${isDemoMode ? 'bg-[#080A0B] animate-ping' : 'bg-surface-500'}`} />
+          <span>{isDemoMode ? 'DEMO ACTIVE' : 'DEMO MODE'}</span>
+        </button>
+
         <div className="text-right hidden sm:block">
           <p className="text-sm font-mono font-medium text-surface-100">{timeStr}</p>
           <p className="text-xs text-surface-500">Local time</p>

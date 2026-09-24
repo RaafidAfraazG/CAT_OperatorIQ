@@ -2,9 +2,11 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 import { api } from '../../api/client';
+import { useDemoMode } from '../../context/DemoModeContext';
 
 export default function MachineScreen() {
   const navigate = useNavigate();
+  const { isDemoMode, demoState } = useDemoMode();
 
   const [machine, setMachine] = useState<any>(null);
   const [currentTel, setCurrentTel] = useState<any>(null);
@@ -60,23 +62,34 @@ export default function MachineScreen() {
     loadData();
   }, []);
 
-  // Telemetry fallback defaults
-  const rpm = currentTel?.engine_rpm ?? 1745;
-  const loadPct = currentTel?.engine_load_percent ?? 91;
-  const coolantTemp = currentTel?.coolant_temperature_c ?? 78;
-  const hydPress = currentTel?.hydraulic_pressure_bar ?? 238;
-  const fuelLvl = currentTel?.fuel_level_percent ?? 63;
-  const fuelRate = currentTel?.fuel_rate_lph ?? 17.0;
+  // Telemetry: use demo values if demo mode is on, else fallback to backend
+  const rpm = isDemoMode ? demoState.telemetry.rpm : (currentTel?.engine_rpm ?? 1745);
+  const loadPct = isDemoMode ? demoState.telemetry.loadPct : (currentTel?.engine_load_percent ?? 91);
+  const coolantTemp = isDemoMode ? demoState.telemetry.coolantTemp : (currentTel?.coolant_temperature_c ?? 78);
+  const hydPress = isDemoMode ? demoState.telemetry.hydPress : (currentTel?.hydraulic_pressure_bar ?? 238);
+  const fuelLvl = isDemoMode ? demoState.telemetry.fuelLvl : (currentTel?.fuel_level_percent ?? 63);
+  const fuelRate = isDemoMode ? demoState.telemetry.fuelRate : (currentTel?.fuel_rate_lph ?? 17.0);
 
   // Machine Anomaly logic
-  const isCriticalAnomaly = machine?.anomaly_score > 0.8 || machine?.status === 'Critical';
-  const isAttentionAnomaly = machine?.anomaly_score > 0.6 || machine?.status === 'Attention';
+  const isCriticalAnomaly = isDemoMode ? false : (machine?.anomaly_score > 0.8 || machine?.status === 'Critical');
+  const isAttentionAnomaly = isDemoMode ? (loadPct > 85) : (machine?.anomaly_score > 0.6 || machine?.status === 'Attention');
   const machineHealthStr = isCriticalAnomaly ? 'CRITICAL' : isAttentionAnomaly ? 'ATTENTION REQUIRED' : 'NORMAL';
   const machineHealthColor = isCriticalAnomaly ? 'text-[#E5484D]' : isAttentionAnomaly ? 'text-[#F2B84B]' : 'text-[#42C76A]';
 
   // Fuel Anomaly logic
-  const hasFuelAnomaly = fuel && fuel.status !== 'normal';
-  const fuelDeviation = fuel?.deviation_percent ? `+${fuel.deviation_percent}%` : null;
+  const activeFuel = isDemoMode 
+    ? {
+        expected_fuel_rate: demoState.shiftDebrief.expectedFuelRate,
+        deviation_percent: demoState.shiftDebrief.fuelDeviation,
+        idle_fuel: demoState.shiftDebrief.idleFuel,
+        status: demoState.shiftDebrief.fuelDeviation > 15 ? 'warning' : 'normal',
+      }
+    : fuel;
+  const hasFuelAnomaly = activeFuel && activeFuel.status !== 'normal';
+  const fuelDeviation = activeFuel?.deviation_percent ? `+${activeFuel.deviation_percent}%` : null;
+
+  // Active chart data
+  const activeHistory = isDemoMode ? demoState.history : history;
 
   if (loading) {
     return (
@@ -219,11 +232,11 @@ export default function MachineScreen() {
                 <span className="text-[#F1F3F4] font-bold">{fuelRate.toFixed(1)} L/h</span>
               </div>
               
-              {fuel && (
+              {activeFuel && (
                 <>
                   <div className="flex justify-between border-b border-[#141819] pb-2 mb-2">
                     <span className="text-[#929A9E]">EXPECTED BASELINE</span>
-                    <span className="text-[#F1F3F4] font-bold">{fuel.expected_fuel_rate} L/h</span>
+                    <span className="text-[#F1F3F4] font-bold">{activeFuel.expected_fuel_rate} L/h</span>
                   </div>
                   <div className="flex justify-between border-b border-[#141819] pb-2 mb-2">
                     <span className="text-[#929A9E]">DEVIATION</span>
@@ -233,7 +246,7 @@ export default function MachineScreen() {
                   </div>
                   <div className="flex justify-between pb-2">
                     <span className="text-[#929A9E]">IDLE WASTE</span>
-                    <span className="text-[#F1F3F4] font-bold">{fuel.idle_fuel} L</span>
+                    <span className="text-[#F1F3F4] font-bold">{activeFuel.idle_fuel} L</span>
                   </div>
                 </>
               )}
@@ -246,10 +259,10 @@ export default function MachineScreen() {
               TELEMETRY TREND (RPM)
             </span>
 
-            {history.length > 0 ? (
+            {activeHistory.length > 0 ? (
               <div className="w-full max-w-lg flex-1 min-h-[100px] max-h-[160px] -ml-4 lg:ml-0">
                 <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={history} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
+                  <LineChart data={activeHistory} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
                     <XAxis 
                       dataKey="timestamp" 
                       tick={{ fontSize: 10, fill: '#5E676C', fontFamily: 'monospace' }} 

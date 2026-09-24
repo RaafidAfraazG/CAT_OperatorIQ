@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clock, TrendingUp, CheckCircle2, AlertTriangle } from 'lucide-react';
 import { api } from '../../api/client';
+import { useDemoMode } from '../../context/DemoModeContext';
 
 export default function ShiftDebriefScreen() {
   const navigate = useNavigate();
+  const { isDemoMode, demoState } = useDemoMode();
+
   const [loading, setLoading] = useState(true);
   const [operatorId, setOperatorId] = useState<string>('');
   
@@ -65,7 +68,7 @@ export default function ShiftDebriefScreen() {
     loadData();
   }, []);
 
-  if (loading) {
+  if (loading && !isDemoMode) {
     return (
       <div className="flex-1 min-h-0 flex flex-col items-center justify-center bg-[#080A0B] text-[#929A9E] font-mono select-none overflow-hidden">
         <div className="w-12 h-12 rounded-full border-2 border-[#141819] border-t-[#FFCC00] animate-spin mb-6" />
@@ -74,22 +77,24 @@ export default function ShiftDebriefScreen() {
     );
   }
 
-  // Compute real metrics from DB data
-  const totalTasks = tasks.length;
-  const completedTasks = tasks.filter(t => t.task_status === 'COMPLETED').length;
-  const delayedTasks = tasks.filter(t => t.task_status === 'DELAYED').length;
+  // Compute metrics: use simulated shift debrief in demo mode, else DB calculations
+  const totalTasks = isDemoMode ? demoState.shiftDebrief.totalTasks : tasks.length;
+  const completedTasks = isDemoMode ? demoState.shiftDebrief.completedTasks : tasks.filter(t => t.task_status === 'COMPLETED').length;
+  const delayedTasks = isDemoMode ? demoState.shiftDebrief.delayedTasks : tasks.filter(t => t.task_status === 'DELAYED').length;
 
-  // Compute shift duration from actual task durations
   const totalActualMin = tasks.reduce((sum: number, t: any) => sum + (t.actual_duration_min || t.estimated_duration_min || 0), 0);
   const shiftHrs = (totalActualMin / 60).toFixed(1);
-  const shiftDuration = totalActualMin > 0 ? `${shiftHrs} HRS` : 'N/A';
+  const shiftDuration = isDemoMode 
+    ? demoState.shiftDebrief.shiftDuration 
+    : (totalActualMin > 0 ? `${shiftHrs} HRS` : 'N/A');
 
-  // Fuel metrics from ML fuel anomaly
-  const actualFuelRate = fuelData?.actual_fuel_rate ?? null;
-  const expectedFuelRate = fuelData?.expected_fuel_rate ?? null;
-  const fuelDeviation = fuelData?.deviation_percent ?? null;
-  const idleFuel = fuelData?.idle_fuel ?? null;
+  const actualFuelRate = isDemoMode ? demoState.shiftDebrief.actualFuelRate : (fuelData?.actual_fuel_rate ?? null);
+  const expectedFuelRate = isDemoMode ? demoState.shiftDebrief.expectedFuelRate : (fuelData?.expected_fuel_rate ?? null);
+  const fuelDeviation = isDemoMode ? demoState.shiftDebrief.fuelDeviation : (fuelData?.deviation_percent ?? null);
+  const idleFuel = isDemoMode ? demoState.shiftDebrief.idleFuel : (fuelData?.idle_fuel ?? null);
+  const displaySafetyAlerts = isDemoMode ? demoState.shiftDebrief.safetyAlertCount : safetyAlertCount;
 
+  const tasksToDisplay = isDemoMode ? demoState.shiftDebrief.taskBreakdown : tasks;
   const aiInsights = intelligence?.insights || [];
 
   return (
@@ -172,9 +177,9 @@ export default function ShiftDebriefScreen() {
                 <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase font-bold mb-2">
                   SAFETY ALERTS
                 </span>
-                <span className="font-mono text-3xl font-extrabold text-[#F1F3F4]">{safetyAlertCount}</span>
-                <span className={`font-mono text-xs mt-2 ${safetyAlertCount > 0 ? 'text-[#F2B84B]' : 'text-[#42C76A]'}`}>
-                  {safetyAlertCount > 0 ? 'PROXIMITY / VIOLATIONS' : 'NO SAFETY ALERTS'}
+                <span className="font-mono text-3xl font-extrabold text-[#F1F3F4]">{displaySafetyAlerts}</span>
+                <span className={`font-mono text-xs mt-2 ${displaySafetyAlerts > 0 ? 'text-[#F2B84B]' : 'text-[#42C76A]'}`}>
+                  {displaySafetyAlerts > 0 ? 'PROXIMITY / VIOLATIONS' : 'NO SAFETY ALERTS'}
                 </span>
               </div>
             </div>
@@ -184,7 +189,7 @@ export default function ShiftDebriefScreen() {
                 TASK BREAKDOWN
               </span>
               <div className="flex flex-col gap-3">
-                {tasks.length > 0 ? tasks.map((task, idx) => (
+                {tasksToDisplay.length > 0 ? tasksToDisplay.map((task, idx) => (
                   <div key={idx} className="flex justify-between items-center font-mono text-xs tracking-widest uppercase pb-2 border-b border-[#141819] last:border-0 last:pb-0">
                     <span className="text-[#F1F3F4]">{task.task_type.replace(/_/g, ' ')}</span>
                     <span className={task.task_status === 'COMPLETED' ? 'text-[#42C76A]' : task.task_status === 'DELAYED' ? 'text-[#F2B84B]' : 'text-[#929A9E]'}>{task.task_status.replace(/_/g, ' ')}</span>

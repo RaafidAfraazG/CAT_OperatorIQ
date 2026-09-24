@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { Mic, MicOff, Send, Loader2, Target, Settings, Shield, BookOpen, Clock, Activity, ChevronRight, AlertTriangle, Volume2, VolumeX } from 'lucide-react';
 import { api } from '../../api/client';
+import { useDemoMode } from '../../context/DemoModeContext';
 
 export default function AssistScreen() {
   const navigate = useNavigate();
+  const { isDemoMode, demoState } = useDemoMode();
 
   // Global Context
   const [loading, setLoading] = useState(true);
@@ -162,17 +164,51 @@ export default function AssistScreen() {
     setErrorState(null);
 
     try {
-      const fuelLevelVal = machine?.fuel_percent ?? machine?.fuelPercent ?? 'UNAVAILABLE';
-      const fuelRateVal = machine?.fuel_rate ?? machine?.fuelRate ?? 'UNAVAILABLE';
-      const engineRpmVal = machine?.engine_rpm ?? machine?.engineRpm ?? 'UNAVAILABLE';
-      const engineLoadVal = machine?.engine_load ?? machine?.engineLoad ?? 'UNAVAILABLE';
-      const speedVal = machine?.speed ?? 'UNAVAILABLE';
+      const fuelLevelVal = isDemoMode 
+        ? demoState.telemetry.fuelLvl.toFixed(1) 
+        : (machine?.fuel_percent ?? machine?.fuelPercent ?? 'UNAVAILABLE');
+      const fuelRateVal = isDemoMode 
+        ? demoState.telemetry.fuelRate.toFixed(1) 
+        : (machine?.fuel_rate ?? machine?.fuelRate ?? 'UNAVAILABLE');
+      const engineRpmVal = isDemoMode 
+        ? Math.round(demoState.telemetry.rpm) 
+        : (machine?.engine_rpm ?? machine?.engineRpm ?? 'UNAVAILABLE');
+      const engineLoadVal = isDemoMode 
+        ? Math.round(demoState.telemetry.loadPct) 
+        : (machine?.engine_load ?? machine?.engineLoad ?? 'UNAVAILABLE');
+      const speedVal = isDemoMode 
+        ? demoState.telemetry.speed.toFixed(1) 
+        : (machine?.speed ?? 'UNAVAILABLE');
+
+      const currentTaskType = isDemoMode 
+        ? demoState.task.taskTitle 
+        : (task?.task_type ? task.task_type.replace(/_/g, ' ') : 'UNASSIGNED');
+      const currentTaskProgress = isDemoMode 
+        ? Math.round(demoState.task.progressPct) 
+        : (task?.completion_percent ?? 0);
+      const currentTaskPredicted = isDemoMode 
+        ? `${demoState.task.predictedMin} min (delay: ${demoState.task.varianceMin} min)` 
+        : `${task?.estimated_duration_min ?? 'UNAVAILABLE'} min`;
+
+      const currentSafetyState = isDemoMode 
+        ? demoState.safety.globalStateText 
+        : (safetyRisk?.risk_level || 'UNKNOWN');
+      const currentSafetyRisk = isDemoMode 
+        ? `${demoState.safety.riskScore}` 
+        : `${safetyRisk?.risk_score ?? 'UNKNOWN'}`;
+      const currentNearestHazard = isDemoMode 
+        ? (demoState.safety.isCritical 
+            ? `PROXIMITY HAZARD: GROUND WORKER WITHIN ${demoState.safety.nearestDistance.toFixed(1)}M` 
+            : demoState.safety.isCaution 
+            ? `OBJECT WITHIN ${demoState.safety.nearestDistance.toFixed(1)}M` 
+            : 'NONE — AREA CLEAR')
+        : (insights?.[0]?.message || 'NONE');
 
       const contextStr = `
 CURRENT MACHINE CONTEXT
 
-Machine: ${machine?.machine_model || 'UNKNOWN'}
-Status: ${machine?.status || 'UNKNOWN'}
+Machine: ${isDemoMode ? 'EX-140GC' : (machine?.machine_model || 'UNKNOWN')}
+Status: ${isDemoMode ? (demoState.telemetry.loadPct > 85 ? 'Attention' : 'NORMAL') : (machine?.status || 'UNKNOWN')}
 
 Fuel level: ${fuelLevelVal}${fuelLevelVal !== 'UNAVAILABLE' ? '%' : ''}
 Fuel rate: ${fuelRateVal}${fuelRateVal !== 'UNAVAILABLE' ? ' L/h' : ''}
@@ -180,13 +216,13 @@ Ground speed: ${speedVal}${speedVal !== 'UNAVAILABLE' ? ' km/h' : ''}
 Engine RPM: ${engineRpmVal}
 Engine load: ${engineLoadVal}${engineLoadVal !== 'UNAVAILABLE' ? '%' : ''}
 
-Current task: ${task?.task_type ? task.task_type.replace(/_/g, ' ') : 'UNASSIGNED'}
-Task progress: ${task?.completion_percent ?? 0}%
-Predicted duration: ${task?.estimated_duration_min ?? 'UNAVAILABLE'} min
+Current task: ${currentTaskType}
+Task progress: ${currentTaskProgress}%
+Predicted duration: ${currentTaskPredicted}
 
-Safety state: ${safetyRisk?.risk_level || 'UNKNOWN'}
-Safety risk: ${safetyRisk?.risk_score ?? 'UNKNOWN'}
-Nearest hazard: ${insights?.[0]?.message || 'NONE'}
+Safety state: ${currentSafetyState}
+Safety risk: ${currentSafetyRisk}
+Nearest hazard: ${currentNearestHazard}
 
 Use this current machine context when answering operator questions.
 If the operator asks for a value that exists here, answer directly using it.
@@ -199,19 +235,20 @@ ${text}
 `;
 
       console.log('[AI CONTEXT]');
-      console.log(`machine.fuelPercent = ${machine?.fuel_percent ?? machine?.fuelPercent}`);
-      console.log(`machine.fuelRate = ${machine?.fuel_rate ?? machine?.fuelRate}`);
-      console.log(`machine.engineLoad = ${machine?.engine_load ?? machine?.engineLoad}`);
-      console.log(`machine.engineRpm = ${machine?.engine_rpm ?? machine?.engineRpm}`);
+      console.log(`machine.fuelPercent = ${fuelLevelVal}`);
+      console.log(`machine.fuelRate = ${fuelRateVal}`);
+      console.log(`machine.engineLoad = ${engineLoadVal}`);
+      console.log(`machine.engineRpm = ${engineRpmVal}`);
       console.log('[AI QUESTION]');
       console.log(text);
       console.log('[AI REQUEST] sending to backend...');
       
       const response = await api.chatWithAssistant(contextStr, operatorId, {
-        fuelPercent: machine?.fuel_percent ?? machine?.fuelPercent,
-        fuelRate: machine?.fuel_rate ?? machine?.fuelRate,
-        engineRpm: machine?.engine_rpm ?? machine?.engineRpm,
-        engineLoad: machine?.engine_load ?? machine?.engineLoad,
+        fuelPercent: isDemoMode ? demoState.telemetry.fuelLvl : (machine?.fuel_percent ?? machine?.fuelPercent),
+        fuelRate: isDemoMode ? demoState.telemetry.fuelRate : (machine?.fuel_rate ?? machine?.fuelRate),
+        engineRpm: isDemoMode ? demoState.telemetry.rpm : (machine?.engine_rpm ?? machine?.engineRpm),
+        engineLoad: isDemoMode ? demoState.telemetry.loadPct : (machine?.engine_load ?? machine?.engineLoad),
+        speed: isDemoMode ? demoState.telemetry.speed : machine?.speed,
       });
       
       console.log('[AI RESPONSE]');
@@ -302,18 +339,58 @@ ${text}
 
   // Derive contextual suggested questions
   const suggestions = ["WHAT SHOULD I WATCH FOR?"];
-  if (task && (task.task_status === 'DELAYED' || task.task_status === 'Delayed')) {
-    suggestions.unshift("WHY IS MY TASK DELAYED?");
-  }
-  if (machine && (machine.status === 'Attention' || machine.status === 'Critical')) {
-    suggestions.unshift("EXPLAIN THE MACHINE ANOMALY");
-  }
-  if (safetyRisk && (safetyRisk.risk_level === 'High' || safetyRisk.risk_level === 'high' || safetyRisk.risk_level === 'critical')) {
-    suggestions.unshift("WHAT IS THE CRITICAL SAFETY HAZARD?");
+  if (isDemoMode) {
+    if (demoState.safety.isCritical) {
+      suggestions.unshift("WHAT IS THE CRITICAL SAFETY HAZARD?");
+    }
+    if (demoState.task.isDelayed) {
+      suggestions.unshift("WHY IS MY TASK DELAYED?");
+    }
+    if (demoState.telemetry.loadPct > 80) {
+      suggestions.unshift("EXPLAIN THE CURRENT MACHINE LOAD");
+    }
+  } else {
+    if (task && (task.task_status === 'DELAYED' || task.task_status === 'Delayed')) {
+      suggestions.unshift("WHY IS MY TASK DELAYED?");
+    }
+    if (machine && (machine.status === 'Attention' || machine.status === 'Critical')) {
+      suggestions.unshift("EXPLAIN THE MACHINE ANOMALY");
+    }
+    if (safetyRisk && (safetyRisk.risk_level === 'High' || safetyRisk.risk_level === 'high' || safetyRisk.risk_level === 'critical')) {
+      suggestions.unshift("WHAT IS THE CRITICAL SAFETY HAZARD?");
+    }
   }
 
   const primaryInsight = insights.length > 0 ? insights[0] : null;
-  const isSafetyCritical = safetyRisk?.risk_level === 'High' || safetyRisk?.risk_level === 'high' || safetyRisk?.risk_level === 'critical';
+  const isSafetyCritical = isDemoMode 
+    ? demoState.safety.isCritical 
+    : (safetyRisk?.risk_level === 'High' || safetyRisk?.risk_level === 'high' || safetyRisk?.risk_level === 'critical');
+
+  const displayTaskTitle = isDemoMode ? demoState.task.taskTitle : (task?.task_type?.replace(/_/g, ' ') || 'UNASSIGNED');
+  const displayTaskProgress = isDemoMode ? Math.round(demoState.task.progressPct) : (task?.task_efficiency ? Math.round(task.task_efficiency * 100) : 0);
+
+  const displayMachineModel = isDemoMode ? 'EX-140GC' : (machine?.machine_model || 'UNK');
+  const displayMachineStatus = isDemoMode ? (demoState.telemetry.loadPct > 85 ? 'Attention' : 'NORMAL') : (machine?.status || 'NORMAL');
+  const displayMachineColor = isDemoMode 
+    ? (demoState.telemetry.loadPct > 85 ? 'text-[#F2B84B]' : 'text-[#42C76A]')
+    : (machine?.status === 'Critical' ? 'text-[#E5484D]' : machine?.status === 'Attention' ? 'text-[#F2B84B]' : 'text-[#42C76A]');
+
+  const displaySafetyText = isDemoMode ? demoState.safety.globalStateText : (safetyRisk?.risk_level === 'High' ? 'CRITICAL HAZARD' : safetyRisk?.risk_level === 'Medium' ? 'CAUTION' : 'SAFE TO OPERATE');
+  const displaySafetyColor = isDemoMode ? demoState.safety.globalStateColor : (safetyRisk?.risk_level === 'High' ? 'text-[#E5484D]' : safetyRisk?.risk_level === 'Medium' ? 'text-[#F2B84B]' : 'text-[#42C76A]');
+
+  const displayInsight = isDemoMode
+    ? {
+        severity: demoState.safety.isCritical ? 'CRITICAL' : demoState.telemetry.loadPct > 80 ? 'HIGH LOAD' : 'NOMINAL',
+        message: demoState.safety.isCritical
+          ? `Safety breach active: Ground personnel detected within ${demoState.safety.nearestDistance.toFixed(1)}m. Halt swinging immediately.`
+          : demoState.telemetry.loadPct > 80
+          ? `Excavation load at ${Math.round(demoState.telemetry.loadPct)}%. Fuel consumption rate burning at ${demoState.telemetry.fuelRate.toFixed(1)} L/h.`
+          : `Nominal duty cycle. Engine RPM at ${Math.round(demoState.telemetry.rpm)} with ${Math.round(demoState.telemetry.fuelLvl)}% diesel.`
+      }
+    : primaryInsight;
+
+  const displayShiftDuration = isDemoMode ? demoState.shiftDebrief.shiftDuration : (shift?.shift_duration ? `${shift.shift_duration} HRS` : '0.0 HRS');
+  const displayFuelBaseline = isDemoMode ? `${demoState.shiftDebrief.expectedFuelRate} L/H` : `${shift?.fuel_baseline || 0} L/H`;
 
   return (
     <div className="flex-1 min-h-0 flex flex-col bg-[#080A0B] select-none px-4 py-2 lg:py-4 lg:px-12 overflow-hidden">
@@ -325,7 +402,11 @@ ${text}
             <AlertTriangle size={24} />
             <div className="flex flex-col">
               <span className="text-sm">CRITICAL SAFETY EVENT ACTIVE</span>
-              <span className="text-[10px] opacity-80">SEE SAFETY SCREEN FOR FULL PROXIMITY RADAR</span>
+              <span className="text-[10px] opacity-80">
+                {isDemoMode 
+                  ? `GROUND WORKER WITHIN ${demoState.safety.nearestDistance.toFixed(1)}M — SEE SAFETY SCREEN FOR RADAR`
+                  : 'SEE SAFETY SCREEN FOR FULL PROXIMITY RADAR'}
+              </span>
             </div>
           </div>
           <button 
@@ -481,8 +562,8 @@ ${text}
                   <Target size={12} />
                   <span className="font-mono text-[10px] tracking-widest uppercase font-bold">TASK</span>
                 </div>
-                <span className="font-mono text-xs text-[#F1F3F4] font-bold uppercase truncate">{task?.task_type?.replace(/_/g, ' ') || 'UNASSIGNED'}</span>
-                <span className="font-mono text-xs text-[#929A9E]">{task?.task_efficiency ? Math.round(task.task_efficiency * 100) : 0}%</span>
+                <span className="font-mono text-xs text-[#F1F3F4] font-bold uppercase truncate">{displayTaskTitle}</span>
+                <span className="font-mono text-xs text-[#929A9E]">{displayTaskProgress}%</span>
               </div>
               
               <div className="flex flex-col gap-1 p-3 border border-[#141819]">
@@ -490,9 +571,9 @@ ${text}
                   <Settings size={12} />
                   <span className="font-mono text-[10px] tracking-widest uppercase font-bold">MACHINE</span>
                 </div>
-                <span className="font-mono text-xs text-[#F1F3F4] font-bold uppercase truncate">{machine?.machine_model || 'UNK'}</span>
-                <span className={`font-mono text-xs font-bold uppercase ${machine?.status === 'Critical' ? 'text-[#E5484D]' : machine?.status === 'Attention' ? 'text-[#F2B84B]' : 'text-[#42C76A]'}`}>
-                  {machine?.status || 'NORMAL'}
+                <span className="font-mono text-xs text-[#F1F3F4] font-bold uppercase truncate">{displayMachineModel}</span>
+                <span className={`font-mono text-xs font-bold uppercase ${displayMachineColor}`}>
+                  {displayMachineStatus}
                 </span>
               </div>
 
@@ -501,8 +582,8 @@ ${text}
                   <Shield size={12} />
                   <span className="font-mono text-[10px] tracking-widest uppercase font-bold">SAFETY</span>
                 </div>
-                <span className={`font-mono text-xs font-bold uppercase ${safetyRisk?.risk_level === 'High' ? 'text-[#E5484D]' : safetyRisk?.risk_level === 'Medium' ? 'text-[#F2B84B]' : 'text-[#42C76A]'}`}>
-                  {safetyRisk?.risk_level === 'High' ? 'CRITICAL HAZARD' : safetyRisk?.risk_level === 'Medium' ? 'CAUTION' : 'SAFE TO OPERATE'}
+                <span className={`font-mono text-xs font-bold uppercase ${displaySafetyColor}`}>
+                  {displaySafetyText}
                 </span>
               </div>
             </div>
@@ -513,13 +594,13 @@ ${text}
               <span className="font-mono text-xs tracking-widest text-[#5E676C] uppercase font-bold">
                 OPERATIONAL INSIGHT
               </span>
-              {primaryInsight ? (
+              {displayInsight ? (
                 <div className="p-4 border border-[#FFCC00]/30 bg-[#FFCC00]/5 flex flex-col gap-2">
                   <span className="font-mono text-xs text-[#FFCC00] font-bold tracking-widest uppercase">
-                    {primaryInsight.severity || 'PRIORITY'} INSIGHT
+                    {displayInsight.severity || 'PRIORITY'} INSIGHT
                   </span>
                   <span className="font-mono text-sm text-[#F1F3F4] leading-relaxed">
-                    {primaryInsight.message}
+                    {displayInsight.message}
                   </span>
                 </div>
               ) : (
@@ -566,12 +647,12 @@ ${text}
               
               <span className="font-mono text-xs text-[#929A9E] uppercase font-bold mb-1">DURATION</span>
               <span className="font-mono text-xl text-[#F1F3F4] font-bold mb-4 uppercase">
-                {shift?.shift_duration ? `${shift.shift_duration} HRS` : '0.0 HRS'}
+                {displayShiftDuration}
               </span>
 
               <span className="font-mono text-xs text-[#929A9E] uppercase font-bold mb-1">FUEL BASELINE</span>
               <span className="font-mono text-sm text-[#F1F3F4] uppercase font-bold">
-                {shift?.fuel_baseline || 0} L/H
+                {displayFuelBaseline}
               </span>
               
               <div className="mt-auto pt-4 font-mono text-xs font-bold tracking-widest text-[#FFCC00] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
