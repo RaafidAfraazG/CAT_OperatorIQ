@@ -163,10 +163,10 @@ export default function DriveScreen() {
       )}
 
       {/* SINGLE SURFACE INSTRUMENT PANEL */}
-      <div className="flex-1 min-h-0 flex flex-col justify-between px-8 py-4 lg:py-6 lg:px-12 max-w-[1600px] mx-auto w-full gap-4 lg:gap-6">
+      <div className="flex-1 min-h-0 flex flex-col justify-between px-6 lg:px-10 py-2.5 lg:py-3.5 max-w-[1600px] mx-auto w-full gap-2.5 lg:gap-3.5 overflow-hidden">
         
         {/* 1. UPPER: CURRENT OPERATION & TELEMETRY */}
-        <div className="flex items-center justify-between pb-1">
+        <div className="flex items-center justify-between pb-0.5">
           <div className="flex items-center gap-3">
             <span className="font-mono text-xs font-bold tracking-widest text-[#929A9E] uppercase">
               CURRENT OPERATION
@@ -184,57 +184,57 @@ export default function DriveScreen() {
         <div className="w-full h-px bg-[#141819]" />
 
         {/* MIDDLE: MACHINE INSTRUMENTATION ROW (TELEMETRY) */}
-        <div className="flex flex-wrap items-center justify-between gap-8 py-2">
+        <div className="flex flex-wrap items-center justify-between gap-6 lg:gap-8 py-1.5">
           {/* SPEED */}
           <div className="flex flex-col">
-            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-1">GROUND SPEED</span>
+            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-0.5">GROUND SPEED</span>
             <div className="flex items-baseline gap-2">
-              <span className="font-mono text-4xl font-extrabold text-[#F1F3F4]">{speed.toFixed(1)}</span>
-              <span className="font-mono text-sm text-[#929A9E]">km/h</span>
+              <span className="font-mono text-3xl lg:text-4xl font-extrabold text-[#F1F3F4]">{speed.toFixed(1)}</span>
+              <span className="font-mono text-xs lg:text-sm text-[#929A9E]">km/h</span>
             </div>
           </div>
 
-          <div className="w-px h-12 bg-[#141819] hidden md:block" />
+          <div className="w-px h-10 bg-[#141819] hidden md:block" />
 
           {/* RPM */}
           <div className="flex flex-col">
-            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-1">ENGINE RPM</span>
+            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-0.5">ENGINE RPM</span>
             <div className="flex items-baseline gap-2">
-              <span className="font-mono text-4xl font-extrabold text-[#F1F3F4]">{Math.round(rpm).toLocaleString()}</span>
-              <span className="font-mono text-sm text-[#929A9E]">RPM</span>
+              <span className="font-mono text-3xl lg:text-4xl font-extrabold text-[#F1F3F4]">{Math.round(rpm).toLocaleString()}</span>
+              <span className="font-mono text-xs lg:text-sm text-[#929A9E]">RPM</span>
             </div>
           </div>
 
-          <div className="w-px h-12 bg-[#141819] hidden md:block" />
+          <div className="w-px h-10 bg-[#141819] hidden md:block" />
 
           {/* ENGINE LOAD */}
           <div className="flex flex-col">
-            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-1">ENGINE LOAD</span>
+            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-0.5">ENGINE LOAD</span>
             <div className="flex items-baseline gap-2">
-              <span className="font-mono text-4xl font-extrabold text-[#F1F3F4]">{Math.round(loadPct)}</span>
-              <span className="font-mono text-sm text-[#929A9E]">%</span>
+              <span className="font-mono text-3xl lg:text-4xl font-extrabold text-[#F1F3F4]">{Math.round(loadPct)}</span>
+              <span className="font-mono text-xs lg:text-sm text-[#929A9E]">%</span>
             </div>
           </div>
 
-          <div className="w-px h-12 bg-[#141819] hidden md:block" />
+          <div className="w-px h-10 bg-[#141819] hidden md:block" />
 
           {/* FUEL LEVEL */}
           <div className="flex flex-col">
-            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-1">DIESEL FUEL</span>
+            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-0.5">DIESEL FUEL</span>
             <div className="flex items-baseline gap-2">
-              <span className="font-mono text-4xl font-extrabold text-[#F1F3F4]">{Math.round(fuelLvl)}</span>
-              <span className="font-mono text-sm text-[#929A9E]">%</span>
+              <span className="font-mono text-3xl lg:text-4xl font-extrabold text-[#F1F3F4]">{Math.round(fuelLvl)}</span>
+              <span className="font-mono text-xs lg:text-sm text-[#929A9E]">%</span>
             </div>
           </div>
 
-          <div className="w-px h-12 bg-[#141819] hidden md:block" />
+          <div className="w-px h-10 bg-[#141819] hidden md:block" />
 
           {/* FUEL RATE */}
           <div className="flex flex-col">
-            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-1">FUEL RATE</span>
+            <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-0.5">FUEL RATE</span>
             <div className="flex items-baseline gap-2">
-              <span className="font-mono text-4xl font-extrabold text-[#F1F3F4]">{fuelRate.toFixed(1)}</span>
-              <span className="font-mono text-sm text-[#929A9E]">L/h</span>
+              <span className="font-mono text-3xl lg:text-4xl font-extrabold text-[#F1F3F4]">{fuelRate.toFixed(1)}</span>
+              <span className="font-mono text-xs lg:text-sm text-[#929A9E]">L/h</span>
             </div>
           </div>
         </div>
@@ -242,25 +242,25 @@ export default function DriveScreen() {
         <div className="w-full h-px bg-[#141819]" />
 
         {/* 2. MIDDLE: COMPACT CURRENT TASK PANEL */}
-        <div className="w-full bg-[#0D1012] border border-[#22282C] border-l-4 border-l-[#FFCC00] rounded px-6 py-4 lg:py-5 shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div className="w-full bg-[#0D1012] border border-[#22282C] border-l-4 border-l-[#FFCC00] rounded px-5 py-3 lg:py-3.5 shadow-[0_4px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.03)] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 lg:gap-6">
           {/* Left Column: CURRENT TASK, Title, Zone */}
           <div className="flex flex-col">
-            <div className="flex items-center gap-2 mb-1.5">
+            <div className="flex items-center gap-2 mb-1">
               <ClipboardList className="w-3.5 h-3.5 text-[#FFCC00]" />
-              <span className="font-mono text-xs font-bold tracking-widest text-[#929A9E] uppercase">
+              <span className="font-mono text-[11px] font-bold tracking-widest text-[#929A9E] uppercase">
                 CURRENT TASK
               </span>
             </div>
-            <h2 className="text-3xl lg:text-4xl font-extrabold text-[#F1F3F4] tracking-tight uppercase">
+            <h2 className="text-2xl lg:text-3xl font-extrabold text-[#F1F3F4] tracking-tight uppercase">
               {taskTitle}
             </h2>
-            <p className="font-mono text-xs lg:text-sm tracking-widest text-[#FFCC00] font-semibold mt-1 uppercase">
+            <p className="font-mono text-xs tracking-widest text-[#FFCC00] font-semibold mt-0.5 uppercase">
               {taskZone}
             </p>
           </div>
 
           {/* Right Column: Progress %, ETA, Status */}
-          <div className="flex flex-wrap items-center gap-6 sm:gap-10 lg:gap-12">
+          <div className="flex flex-wrap items-center gap-6 sm:gap-8 lg:gap-10">
             {/* Task Progress % */}
             <div className="flex flex-col">
               <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-0.5">
@@ -275,7 +275,7 @@ export default function DriveScreen() {
                 </span>
               </div>
               {/* Mini progress bar */}
-              <div className="w-28 sm:w-36 h-1.5 bg-[#171B1D] rounded-full overflow-hidden mt-1.5 border border-[#2A3033]">
+              <div className="w-28 sm:w-32 h-1.5 bg-[#171B1D] rounded-full overflow-hidden mt-1 border border-[#2A3033]">
                 <div 
                   className="h-full bg-[#FFCC00] transition-all duration-300"
                   style={{ width: `${Math.min(100, Math.max(0, progressPct))}%` }}
@@ -283,7 +283,7 @@ export default function DriveScreen() {
               </div>
             </div>
 
-            <div className="w-px h-10 bg-[#1A1F22] hidden sm:block" />
+            <div className="w-px h-9 bg-[#1A1F22] hidden sm:block" />
 
             {/* Predicted ETA */}
             <div className="flex flex-col">
@@ -301,19 +301,19 @@ export default function DriveScreen() {
                   MIN
                 </span>
               </div>
-              <span className="font-mono text-[10px] tracking-wider uppercase mt-1 text-[#5E676C]">
+              <span className="font-mono text-[10px] tracking-wider uppercase mt-0.5 text-[#5E676C]">
                 {isDelayed ? `+${varianceMin} MIN OVER` : 'ON SCHEDULE'}
               </span>
             </div>
 
-            <div className="w-px h-10 bg-[#1A1F22] hidden sm:block" />
+            <div className="w-px h-9 bg-[#1A1F22] hidden sm:block" />
 
             {/* Task Status */}
             <div className="flex flex-col">
               <span className="font-mono text-[10px] tracking-widest text-[#5E676C] uppercase mb-1">
                 STATUS
               </span>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-[#13171A] border border-[#262D32]">
+              <div className="flex items-center gap-2 px-2.5 py-1 rounded bg-[#13171A] border border-[#262D32]">
                 <span className={`w-2 h-2 rounded-full ${
                   taskStatusText.includes('COMPLETED')
                     ? 'bg-[#42C76A]'
@@ -338,34 +338,34 @@ export default function DriveScreen() {
         <div className="w-full h-px bg-[#141819]" />
 
         {/* LOWER: SAFETY & SCHEDULE */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 flex-1 min-h-0 items-start mt-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 flex-1 min-h-0 items-start mt-1">
           
           {/* SAFETY REGION */}
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-3 h-3 rounded-full bg-[#42C76A]" />
-              <span className="font-mono text-lg font-bold tracking-widest text-[#F1F3F4] uppercase">
+          <div className="flex flex-col gap-3 lg:gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#42C76A]" />
+              <span className="font-mono text-base lg:text-lg font-bold tracking-widest text-[#F1F3F4] uppercase">
                 SAFE TO OPERATE
               </span>
-              <span className="font-mono text-sm text-[#5E676C] tracking-widest ml-4">
+              <span className="font-mono text-xs text-[#5E676C] tracking-widest ml-3">
                 RISK {riskScore} / 100
               </span>
             </div>
 
-            <div className="flex flex-col gap-3 font-mono text-sm tracking-widest">
-              <div className="flex justify-between w-64 border-b border-[#141819] pb-2">
+            <div className="flex flex-col gap-2 font-mono text-xs lg:text-sm tracking-widest">
+              <div className="flex justify-between w-64 border-b border-[#141819] pb-1.5">
                 <span className="text-[#929A9E]">SEATBELT</span>
                 <span className={`font-bold ${seatbeltStatus === 'UNFASTENED' ? 'text-[#E5484D]' : 'text-[#F1F3F4]'}`}>
                   {seatbeltStatus || 'FASTENED'}
                 </span>
               </div>
-              <div className="flex justify-between w-64 border-b border-[#141819] pb-2">
+              <div className="flex justify-between w-64 border-b border-[#141819] pb-1.5">
                 <span className="text-[#929A9E]">NEAREST OBJECT</span>
                 <span className={`font-bold ${nearestDistance !== null && nearestDistance < PROXIMITY_WARN_M ? 'text-[#F2B84B]' : 'text-[#42C76A]'}`}>
                   {nearestDistance !== null ? `${nearestDistance.toFixed(1)}m` : 'CLEAR'}
                 </span>
               </div>
-              <div className="flex justify-between w-64 border-b border-[#141819] pb-2">
+              <div className="flex justify-between w-64 border-b border-[#141819] pb-1.5">
                 <span className="text-[#929A9E]">PROXIMITY</span>
                 <span className={`font-bold ${proximityColor}`}>{proximityState}</span>
               </div>
@@ -373,17 +373,17 @@ export default function DriveScreen() {
           </div>
 
           {/* TASK STATUS & AI ASSIST */}
-          <div className="flex flex-col gap-8 lg:items-end">
-            <div className="flex flex-col font-mono text-sm tracking-widest w-64 lg:text-right">
-              <div className="flex justify-between lg:justify-end lg:gap-8 border-b border-[#141819] pb-2 mb-3">
+          <div className="flex flex-col gap-3 lg:items-end">
+            <div className="flex flex-col font-mono text-xs lg:text-sm tracking-widest w-64 lg:text-right">
+              <div className="flex justify-between lg:justify-end lg:gap-8 border-b border-[#141819] pb-1.5 mb-1.5">
                 <span className="text-[#929A9E]">SCHEDULE</span>
                 <span className="text-[#F1F3F4] font-bold">{scheduledMin} MIN</span>
               </div>
-              <div className="flex justify-between lg:justify-end lg:gap-8 border-b border-[#141819] pb-2 mb-3">
+              <div className="flex justify-between lg:justify-end lg:gap-8 border-b border-[#141819] pb-1.5 mb-1.5">
                 <span className="text-[#929A9E]">PREDICTED</span>
                 <span className="text-[#F1F3F4] font-bold">{predictedMin} MIN</span>
               </div>
-              <div className="flex justify-between lg:justify-end lg:gap-8 pb-2">
+              <div className="flex justify-between lg:justify-end lg:gap-8 pb-1.5">
                 <span className="text-[#929A9E]">VARIANCE</span>
                 <span className={`font-bold ${isDelayed ? 'text-[#F2B84B]' : 'text-[#42C76A]'}`}>
                   {varianceMin > 0 ? '+' : ''}{varianceMin} MIN {isDelayed ? 'DELAYED' : 'AHEAD'}
@@ -395,13 +395,13 @@ export default function DriveScreen() {
             {isDelayed && (
               <button 
                 onClick={() => navigate(`/assist?question=${encodeURIComponent(`Why is ${taskTitle} currently predicted to take ${varianceMin} minutes longer than scheduled?`)}`, { state: { autoSubmit: true } })}
-                className="group flex flex-col lg:items-end gap-1 cursor-pointer"
+                className="group flex flex-col lg:items-end gap-0.5 cursor-pointer mt-1 outline-none"
               >
-                <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-[#FFCC00]">
+                <div className="flex items-center gap-1.5 font-mono text-xs font-bold tracking-widest text-[#FFCC00]">
                   <span>✦ ASK ASSIST</span>
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0">→</span>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-6px] group-hover:translate-x-0">→</span>
                 </div>
-                <span className="font-mono text-sm text-[#929A9E] group-hover:text-[#F1F3F4] transition-colors">
+                <span className="font-mono text-xs text-[#929A9E] group-hover:text-[#F1F3F4] transition-colors">
                   Why is this task delayed?
                 </span>
               </button>

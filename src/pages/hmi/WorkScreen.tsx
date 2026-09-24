@@ -119,28 +119,28 @@ export default function WorkScreen() {
     : (currentIndex >= 0 && currentIndex + 2 < tasks.length ? tasks.slice(currentIndex + 2) : []);
 
   return (
-    <div className="flex-1 min-h-0 flex flex-col bg-[#080A0B] select-none px-8 py-4 lg:py-6 lg:px-12">
-      <div className="max-w-[1600px] mx-auto w-full flex flex-col justify-between gap-4 lg:gap-6 h-full min-h-0">
+    <div className="flex-1 min-h-0 flex flex-col bg-[#080A0B] select-none px-6 lg:px-10 py-2.5 lg:py-3.5 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto w-full flex flex-col justify-between gap-3 lg:gap-4 h-full min-h-0">
 
         {/* 1. CURRENT ASSIGNMENT & TIMELINE */}
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-3 lg:gap-4">
           
-          <div className="flex flex-col lg:flex-row justify-between items-start gap-8">
+          <div className="flex flex-col lg:flex-row justify-between items-start gap-4">
             <div>
               <span className="font-mono text-xs font-bold tracking-widest text-[#929A9E] uppercase">
                 CURRENT OPERATION
               </span>
-              <h1 className="text-4xl lg:text-5xl font-extrabold text-[#F1F3F4] tracking-tight mt-2 uppercase">
+              <h1 className="text-3xl lg:text-4xl font-extrabold text-[#F1F3F4] tracking-tight mt-1 uppercase">
                 {taskTitle}
               </h1>
-              <p className="font-mono text-sm tracking-widest text-[#FFCC00] mt-3 uppercase">
+              <p className="font-mono text-xs lg:text-sm tracking-widest text-[#FFCC00] mt-1 uppercase">
                 {taskZone}
               </p>
             </div>
 
-            <div className="flex flex-col items-end gap-1">
+            <div className="flex flex-col items-end gap-0.5">
               <div className="flex items-baseline gap-1 text-[#F1F3F4]">
-                <span className="text-4xl lg:text-5xl font-extrabold tracking-tighter">
+                <span className="text-3xl lg:text-4xl font-extrabold tracking-tighter">
                   {progressPct}%
                 </span>
               </div>
@@ -151,9 +151,9 @@ export default function WorkScreen() {
           </div>
 
           {/* Minimalist Linear Progress Track & Timeline */}
-          <div className="w-full flex flex-col gap-3">
+          <div className="w-full flex flex-col gap-2">
             {/* Progress Bar */}
-            <div className="w-full h-1 bg-[#141819] relative rounded-full overflow-hidden mt-4">
+            <div className="w-full h-1.5 bg-[#141819] relative rounded-full overflow-hidden mt-1 border border-[#2A3033]/50">
               <div 
                 className="absolute top-0 left-0 h-full bg-[#FFCC00]" 
                 style={{ width: `${progressPct}%` }}
@@ -161,17 +161,17 @@ export default function WorkScreen() {
             </div>
             
             {/* Timeline markers */}
-            <div className="flex justify-between items-center font-mono text-xs font-bold tracking-widest uppercase">
+            <div className="flex justify-between items-center font-mono text-[11px] font-bold tracking-widest uppercase">
               <div className="flex flex-col text-left">
-                <span className="text-[#5E676C] mb-1">START</span>
+                <span className="text-[#5E676C]">START</span>
                 <span className="text-[#F1F3F4]">{startStr}</span>
               </div>
               <div className="flex flex-col text-center">
-                <span className="text-[#5E676C] mb-1">NOW</span>
+                <span className="text-[#5E676C]">NOW</span>
                 <span className="text-[#F1F3F4]">{nowTimeStr}</span>
               </div>
               <div className="flex flex-col text-right">
-                <span className="text-[#5E676C] mb-1">EXPECTED</span>
+                <span className="text-[#5E676C]">EXPECTED</span>
                 <span className={`text-[#F1F3F4] ${isDelayed ? 'text-[#F2B84B]' : 'text-[#F1F3F4]'}`}>{expectedStr}</span>
               </div>
             </div>
@@ -182,52 +182,52 @@ export default function WorkScreen() {
         <div className="w-full h-px bg-[#141819]" />
 
         {/* 2. LOWER REGION: QUEUE & ETA */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 flex-1 min-h-0 items-start mt-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 flex-1 min-h-0 items-start mt-1">
           
           {/* TASK QUEUE */}
-          <div className="flex flex-col font-mono uppercase tracking-widest text-sm w-full max-w-sm flex-1 min-h-0">
-            <span className="text-xs text-[#5E676C] font-bold mb-8 shrink-0">DISPATCH QUEUE</span>
+          <div className="flex flex-col font-mono uppercase tracking-widest text-xs lg:text-sm w-full max-w-sm flex-1 min-h-0">
+            <span className="text-xs text-[#5E676C] font-bold mb-3 shrink-0">DISPATCH QUEUE</span>
 
-            <div className="flex flex-col gap-6 overflow-hidden">
+            <div className="flex flex-col gap-3 overflow-hidden">
               {/* NOW */}
-              <div className="flex items-start gap-4">
-                <div className="flex flex-col items-center mt-1 gap-2 shrink-0">
+              <div className="flex items-start gap-3">
+                <div className="flex flex-col items-center mt-1 gap-1.5 shrink-0">
                   <div className="w-2.5 h-2.5 rounded-full bg-[#FFCC00]" />
-                  {nextTask && <div className="w-px h-8 bg-[#141819]" />}
+                  {nextTask && <div className="w-px h-6 bg-[#141819]" />}
                 </div>
-                <div className="flex flex-col flex-1 pb-2">
-                  <span className="text-xs text-[#FFCC00] mb-1">NOW</span>
-                  <span className="text-base text-[#F1F3F4] font-bold">{taskTitle}</span>
-                  <span className="text-[#929A9E] mt-1 text-xs">{activeTask?.task_status?.replace(/_/g, ' ') || 'IN PROGRESS'}</span>
+                <div className="flex flex-col flex-1 pb-1">
+                  <span className="text-[11px] text-[#FFCC00]">NOW</span>
+                  <span className="text-sm lg:text-base text-[#F1F3F4] font-bold">{taskTitle}</span>
+                  <span className="text-[#929A9E] text-[11px]">{activeTask?.task_status?.replace(/_/g, ' ') || 'IN PROGRESS'}</span>
                 </div>
               </div>
 
               {/* NEXT */}
               {nextTask && (
-                <div className="flex items-start gap-4">
-                  <div className="flex flex-col items-center mt-1 gap-2 shrink-0">
+                <div className="flex items-start gap-3">
+                  <div className="flex flex-col items-center mt-1 gap-1.5 shrink-0">
                     <div className="w-2.5 h-2.5 rounded-full border-2 border-[#141819]" />
-                    {laterTasks.length > 0 && <div className="w-px h-8 bg-[#141819]" />}
+                    {laterTasks.length > 0 && <div className="w-px h-6 bg-[#141819]" />}
                   </div>
-                  <div className="flex flex-col flex-1 pb-2">
-                    <span className="text-xs text-[#5E676C] mb-1">NEXT</span>
-                    <span className="text-base text-[#929A9E] font-bold">{nextTask.task_type.replace(/_/g, ' ')}</span>
-                    <span className="text-[#5E676C] mt-1 text-xs">QUEUED</span>
+                  <div className="flex flex-col flex-1 pb-1">
+                    <span className="text-[11px] text-[#5E676C]">NEXT</span>
+                    <span className="text-sm lg:text-base text-[#929A9E] font-bold">{nextTask.task_type.replace(/_/g, ' ')}</span>
+                    <span className="text-[#5E676C] text-[11px]">QUEUED</span>
                   </div>
                 </div>
               )}
 
-              {/* LATER (show up to 3) */}
-              {laterTasks.slice(0, 3).map((lt: any, idx: number, arr: any[]) => (
-                <div className="flex items-start gap-4" key={lt.task_id}>
-                  <div className="flex flex-col items-center mt-1 gap-2 shrink-0">
+              {/* LATER (show 1 later task to preserve vertical budget) */}
+              {laterTasks.slice(0, 1).map((lt: any, idx: number, arr: any[]) => (
+                <div className="flex items-start gap-3" key={lt.task_id}>
+                  <div className="flex flex-col items-center mt-1 gap-1.5 shrink-0">
                     <div className="w-2.5 h-2.5 rounded-full border-2 border-[#141819]" />
-                    {idx < arr.length - 1 && <div className="w-px h-8 bg-[#141819]" />}
+                    {idx < arr.length - 1 && <div className="w-px h-6 bg-[#141819]" />}
                   </div>
-                  <div className="flex flex-col flex-1 pb-2">
-                    <span className="text-xs text-[#5E676C] mb-1">LATER</span>
-                    <span className="text-base text-[#5E676C] font-bold">{lt.task_type.replace(/_/g, ' ')}</span>
-                    <span className="text-[#5E676C] mt-1 text-xs">QUEUED</span>
+                  <div className="flex flex-col flex-1 pb-1">
+                    <span className="text-[11px] text-[#5E676C]">LATER</span>
+                    <span className="text-sm lg:text-base text-[#5E676C] font-bold">{lt.task_type.replace(/_/g, ' ')}</span>
+                    <span className="text-[#5E676C] text-[11px]">QUEUED</span>
                   </div>
                 </div>
               ))}
@@ -235,19 +235,19 @@ export default function WorkScreen() {
           </div>
 
           {/* SCHEDULE, ETA & ASSIST */}
-          <div className="flex flex-col gap-8 lg:items-end">
-            <span className="text-xs text-[#5E676C] font-mono font-bold tracking-widest uppercase mb-2 lg:text-right w-full block">AI ETA PREDICTION</span>
+          <div className="flex flex-col gap-2.5 lg:items-end">
+            <span className="text-xs text-[#5E676C] font-mono font-bold tracking-widest uppercase mb-1 lg:text-right w-full block">AI ETA PREDICTION</span>
 
-            <div className="flex flex-col font-mono text-sm tracking-widest w-72 lg:text-right">
-              <div className="flex justify-between lg:justify-end lg:gap-8 border-b border-[#141819] pb-3 mb-4">
+            <div className="flex flex-col font-mono text-xs lg:text-sm tracking-widest w-72 lg:text-right">
+              <div className="flex justify-between lg:justify-end lg:gap-8 border-b border-[#141819] pb-1.5 mb-1.5">
                 <span className="text-[#929A9E]">SCHEDULED</span>
                 <span className="text-[#F1F3F4] font-bold">{scheduledMin} MIN</span>
               </div>
-              <div className="flex justify-between lg:justify-end lg:gap-8 border-b border-[#141819] pb-3 mb-4">
+              <div className="flex justify-between lg:justify-end lg:gap-8 border-b border-[#141819] pb-1.5 mb-1.5">
                 <span className="text-[#929A9E]">PREDICTED</span>
                 <span className="text-[#F1F3F4] font-bold">{predictedMin} MIN</span>
               </div>
-              <div className="flex justify-between lg:justify-end lg:gap-8 pb-3">
+              <div className="flex justify-between lg:justify-end lg:gap-8 pb-1.5">
                 <span className="text-[#929A9E]">VARIANCE</span>
                 <span className={`font-bold ${isDelayed ? 'text-[#F2B84B]' : 'text-[#42C76A]'}`}>
                   {varianceMin > 0 ? '+' : ''}{varianceMin} MIN {isDelayed ? 'DELAYED' : 'AHEAD'}
@@ -256,16 +256,16 @@ export default function WorkScreen() {
             </div>
 
             {/* Contextual AI Action */}
-            <div className="mt-8 flex justify-end">
+            <div className="mt-2 flex justify-end">
               <button 
                 onClick={() => navigate(`/assist?question=${encodeURIComponent(`Why is ${taskTitle} currently predicted to take ${varianceMin > 0 ? '+' : ''}${varianceMin} minutes longer than scheduled?`)}`, { state: { autoSubmit: true } })}
-                className="group flex flex-col lg:items-end gap-1 cursor-pointer outline-none"
+                className="group flex flex-col lg:items-end gap-0.5 cursor-pointer outline-none"
               >
-                <div className="flex items-center gap-2 font-mono text-xs font-bold tracking-widest text-[#FFCC00]">
+                <div className="flex items-center gap-1.5 font-mono text-xs font-bold tracking-widest text-[#FFCC00]">
                   <span>✦ ASK ASSIST</span>
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0">→</span>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-6px] group-hover:translate-x-0">→</span>
                 </div>
-                <span className="font-mono text-sm tracking-widest text-[#929A9E] group-hover:text-[#F1F3F4] transition-colors uppercase">
+                <span className="font-mono text-xs tracking-widest text-[#929A9E] group-hover:text-[#F1F3F4] transition-colors uppercase">
                   Explain the {varianceMin > 0 ? '+' : ''}{varianceMin} min variance
                 </span>
               </button>
