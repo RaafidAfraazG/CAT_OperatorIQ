@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen, Play, CheckCircle2, ChevronRight, Award, AlertTriangle, X, ShieldCheck, RotateCcw, Sparkles } from 'lucide-react';
 import { api } from '../../api/client';
@@ -100,7 +100,47 @@ export default function TrainingScreen() {
 
   const skillProgress = trainingData?.current_skill_progress || 0;
   const recentCompletion = trainingData?.completed_modules?.[0];
-  const recModules = trainingData?.recommended_modules || [];
+  
+  const rawRecModules = trainingData?.recommended_modules || [];
+  const isSteepSlopeCompleted = trainingData?.completed_modules?.some(
+    (m: any) => m.module_name?.toLowerCase().includes('steep slope') || m.module_name?.toLowerCase().includes('rock')
+  );
+
+  const recModules = useMemo(() => {
+    if (isSteepSlopeCompleted) {
+      return rawRecModules.filter(
+        (m: any) => !m.module_name?.toLowerCase().includes('steep slope') && !m.module_name?.toLowerCase().includes('rock')
+      );
+    }
+
+    const steepSlopeModule = {
+      module_name: 'Steep Slope & Rock Operations',
+      priority_score: 75, // <= 80 so it renders as 'RECOMMENDED'
+      reason: 'Recommended training for safe operation on steep slopes and rocky terrain.',
+      duration: '10 MIN',
+      video_url: '/videos/steep_slope_rock_operations.mp4',
+      is_video: true,
+    };
+
+    // Filter out existing to avoid duplication
+    const filtered = rawRecModules.filter(
+      (m: any) => !m.module_name?.toLowerCase().includes('steep slope') && !m.module_name?.toLowerCase().includes('rock')
+    );
+
+    // Locate Seatbelt Compliance Essentials
+    const seatbeltIdx = filtered.findIndex((m: any) =>
+      m.module_name?.toLowerCase().includes('seatbelt')
+    );
+
+    if (seatbeltIdx !== -1) {
+      const result = [...filtered];
+      // Insert directly below Seatbelt Compliance Essentials
+      result.splice(seatbeltIdx + 1, 0, steepSlopeModule);
+      return result;
+    } else {
+      return [steepSlopeModule, ...filtered];
+    }
+  }, [rawRecModules, isSteepSlopeCompleted]);
 
   return (
     <div className="flex-1 min-h-0 flex flex-col bg-[#080A0B] select-none relative">
@@ -164,7 +204,9 @@ export default function TrainingScreen() {
               {recModules.length > 0 ? (
                 recModules.map((mod: any, idx: number) => {
                   const isSelected = selectedModule?.module_name === mod.module_name;
-                  const isSeatbelt = mod.module_name.toLowerCase().includes('seatbelt');
+                  const isSeatbelt = mod.module_name?.toLowerCase().includes('seatbelt');
+                  const isSteepSlope = mod.module_name?.toLowerCase().includes('steep slope') || mod.module_name?.toLowerCase().includes('rock');
+                  const hasVideo = isSeatbelt || isSteepSlope || mod.is_video;
 
                   return (
                     <div 
@@ -182,7 +224,7 @@ export default function TrainingScreen() {
                           {mod.module_name}
                         </span>
                         <div className="flex items-center gap-2">
-                          {isSeatbelt && (
+                          {hasVideo && (
                             <span className="font-mono text-[10px] bg-[#FFCC00]/10 text-[#FFCC00] border border-[#FFCC00]/30 px-2 py-0.5 uppercase font-bold">
                               VIDEO AVAILABLE
                             </span>
@@ -203,8 +245,8 @@ export default function TrainingScreen() {
                           <div className="flex items-center gap-3 text-[#929A9E] font-mono text-[11px] uppercase">
                             <span className="text-[#FFCC00] font-bold">● ACTIVE SELECTION</span>
                             <span>•</span>
-                            <span>EST. 15 MIN</span>
-                            {isSeatbelt && (
+                            <span>{mod.duration ? `EST. ${mod.duration}` : 'EST. 15 MIN'}</span>
+                            {hasVideo && (
                               <>
                                 <span>•</span>
                                 <span className="text-[#42C76A] font-bold">IN-CAB VIDEO READY</span>
@@ -225,7 +267,7 @@ export default function TrainingScreen() {
                         </div>
                       ) : (
                         <div className="mt-auto flex items-center justify-between text-[#5E676C]">
-                          <span className="font-mono text-[10px] tracking-widest uppercase">Est. 15 MIN</span>
+                          <span className="font-mono text-[10px] tracking-widest uppercase">{mod.duration ? `Est. ${mod.duration}` : 'Est. 15 MIN'}</span>
                           <div className="font-mono text-[10px] font-bold tracking-widest text-[#FFCC00] flex items-center gap-1 group-hover:opacity-100 transition-opacity">
                             <Play size={10} />
                             <span>CLICK TO VIEW & START</span>
@@ -336,7 +378,17 @@ export default function TrainingScreen() {
 
             {/* Video Player Display */}
             <div className="relative bg-black flex items-center justify-center aspect-video w-full max-h-[55vh]">
-              {activeVideoModule.module_name.toLowerCase().includes('seatbelt') ? (
+              {activeVideoModule.module_name?.toLowerCase().includes('steep slope') || activeVideoModule.module_name?.toLowerCase().includes('rock') ? (
+                <video
+                  ref={videoRef}
+                  src="/videos/steep_slope_rock_operations.mp4"
+                  className="w-full h-full object-contain"
+                  controls
+                  autoPlay
+                  playsInline
+                  onEnded={() => setVideoCompleted(true)}
+                />
+              ) : activeVideoModule.module_name?.toLowerCase().includes('seatbelt') ? (
                 <video
                   ref={videoRef}
                   src="/videos/seatbelt_compliance.mp4"
@@ -369,7 +421,9 @@ export default function TrainingScreen() {
                   </span>
                 </div>
                 <p className="font-mono text-[11px] text-[#929A9E] uppercase">
-                  Always verify 3-point seatbelt engagement and retractor lock before machine travel.
+                  {activeVideoModule.module_name?.toLowerCase().includes('steep slope') || activeVideoModule.module_name?.toLowerCase().includes('rock')
+                    ? 'Maintain tracks aligned vertically with slope gradient, keep attachments low, and avoid abrupt steering.'
+                    : 'Always verify 3-point seatbelt engagement and retractor lock before machine travel.'}
                 </p>
               </div>
 
